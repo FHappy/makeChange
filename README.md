@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+This is a test making sure everything is fine on my end.
+	-Randy A. Galeano
