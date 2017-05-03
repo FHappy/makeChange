@@ -34,6 +34,13 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'pry'
 gem 'angular_rails_csrf'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-digitalocean'
+gem 'omniauth-facebook'
+gem "materialize-sass"
+gem "material_icons"
+gem "devise_materialize", "~>1.0.0"
 
 
 group :development, :test do
