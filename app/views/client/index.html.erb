@@ -1,0 +1,16 @@
+<!-- in app/views/client/index.html.erb -->
+<!DOCTYPE html>
+<html>
+ <head>
+    <title>AngularOnRails</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+   <%= javascript_include_tag 'application' %>
+  </head>
+  <body ng-app="makeChangeApp">
+    
+    <h1>This is our Front end</h1>
+    <ui-view></ui-view>
+  </body>
+</html>
