@@ -40,7 +40,6 @@ gem 'omniauth-digitalocean'
 gem 'omniauth-facebook'
 gem "materialize-sass"
 gem "material_icons"
-gem "devise_materialize", "~>1.0.0"
 
 
 group :development, :test do

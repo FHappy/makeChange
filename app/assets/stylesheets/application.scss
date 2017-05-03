@@ -14,3 +14,10 @@
  *= require_tree .
  *= require_tree ../javascripts/components/
  */
+
+  @import "materialize/components/color";
+  $primary-color: color("blue", "lighten-2") !default;
+  $secondary-color: color("yellow", "base") !default;
+  @import 'materialize';
+  @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
