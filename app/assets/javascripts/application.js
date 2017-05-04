@@ -21,7 +21,7 @@
 //= require_tree .
 
 angular
-  .module('makeChangeApp', ['ui.router'])
+  .module('makeChangeApp', ['ui.router', 'stripe.checkout'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('home', {
@@ -37,4 +37,12 @@ angular
       enabled: true,
       requireBase: false
     });
-  });
+  })
+  .config(function(StripeCheckoutProvider) {
+    StripeCheckoutProvider.defaults({
+      key: 'pk_test_BXvvyNNCdq2c7PKLgIoHDvnw'
+    }
+  )});
+  // .config(function($window) {
+  //     $window.Stripe.setPublishableKey('pk_test_BXvvyNNCdq2c7PKLgIoHDvnw');
+  //   });

@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
-   <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'application', "https://js.stripe.com/v2/", "https://checkout.stripe.com/checkout.js"  %>
   </head>
   <body ng-app="makeChangeApp">
     <nav>
@@ -17,8 +17,11 @@
       <% end %>
     </nav>
 
+    
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>    <h1>This is our Front end</h1>
+    <stripe-form>
+    </stripe-form>
     <ui-view></ui-view>
   </body>
 </html>
