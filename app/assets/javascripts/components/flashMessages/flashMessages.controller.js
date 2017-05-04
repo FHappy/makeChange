@@ -1,7 +1,3 @@
-angular
-  .module('makeChangeApp')
-  .controller('FlashMessagesController', FlashMessagesController);
-
 FlashMessagesController.$inject = ['$scope', '$attrs', 'FlashMessage'];
 
 function FlashMessagesController($scope, $attrs, FlashMessage) {
@@ -16,3 +12,7 @@ function FlashMessagesController($scope, $attrs, FlashMessage) {
   }
 
 }
+
+angular
+  .module('makeChangeApp')
+  .controller('FlashMessagesController', FlashMessagesController);
