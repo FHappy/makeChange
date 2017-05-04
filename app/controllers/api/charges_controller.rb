@@ -1,4 +1,4 @@
-class ChargesController < ApplicationController
+class Api::ChargesController < ApplicationController
   def index
     render json: {
       message: 'hey'
