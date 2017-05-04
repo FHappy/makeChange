@@ -21,7 +21,7 @@
 //= require_tree .
 
 angular
-  .module('makeChangeApp', ['ui.router', 'angularPayments'])
+  .module('makeChangeApp', ['ui.router', 'stripe.checkout'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('home', {
@@ -36,8 +36,13 @@ angular
     $locationProvider.html5Mode({
       enabled: true,
       requireBase: false
-    })
-    .config(function($window) {
-      $window.Stripe.setPublishableKey('pk_test_BXvvyNNCdq2c7PKLgIoHDvnw Roll Key');
     });
-  });
+  })
+  .config(function(StripeCheckoutProvider) {
+    StripeCheckoutProvider.defaults({
+      key: 'pk_test_BXvvyNNCdq2c7PKLgIoHDvnw'
+    }
+  )});
+  // .config(function($window) {
+  //     $window.Stripe.setPublishableKey('pk_test_BXvvyNNCdq2c7PKLgIoHDvnw');
+  //   });
