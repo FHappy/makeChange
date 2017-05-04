@@ -1,6 +1,6 @@
-StripeFormController.$inject = ['StripeCheckout'];
+StripeFormController.$inject = ['StripeCheckout', '$http'];
 
-function StripeFormController(StripeCheckout) {
+function StripeFormController(StripeCheckout, $http) {
   const vm = this;
 
   vm.description = 'hello world';
@@ -22,7 +22,9 @@ function StripeFormController(StripeCheckout) {
     handler.open(options)
       .then(function resolve(response) {
         console.log(response);
-        alert("Got stripe token: " + response[0].id);
+        // alert("Got stripe token: " + response[0].id);
+        var token = response[0].id;
+        $http.post('/api/charges');
       }, function reject(response) {
         alert("Stripe Checkout closed without making a sale: :(");
       });
