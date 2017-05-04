@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  
+  get "api/users/current" => "api/users#current", as: "users_current"
 
   namespace :api do
     resources :charges, only: [:index, :create]
   end
-
-  # post '/api/charges', 
-  # get '/api/charges' => "charges#index"
-
-  # post '/api/charges' => "charges#create"
   
   root to: 'client#index'
   get '*path', to: 'client#index'

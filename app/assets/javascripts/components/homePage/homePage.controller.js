@@ -1,9 +1,23 @@
-HomePageController.$inject = [];
+HomePageController.$inject = ["UsersService"];
 
-function HomePageController() {
+function HomePageController(UsersService) {
   const vm = this;
 
-  vm.message = "hey yall its angular";
+  vm.user = null;
+
+  function currentUser() {
+  	UsersService
+  		.getCurrentUser()
+  		.then(function(res) {
+  			vm.user = res.data;
+  		});
+  }
+
+  function activate() {
+  	currentUser();
+  }
+
+  activate();
 }
 
 angular
