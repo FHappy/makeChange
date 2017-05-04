@@ -27,6 +27,14 @@ angular
       .state('home', {
         url: '/',
         component: 'homePage'
+      })
+      .state("charitiesIndex", {
+        url: "/charities",
+        component: "charitiesIndex"
+      })
+      .state("charitiesShow", {
+        url: "/charities/:ein",
+        component: "charitiesShow"
       });
 
     // default fall back route
