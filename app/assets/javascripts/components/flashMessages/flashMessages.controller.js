@@ -2,11 +2,17 @@ angular
   .module('makeChangeApp')
   .controller('FlashMessagesController', FlashMessagesController);
 
-FlashMessagesController.$inject = ['$attrs'];
+FlashMessagesController.$inject = ['$scope', '$attrs', 'FlashMessage'];
 
-function FlashMessagesController($attrs) {
+function FlashMessagesController($scope, $attrs, FlashMessage) {
   const vm = this;
+  vm.factory = FlashMessage;
 
-  vm.notice = $attrs.notice;
-  vm.alert  = $attrs.alert;
+  var initial = eval($attrs.initial);
+  
+  if (initial.length) {
+    FlashMesage.setshow($attrs.initial[0][0]);
+    FlashMesage.setmessage($attrs.intial[0][1]);
+  }
+
 }
