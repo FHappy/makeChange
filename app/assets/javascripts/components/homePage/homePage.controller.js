@@ -12,7 +12,6 @@ function HomePageController(UsersService) {
   		.then(function(res) {
   			vm.user = res.data.user;
         vm.charities = res.data.charities;
-        console.log(vm.charities);
   		});
   }
 
