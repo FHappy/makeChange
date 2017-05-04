@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ein: 1
+  city: MyString
+  state: MyString
+  zip_code: 1
+  category: MyString
+  name: MyString
+  url: MyString
+  mission_statement: MyString
+  token_amount: 1
+  active?: MyString
+  time_started: 2017-05-03
+
+two:
+  ein: 1
+  city: MyString
+  state: MyString
+  zip_code: 1
+  category: MyString
+  name: MyString
+  url: MyString
+  mission_statement: MyString
+  token_amount: 1
+  active?: MyString
+  time_started: 2017-05-03
