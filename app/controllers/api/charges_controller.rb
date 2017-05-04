@@ -6,7 +6,7 @@ class Api::ChargesController < ApplicationController
   end
   
   def create
-    binding.pry
+    # binding.pry
     @amount = 575
 
     Stripe.api_key = "sk_test_VMkXZrajoyfxdGbjLZ8l329p"
@@ -25,8 +25,11 @@ class Api::ChargesController < ApplicationController
       :currency => 'usd'
     )
 
-    # rescue Stripe::CardError => e
-    #   flash[:error] = e.message
-    #   redirect_to new_charge_path
+    rescue Stripe::CardError => e
+      # flash[:alert] = e.message
+      # return {
+      #   alert: e.message
+      # }
+      render json: {error: e.message}, status: 517
   end
 end

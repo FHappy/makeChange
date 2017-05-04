@@ -1,6 +1,6 @@
-StripeFormController.$inject = ['StripeCheckout', '$http'];
+StripeFormController.$inject = ['StripeCheckout', '$http', 'FlashMessage'];
 
-function StripeFormController(StripeCheckout, $http) {
+function StripeFormController(StripeCheckout, $http, FlashMessage) {
   const vm = this;
 
   vm.description = 'hello world';
@@ -26,11 +26,19 @@ function StripeFormController(StripeCheckout, $http) {
         var token = {
           token: response[0].id
         }
-        return $http.post('/api/charges', token);
-      })
-      .then(function (payment) {
-        console.log('successful payment submitted!')
+        return $http.post('/api/charges', token)
+          .then(function (payment) {
+            console.log(payment);
+            console.log('successful payment submitted!')
+          })
+          .catch(function(response) {
+            console.log(response.data.error);
+            error = response.data.error;
+            FlashMessage.setShow('alert');
+            FlashMessage.setMessage(error);
+          });
       });
+      
 
   };
 }

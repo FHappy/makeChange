@@ -21,3 +21,17 @@
   @import 'materialize';
   @import "https://fonts.googleapis.com/icon?family=Material+Icons";
   @import "materialize/extras/nouislider";
+  @import "font-awesome";
+
+
+  $green: 256;
+  $red: 256;
+
+  .flash {
+    &.notice {
+      background: $green;
+    }
+    &.alert {
+      background: $red;
+    }
+  }
