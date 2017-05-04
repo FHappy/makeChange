@@ -14,14 +14,14 @@
         <%= link_to 'Home', root_path %>
         <%= link_to 'Edit account', edit_user_registration_path, target: '_self' %>
         <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %>
+        <a ui-sref="charitiesIndex">Charity Search</a>
       <% end %>
     </nav>
 
     
     <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>    <h1>This is our Front end</h1>
-    <stripe-form>
-    </stripe-form>
+    <p class="alert"><%= alert %></p>
+    <stripe-form></stripe-form>
     <ui-view></ui-view>
   </body>
 </html>
