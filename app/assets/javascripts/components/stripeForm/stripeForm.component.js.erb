@@ -1,0 +1,8 @@
+const StripeFormComponent = {
+  controller: 'StripeFormController',
+  templateUrl: '<%= asset_path("components/stripeForm/stripeForm") %>'
+};
+
+angular
+  .module('makeChangeApp')
+  .component('stripeForm', StripeFormComponent);
