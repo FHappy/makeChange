@@ -23,8 +23,10 @@ function StripeFormController(StripeCheckout, $http) {
       .then(function resolve(response) {
         console.log(response);
         // alert("Got stripe token: " + response[0].id);
-        var token = response[0].id;
-        return $http.post('/api/charges');
+        var token = {
+          token: response[0].id
+        }
+        return $http.post('/api/charges', token);
       })
       .then(function (payment) {
         console.log('successful payment submitted!')

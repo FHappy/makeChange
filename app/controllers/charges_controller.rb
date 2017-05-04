@@ -1,12 +1,21 @@
-class Api::ChargesController < ApplicationController
-
+class ChargesController < ApplicationController
+  def index
+    render json: {
+      message: 'hey'
+    }
+  end
+  
   def create
     binding.pry
     @amount = 575
 
+    Stripe.api_key = "sk_test_VMkXZrajoyfxdGbjLZ8l329p"
+
+    token = params["charge"]["token"]
+
     customer = Stripe::Customer.create(
       :email => current_user.email,
-      :source => params[token]
+      :source => token
     )
 
     charge = Stripe::Charge.create(
