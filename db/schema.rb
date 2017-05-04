@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503222729) do
+ActiveRecord::Schema.define(version: 20170504000749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "charities", force: :cascade do |t|
+    t.integer  "ein"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "category"
+    t.string   "name"
+    t.string   "url"
+    t.string   "mission_statement"
+    t.integer  "token_amount"
+    t.string   "active?"
+    t.date     "time_started"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "charity_id"
+    t.integer  "token_amount"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +54,8 @@ ActiveRecord::Schema.define(version: 20170503222729) do
     t.string   "username"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "provider"
+    t.string   "uid"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
