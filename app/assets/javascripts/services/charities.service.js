@@ -7,8 +7,9 @@ CharitiesService.$inject = ["$http"];
 function CharitiesService($http) {
 	const self = this;
 
-	self.getAllCharities = getAllCharities
-	self.findOneCharity = findOneCharity
+	self.getAllCharities = getAllCharities;
+	self.findOneCharity = findOneCharity;
+	self.indexQuery = indexQuery;
 
 	function getAllCharities() {
 		return $http.get("/api/charities");
@@ -16,5 +17,9 @@ function CharitiesService($http) {
 
 	function findOneCharity(ein) {
 		return $http.get(`/api/charities/${ein}`);
+	}
+
+	function indexQuery(page) {
+		return $http.get(`/api/charities/index/${page}`);
 	}
 }
