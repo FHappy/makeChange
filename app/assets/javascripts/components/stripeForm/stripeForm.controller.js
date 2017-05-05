@@ -5,6 +5,8 @@ function StripeFormController(StripeCheckout, $http, FlashMessage) {
 
   vm.description = 'hello world';
   vm.doCheckout = doCheckout;
+  vm.alertMessage = '';
+  vm.noticeMessage = '';
   vm.isLoading = false;
 
   var handler = StripeCheckout.configure({
@@ -22,7 +24,7 @@ function StripeFormController(StripeCheckout, $http, FlashMessage) {
 
     handler.open(options)
       .then(function resolve(response) {
-        var target = document.getElementById('spinner');
+        vm.isLoading = true;
         console.log(response);
         // alert("Got stripe token: " + response[0].id);
         var token = {
@@ -30,15 +32,14 @@ function StripeFormController(StripeCheckout, $http, FlashMessage) {
         };
         $http.post('/api/charges', token)
           .then(function (response) {
-            console.log('button submitted!');
             // console.log('successful payment submitted!');
-            console.log(response.data.message);
+            var alert = response.data.message;
+            vm.alertMessage = alert;
           })
           .catch(function(response) {
             console.log(response.data.message);
-            error = response.data.message;
-            FlashMessage.setShow('alert');
-            FlashMessage.setMessage(error);
+            var error = response.data.message;
+            vm.alertMessage = error;
           });
       });
       

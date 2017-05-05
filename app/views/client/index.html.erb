@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application', "https://js.stripe.com/v2/", "https://checkout.stripe.com/checkout.js"  %>
+    <%= javascript_include_tag 'application', "https://js.stripe.com/v2/", "https://checkout.stripe.com/checkout.js" %>
   </head>
   <body ng-app="makeChangeApp">
     <nav>
@@ -14,13 +14,15 @@
         <%= link_to 'Home', root_path %>
         <%= link_to 'Edit account', edit_user_registration_path, target: '_self' %>
         <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %>
+        <a ui-sref="charitiesIndex">Charity Search</a>
       <% end %>
     </nav>
 
-    <p class="flash notice"><%= notice %></p>
-    <p class="flash alert"><%= alert %></p>    <h1>This is our Front end</h1>
-    <stripe-form>
-    </stripe-form>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <stripe-form></stripe-form>
     <ui-view></ui-view>
+    <div id="loading" class="loading"></div>
+
   </body>
 </html>

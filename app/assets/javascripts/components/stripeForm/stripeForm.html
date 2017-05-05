@@ -1,7 +1,10 @@
 
 <button ng-click="$ctrl.doCheckout()">Purchase</button>
-
-<div ng-show="$ctrl.isLoading" id="spinner">
-
-
+<div>
+  <div class="alert">
+    <p ng-show="$ctrl.alertMessage">{{ $ctrl.alertMessage }} </p>
+  </div>
+  <div class="notice">
+      <p ng-show="$ctrl.noticeMessage">{{ $ctrl.noticeMessage }} </p>
+  </div>  
 </div>

@@ -6,7 +6,6 @@ class Api::ChargesController < ApplicationController
   end
   
   def create
-    # binding.pry
     begin
     @amount = 575
 
