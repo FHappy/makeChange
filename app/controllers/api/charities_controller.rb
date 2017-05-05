@@ -27,14 +27,18 @@ class Api::CharitiesController < ApplicationController
 					org_charity = db_charity
 					break
 				else
-					# org_charity["token_amount"] = 0
+					org_charity["token_amount"] = 0
+					org_charity["total_earned"] = 0
 					org_charity
 				end
 			end
 			org_charity
 		end
-		# charities.sort! {|x,y| y["token_amount"] <=> x["token_amount"]}
-		charities
+		@db_charities.each do |charity|
+			charities.push(charity)
+		end
+		charities.uniq!
+		charities.sort_by {|x| [-x["token_amount"], -x["total_earned"]] }
 	end
 
 	def url
