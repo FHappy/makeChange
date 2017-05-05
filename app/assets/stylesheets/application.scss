@@ -22,10 +22,18 @@
   @import "https://fonts.googleapis.com/icon?family=Material+Icons";
   @import "materialize/extras/nouislider";
 
-body {
+html {
+	height: 100vh;
 	align-content: center;
+	margin: 0 auto;
 }
 
 .col {
 	text-align: center;
 }
+
+.clientView {
+	margin-bottom: 0px;
+	height: 93vh;
+}
+
