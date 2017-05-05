@@ -8,13 +8,15 @@ CharitiesIndexController.$inject = ["CharitiesService"];
 function CharitiesIndexController(CharitiesService) {
 	var vm = this;
 
-	vm.all = null;
+	vm.all = [];
 
 	function activate() {
 		CharitiesService
 			.getAllCharities()
 			.then(function(res) {
-				vm.all = res.data;
+				vm.all.push(res.data.local);
+				vm.all.push(res.data.third_party);
+				vm.all = [].concat.apply([], vm.all);
 			});
 
 	}

@@ -10,25 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504180726) do
+ActiveRecord::Schema.define(version: 20170505132800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "charities", force: :cascade do |t|
-    t.integer  "ein"
+    t.string   "ein"
     t.string   "city"
     t.string   "state"
-    t.string   "zip_code"
+    t.string   "zipCode"
     t.string   "category"
-    t.string   "name"
+    t.string   "charityName"
     t.string   "url"
-    t.string   "mission_statement"
+    t.string   "missionStatement"
     t.integer  "token_amount"
     t.date     "time_started"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.boolean  "is_active?",        default: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "is_active?",       default: true
+    t.string   "website"
   end
 
   create_table "donations", force: :cascade do |t|
