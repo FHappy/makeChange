@@ -24,10 +24,15 @@ class Api::CharitiesController < ApplicationController
 			@db_charities.each do |db_charity|
 				if db_charity["ein"] == org_charity["ein"]
 					org_charity = db_charity
+					break
+				else
+					# org_charity["token_amount"] = 0
+					org_charity
 				end
 			end
 			org_charity
 		end
+		# charities.sort! {|x,y| y["token_amount"] <=> x["token_amount"]}
 		charities
 	end
 
