@@ -41,6 +41,7 @@ gem 'omniauth-facebook'
 gem "materialize-sass"
 gem "material_icons"
 gem 'stripe'
+gem "httparty"
 gem 'font-awesome-rails'
 
 group :development, :test do
