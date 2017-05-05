@@ -21,8 +21,32 @@
   @import 'materialize';
   @import "https://fonts.googleapis.com/icon?family=Material+Icons";
   @import "materialize/extras/nouislider";
-  @import "font-awesome";
 
+
+html {
+	height: 100vh;
+	align-content: center;
+	margin: 0 auto;
+}
+
+.wrapper {
+	margin: 0 auto;
+}
+
+.col {
+	text-align: center;
+}
+
+.clientView {
+	margin-bottom: 0px;
+	height: 93vh;
+}
+
+.deviseForm {
+	border: 3px solid black;
+	max-width: 100%;
+	margin: 0 auto;
+}
 
   $green: 256;
   $red: 256;
@@ -40,3 +64,4 @@
     height: 500px;
     width: 600px;
   }
+

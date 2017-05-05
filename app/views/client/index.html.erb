@@ -9,20 +9,70 @@
     <%= javascript_include_tag 'application', "https://js.stripe.com/v2/", "https://checkout.stripe.com/checkout.js" %>
   </head>
   <body ng-app="makeChangeApp">
-    <nav>
-      <% if user_signed_in? %>
-        <%= link_to 'Home', root_path %>
-        <%= link_to 'Edit account', edit_user_registration_path, target: '_self' %>
-        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %>
-        <a ui-sref="charitiesIndex">Charity Search</a>
-      <% end %>
-    </nav>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <stripe-form></stripe-form>
-    <ui-view></ui-view>
-    <div id="loading" class="loading"></div>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-wrapper pink lighten-2">
+    <a href="#" class="brand-logo">LOGO</a>
+
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <% if user_signed_in? %>
+      <li><a ui-sref="charitiesIndex">charity search</a></li>
+      <li><%= link_to 'home', root_path %></li>
+      <li><a href="#" data-activates="slide-out" class="sideMenu">menu</a></li>
+    <% end %>
+    </ul>
+  <div>
+</nav>
+
+<!-- SideNav -->
+<div class="row teal lighten-4" ng-controller="HomePageController as controller" style="margin-bottom: 0px;">
+  <ul id="slide-out" class="side-nav">
+    <li>
+      <div class="userView">
+        <div class="background teal blue-4">
+          <img src="">
+        </div>
+        <a href="#!user"><img class="circle" src=""></a>
+        <a href="#!name">
+          <span class="black-text name">{{controller.user.username}}</span>
+        </a>
+        <a href="#!email">
+          <span class="black-text email">{{controller.user.email}}</span>
+        </a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#">
+        <stripe-form></stripe-form>
+      </a>
+    </li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">SOMETEXTIDK</a></li>
+    <li><%= link_to 'edit account', edit_user_registration_path, target: '_self' %></li>
+    <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %></li>
+  </ul>
+</div> 
+
+
+<div class="row red lighten-4 clientView">
+    <div class="col s12">
+      <ui-view></ui-view>
+    </div>
+</div>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <script>
+    $( document ).ready(function() {
+      $('.sideMenu').sideNav({
+        edge: 'right'
+      });
+    });
+  </script>
 
   </body>
 </html>
