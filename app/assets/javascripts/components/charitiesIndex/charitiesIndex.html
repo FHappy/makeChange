@@ -32,8 +32,12 @@
 							</i>
 						</span>
 						<p ng-if="charity.missionStatement">{{ charity.missionStatement }}</p>
-						<h5 ng-if="charity.category != 'Not Provided'"><strong>{{ charity.category }}</strong></h5>
 						<p>{{ charity.url }}</p>
+						<span>
+							Catagories:
+						</span>
+						<br>
+						<span><h6 ng-if="charity.category != 'Not Provided'"><strong>{{ charity.category }}</strong></h6></span>
 				    </div>
 				</div>
 

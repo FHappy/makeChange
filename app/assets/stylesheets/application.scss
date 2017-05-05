@@ -65,6 +65,11 @@ html {
 
 .card {
 	height: 250px;
+	margin: 15px;
+}
+.card-content,
+.card-reveal {
+	text-align: left;
 }
 
   $green: 256;
