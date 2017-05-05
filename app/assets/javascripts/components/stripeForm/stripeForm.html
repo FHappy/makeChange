@@ -1,58 +1,10 @@
-<!--<form stripe-form="stripeCallback">
-    <input ng-model="number" placeholder="Card Number" payments-format="card" payments-validate="card" name="card" />
-    
-    <input ng-model="expiry" placeholder="Expiration" payments-format="expiry" payments-validate="expiry" name="expiry" />
-    
-    <input ng-model="cvc" placeholder="CVC" payments-format="cvc" payments-validate="cvc" name="cvc" />
-    
-    <button type="submit">Submit</button>
-</form>
-
-<div ng-if="checkoutForm.card.$invalid">
-    Error: invalid card number!
-</div>-->
-
-<!--<form action="/your-server-side-code" method="POST">
-<p>hello</p>
-<script
-  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-  data-key="pk_test_BXvvyNNCdq2c7PKLgIoHDvnw"
-  data-amount="2000"
-  data-name="makeChange"
-  data-description="{{$ctrl.description}}"
-  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-  data-locale="auto">
-</script>
-</form>-->
-
-<!--<script src="https://checkout.stripe.com/checkout.js"></script>-->
 
 <button ng-click="$ctrl.doCheckout()">Purchase</button>
-
-<!--<script>
-var handler = StripeCheckout.configure({
-  key: 'pk_test_BXvvyNNCdq2c7PKLgIoHDvnw',
-  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-  locale: 'auto',
-  token: function(token) {
-    // You can access the token ID with `token.id`.
-    // Get the token ID to your server-side code for use.
-  }
-});
-
-document.getElementById('customButton').addEventListener('click', function(e) {
-  // Open Checkout with further options:
-  handler.open({
-    name: 'makeChange',
-    description: '10 tokens',
-    amount: 2000
-  });
-  e.preventDefault();
-});
-
-// Close Checkout on page navigation:
-window.addEventListener('popstate', function() {
-  handler.close();
-});
-</script>-->
-
+<div>
+  <div class="alert">
+    <p ng-show="$ctrl.alertMessage">{{ $ctrl.alertMessage }} </p>
+  </div>
+  <div class="notice">
+      <p ng-show="$ctrl.noticeMessage">{{ $ctrl.noticeMessage }} </p>
+  </div>  
+</div>

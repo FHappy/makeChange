@@ -1,0 +1,11 @@
+<div ng-controller="FlashMessagesController as flash"
+     data-initial="<%= flash.to_json.html_safe %>"
+     ng-cloak>
+
+  <div ng-show="flash.factory.show" ng-class="flash.factory.show" class="flash">
+    <div class="close" ng-click="flash.factory.setShow(false)">
+      <%= fa_icon "close" %>
+    </div>
+      {{ flash.factory.message }}
+  </div>
+</div>

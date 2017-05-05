@@ -1,0 +1,8 @@
+const FlashMessagesComponent = {
+  controller: 'FlashMessagesController',
+  templateUrl: '<%= asset_path("components/flashMessages/flashMessages") %>'
+}
+
+angular
+  .module('makeChangeApp')
+  .component('flashMessages', FlashMessagesComponent);
