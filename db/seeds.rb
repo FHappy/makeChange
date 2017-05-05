@@ -122,6 +122,42 @@ Donation.create(
 	user_id: user3.id,
 	charity_id: charity5.id
 	)
+Donation.create(
+	user_id: user1.id,
+	charity_id: charity1.id
+	)
+Donation.create(
+	user_id: user1.id,
+	charity_id: charity2.id
+	)
+Donation.create(
+	user_id: user1.id,
+	charity_id: charity3.id
+	)
+Donation.create(
+	user_id: user2.id,
+	charity_id: charity4.id
+	)
+Donation.create(
+	user_id: user2.id,
+	charity_id: charity5.id
+	)
+Donation.create(
+	user_id: user2.id,
+	charity_id: charity6.id
+	)
+Donation.create(
+	user_id: user3.id,
+	charity_id: charity1.id
+	)
+Donation.create(
+	user_id: user3.id,
+	charity_id: charity3.id
+	)
+Donation.create(
+	user_id: user3.id,
+	charity_id: charity5.id
+	)
 
 
 

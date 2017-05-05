@@ -2,10 +2,10 @@ angular
 	.module("makeChangeApp")
 	.controller("CharitiesShowController", CharitiesShowController);
 
-CharitiesShowController.$inject = [];
+CharitiesShowController.$inject = ["$stateParams", "$http", "CharitiesService"];
 
-function CharitiesShowController() {
+function CharitiesShowController($stateParams, $http) {
 	var vm = this;
 
-	vm.message = "charity show page, dwag";
+	
 }
