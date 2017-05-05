@@ -25,70 +25,70 @@ user3 = User.create(
 	password: "password"
 	)
 charity1 = Charity.create(
-	ein: "1",
-	city: "city",
-	state: "state",
-	zipCode: "11111",
-	category: "cat",
-	charityName: "charity1",
-	url: "http://www.google.com",
-	missionStatement: "missionStatement",
-	website: "http://www.google.com/news"
+	ein: "721336135",
+	city: "GULFPORT",
+	state: "Mississippi",
+	zipCode: "39501",
+	category: "Religion-Related, Spiritual Development",
+	charityName: "NEW COMMUNITY HOPE",
+	url: "http://www.orghunter.com/organization/721336135",
+	missionStatement: "",
+	website: ""
 	)
 charity2 = Charity.create(
-	ein: "2",
-	city: "city",
-	state: "state",
-	zipCode: "22222",
-	category: "cat",
-	charityName: "charity2",
-	url: "http://www.google.com",
-	missionStatement: "missionStatement",
-	website: "http://www.google.com/news"
+	ein: "010352636",
+	city: "Maine",
+	state: "PORTLAND",
+	zipCode: "04104",
+	category: "Human Services - Multipurpose and Other",
+	charityName: "FAMILY CRISIS SERVICES",
+	url: "http://www.orghunter.com/organization/010352636",
+	missionStatement: "Domestic violence resource center offering safe and accessible services to victims 24 hotline, emergency shelter, outreach and court advocacy, school education and prevention.",
+	website: "www.familycrisis.org"
 	)
 charity3 = Charity.create(
-	ein: "3",
-	city: "city",
-	state: "state",
-	zipCode: "33333",
-	category: "cat",
-	charityName: "charity3",
-	url: "http://www.google.com",
-	missionStatement: "missionStatement",
-	website: "http://www.google.com/news"
+	ein: "741109881",
+	city: "HOBSON",
+	state: "Texas",
+	zipCode: "78117",
+	category: "Not Provided",
+	charityName: "ST BONIFACE PARISH",
+	url: "http://www.orghunter.com/organization/741109881",
+	missionStatement: "",
+	website: ""
 	)
 charity4 = Charity.create(
-	ein: "4",
-	city: "city",
-	state: "state",
-	zipCode: "44444",
-	category: "cat",
-	charityName: "charity4",
-	url: "http://www.google.com",
-	missionStatement: "missionStatement",
-	website: "http://www.google.com/news"
+	ein: "731623980",
+	city: "NORMAN",
+	state: "Oklahoma",
+	zipCode: "73070",
+	category: "Religion-Related, Spiritual Development",
+	charityName: "MORNING STAR CENTER FOR SPIRITUAL LIVING INC",
+	url: "http://www.orghunter.com/organization/731623980",
+	missionStatement: "",
+	website: ""
 	)
 charity5 = Charity.create(
-	ein: "5",
-	city: "city",
-	state: "state",
-	zipCode: "55555",
-	category: "cat",
-	charityName: "charity5",
-	url: "http://www.google.com",
-	missionStatement: "missionStatement",
-	website: "http://www.google.com/news"
+	ein: "560547476",
+	city: "ASHEVILLE",
+	state: "North Carolina",
+	zipCode: "28801",
+	category: "Not Provided",
+	charityName: "YWCA OF ASHEVILLE AND WESTERN NORTH CAROLINA INC",
+	url: "http://www.orghunter.com/organization/560547476",
+	missionStatement: "To eliminate racism, empower women and promote peace, justice, freedom and dignity for all through programs that balance disparities in health, childcare, education and employment.",
+	website: "www.ywcaofasheville.org"
 	)
 charity6 = Charity.create(
-	ein: "6",
-	city: "city",
-	state: "state",
-	zipCode: "66666",
-	category: "cat",
-	charityName: "charity6",
-	url: "http://www.google.com",
-	missionStatement: "missionStatement",
-	website: "http://www.google.com/news"
+	ein: "351408887",
+	city: "MUNCIE",
+	state: "Indiana",
+	zipCode: "47305",
+	category: "Not Provided",
+	charityName: "TEMPLE BETH-EL",
+	url: "http://www.orghunter.com/organization/351408887",
+	missionStatement: "",
+	website: ""
 	)
 
 Donation.create(
