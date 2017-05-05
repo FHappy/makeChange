@@ -1,10 +1,7 @@
 class Api::CharitiesController < ApplicationController
 	def index
-		page = params[:page].to_i
-		start = (page - 1) * 20 + 1
-		@charities= HTTParty.get("#{url}&start=#{start}").as_json["data"]
-		
-		render json: {charities: de_dupe(@charities)}
+		@charities= Charity.all;
+		render json: {charities: sort_by_goal(@charities)}
 	end
 
 	def show
@@ -14,7 +11,6 @@ class Api::CharitiesController < ApplicationController
 			render json: @charity
 		else
 			@charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
-			binding.pry
 			render json: @charity
 		end
 	end
@@ -35,11 +31,15 @@ class Api::CharitiesController < ApplicationController
 			end
 			org_charity
 		end
-		charities.sort_by {|x| [-x["token_amount"], -x["total_earned"]] }
+		charities
 	end
 
 	def url
 		url = "http://data.orghunter.com/v1/charitysearch?user_key=fd8d0a7418b42223ada1b88c40dfa0a9&eligible=1"
 	end
-	
+
+	def sort_by_goal(charities)
+		charities.sort_by {|x| [-x["token_amount"], -x["total_earned"]] }
+	end
+		
 end
