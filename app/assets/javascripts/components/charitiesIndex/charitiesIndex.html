@@ -1,3 +1,9 @@
 <h1>Charities Index</h1>
 
-{{ $ctrl.message }}
+<div ng-repeat="charity in $ctrl.all">
+	<h3><a ui-sref="charitiesShow({ ein: charity.ein })">{{ charity.charityName }}</a></h3>
+	<h4 ng-if="charity.category != 'Not Provided'">{{ charity.category }}</h4>
+	<h5>{{ charity.city }}, {{ charity.state }} {{ charity.zip_code }}</h5>
+	<p ng-if="charity.missionStatement">{{ charity.missionStatement }}</p>
+	<p>{{ charity.url }}</p>
+</div>

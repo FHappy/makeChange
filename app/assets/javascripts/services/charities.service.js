@@ -4,12 +4,17 @@ angular
 
 CharitiesService.$inject = ["$http"];
 
-function CharitiesService() {
+function CharitiesService($http) {
 	const self = this;
 
-	// self.all = getAllCharities
+	self.getAllCharities = getAllCharities
+	self.findOneCharity = findOneCharity
 
-	// function getAllCharities() {
-	// 	return $http.get("/api/charities");
-	// }
+	function getAllCharities() {
+		return $http.get("/api/charities");
+	}
+
+	function findOneCharity(ein) {
+		return $http.get(`/api/charities/${ein}`);
+	}
 }

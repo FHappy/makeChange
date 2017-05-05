@@ -2,9 +2,8 @@
 	<div class="col s12">
 		<h1>welcome home, {{ $ctrl.user.username }}</h1>
 
-	<h2>{{ $ctrl.user.username }}'s Charities</h2>
+<div ng-repeat="charity in $ctrl.charities">
+	<h1>{{ charity.name }}</h1>
+	<p>{{ charity.url }}</p>
+	<p>{{ charity.category }}</p>
 </div>
-
-</div>
-	<!-- Side bar -->
-	<!-- <p>Email: {{ $ctrl.user.email }}</p> -->

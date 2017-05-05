@@ -22,6 +22,7 @@
   @import "https://fonts.googleapis.com/icon?family=Material+Icons";
   @import "materialize/extras/nouislider";
 
+
 html {
 	height: 100vh;
 	align-content: center;
@@ -47,10 +48,20 @@ html {
 	margin: 0 auto;
 }
 
+  $green: 256;
+  $red: 256;
 
+  .flash {
+    &.notice {
+      background: $green;
+    }
+    &.alert {
+      background: $red;
+    }
+  }
 
-
-
-
-
+  .loading {
+    height: 500px;
+    width: 600px;
+  }
 
