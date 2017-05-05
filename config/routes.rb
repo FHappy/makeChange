@@ -3,8 +3,7 @@ Rails.application.routes.draw do
 
   
   get "api/users/current" => "api/users#current", as: "users_current"
-  get "api/charities" => "api/charities#index", as: "charities_index"
-  get "api/charities/:ein" => "api/charities#show", as: "charities_show"
+  get "api/charities/index/:page" => "api/charities#index", as: "charities_index"
 
   namespace :api do
     resources :charges, only: [:index, :create]
