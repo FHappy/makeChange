@@ -15,7 +15,6 @@ function CharitiesIndexController(CharitiesService) {
 		CharitiesService
 			.indexQuery(1)
 			.then(function resolve(response) {
-				console.log(response.data.charities);
 				vm.charities = response.data.charities;
 			});
 	}

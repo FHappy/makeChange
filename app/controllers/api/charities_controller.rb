@@ -1,6 +1,5 @@
 class Api::CharitiesController < ApplicationController
 	def index
-		binding.pry
 		page = params[:page].to_i
 		start = (page - 1) * 20 + 1
 		@charities= HTTParty.get("#{url}&start=#{start}").as_json["data"]
@@ -25,7 +24,7 @@ class Api::CharitiesController < ApplicationController
 		end
 		charities
 	end
-	
+
 	def url
 		url = "http://data.orghunter.com/v1/charitysearch?user_key=fd8d0a7418b42223ada1b88c40dfa0a9&eligible=1"
 	end
