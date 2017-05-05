@@ -15,6 +15,29 @@ class Api::CharitiesController < ApplicationController
 		end
 	end
 
+	def search
+		query = params[:query].upcase
+		# query = "%#{query}%"
+		# @db_charities = Charity.where("'charityName' ILIKE :query", query: query)
+		# binding.pry
+		@suggested = []
+		Charity.all.each do |charity|
+			regex_query = Regexp.new("#{query}")
+			if regex_query =~ charity["charityName"]
+				@suggested << charity
+			end
+		end
+		
+		@org_charities = HTTParty.get("#{url}&searchTerm=#{query}")
+		
+		render json: {
+			suggested: @suggested,
+			charities: @org_charities
+		}
+
+	end
+	
+
 	private
 	def de_dupe(charities)
 		@db_charities = Charity.all
