@@ -9,19 +9,36 @@
     <%= javascript_include_tag 'application', "https://js.stripe.com/v2/", "https://checkout.stripe.com/checkout.js"  %>
   </head>
   <body ng-app="makeChangeApp">
-    <nav>
-      <% if user_signed_in? %>
-        <%= link_to 'Home', root_path %>
-        <%= link_to 'Edit account', edit_user_registration_path, target: '_self' %>
-        <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %>
-        <a ui-sref="charitiesIndex">Charity Search</a>
-      <% end %>
-    </nav>
 
+    <nav>
+      <div class="nav-wrapper pink lighten-2">
+        <a href="#" class="brand-logo">LOGO</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <% if user_signed_in? %>
+          <li><%= link_to 'Home', root_path %></li>
+          <li><a ui-sref="charitiesIndex">Charity Search</a></li>
+          <li><%= link_to 'Edit account', edit_user_registration_path, target: '_self' %></li>
+          <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %></li>
+        <% end %>
+        </ul>
+        <div>
+    </nav>
     
+    <div class="row">
+      <div class="col s12">
+        <ui-view></ui-view>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12">
+        <stripe-form></stripe-form>
+      </div>
+    </div>
+
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <stripe-form></stripe-form>
-    <ui-view></ui-view>
+
   </body>
 </html>
