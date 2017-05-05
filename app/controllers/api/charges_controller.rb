@@ -6,7 +6,7 @@ class Api::ChargesController < ApplicationController
   end
   
   def create
-    binding.pry
+    begin
     @amount = 575
 
     Stripe.api_key = "sk_test_VMkXZrajoyfxdGbjLZ8l329p"
@@ -24,9 +24,14 @@ class Api::ChargesController < ApplicationController
       :description => 'makeChange donation',
       :currency => 'usd'
     )
-
-    # rescue Stripe::CardError => e
-    #   flash[:error] = e.message
-    #   redirect_to new_charge_path
+    render json: {message: "Payment for #{@amount} successfully submitted"}, status: 200
+    rescue Stripe::CardError => e
+      # flash[:alert] = e.message
+      # return {
+      #   alert: e.message
+      # }
+      render json: {message: e.message}, status: 517
+    end
+    
   end
 end
