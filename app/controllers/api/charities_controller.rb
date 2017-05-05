@@ -13,6 +13,7 @@ class Api::CharitiesController < ApplicationController
 			render json: @charity
 		else
 			@charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
+			binding.pry
 			render json: @charity
 		end
 	end
@@ -24,10 +25,15 @@ class Api::CharitiesController < ApplicationController
 			@db_charities.each do |db_charity|
 				if db_charity["ein"] == org_charity["ein"]
 					org_charity = db_charity
+					break
+				else
+					# org_charity["token_amount"] = 0
+					org_charity
 				end
 			end
 			org_charity
 		end
+		# charities.sort! {|x,y| y["token_amount"] <=> x["token_amount"]}
 		charities
 	end
 
