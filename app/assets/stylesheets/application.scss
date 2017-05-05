@@ -33,19 +33,38 @@ html {
 	margin: 0 auto;
 }
 
+.nav-wrapper {
+	padding: 0px 25px;
+}
+
+.col .s12 {
+	padding: 0px;
+}
+
 .col {
 	text-align: center;
 }
 
 .clientView {
 	margin-bottom: 0px;
-	height: 93vh;
 }
 
 .deviseForm {
 	border: 3px solid black;
 	max-width: 100%;
 	margin: 0 auto;
+}
+
+.charityBanner {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+
+.card {
+	height: 250px;
 }
 
   $green: 256;

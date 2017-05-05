@@ -12,19 +12,21 @@
 
 
 <!-- Navbar -->
-<nav>
-  <div class="nav-wrapper pink lighten-2">
-    <a href="#" class="brand-logo">LOGO</a>
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper pink lighten-2">
+      <a href="#" class="brand-logo">LOGO</a>
 
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-    <% if user_signed_in? %>
-      <li><a ui-sref="charitiesIndex">charity search</a></li>
-      <li><%= link_to 'home', root_path %></li>
-      <li><a href="#" data-activates="slide-out" class="sideMenu">menu</a></li>
-    <% end %>
-    </ul>
-  <div>
-</nav>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if user_signed_in? %>
+        <li><a ui-sref="charitiesIndex">charity search</a></li>
+        <li><%= link_to 'home', root_path %></li>
+        <li><a href="#" data-activates="slide-out" class="sideMenu">menu</a></li>
+      <% end %>
+      </ul>
+    <div>
+  </nav>
+</div>
 
 <!-- SideNav -->
 <div class="row teal lighten-4" ng-controller="HomePageController as controller" style="margin-bottom: 0px;">
@@ -55,7 +57,6 @@
     <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %></li>
   </ul>
 </div> 
-
 
 <div class="row red lighten-4 clientView">
     <div class="col s12">
