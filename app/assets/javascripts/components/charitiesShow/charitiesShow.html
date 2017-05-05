@@ -1,3 +1,5 @@
-<h1>Charities Show</h1>
-
-{{ $ctrl.message }}
+<h1>{{ $ctrl.charity.name }}</h1>
+<h3>{{ $ctrl.charity.category }}</h3>
+<h4>{{ $ctrl.charity.city }}, {{ $ctrl.charity.state }} {{ $ctrl.charity.zip_code }}</h4>
+<p ng-if="$ctrl.charity.mission_statement">{{ $ctrl.charity.mission_statement }}</p>
+<p>{{ $ctrl.charity.url }}</p>
