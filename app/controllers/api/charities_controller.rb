@@ -3,6 +3,7 @@ class Api::CharitiesController < ApplicationController
 		page = params[:page].to_i
 		start = (page - 1) * 20 + 1
 		@charities= HTTParty.get("#{url}&start=#{start}").as_json["data"]
+		
 		render json: {charities: de_dupe(@charities)}
 	end
 
@@ -34,10 +35,6 @@ class Api::CharitiesController < ApplicationController
 			end
 			org_charity
 		end
-		@db_charities.each do |charity|
-			charities.push(charity)
-		end
-		charities.uniq!
 		charities.sort_by {|x| [-x["token_amount"], -x["total_earned"]] }
 	end
 
