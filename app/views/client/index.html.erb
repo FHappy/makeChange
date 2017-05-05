@@ -10,28 +10,23 @@
   </head>
   <body ng-app="makeChangeApp">
 
-  <nav>
-    <div class="nav-wrapper pink lighten-2">
-      <a href="#" class="brand-logo">LOGO</a>
-      
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <% if user_signed_in? %>
-        <li><a ui-sref="charitiesIndex">Charity Search</a></li>
-        <li><%= link_to 'Home', root_path %></li>
-        <li><%= link_to 'Edit account', edit_user_registration_path, target: '_self' %></li>
-        <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %></li>
+<!-- Navbar -->
+<nav>
+  <div class="nav-wrapper pink lighten-2">
+    <a href="#" class="brand-logo">LOGO</a>
 
-      <% end %>
-      </ul>
-      <div>
-  </nav>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <% if user_signed_in? %>
+      <li><a ui-sref="charitiesIndex">charity search</a></li>
+      <li><%= link_to 'home', root_path %></li>
+      <li><a href="#" data-activates="slide-out" class="sideMenu">menu</a></li>
+    <% end %>
+    </ul>
+  <div>
+</nav>
 
-
-
-
-<li><a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">MENU</i></a></li>
-
-<div class="row teal lighten-4 header" ng-controller="HomePageController as controller">
+<!-- SideNav -->
+<div class="row teal lighten-4" ng-controller="HomePageController as controller" style="margin-bottom: 0px;">
   <ul id="slide-out" class="side-nav">
     <li>
       <div class="userView">
@@ -47,21 +42,18 @@
         </a>
       </div>
     </li>
-    <li><%= link_to 'edit account', edit_user_registration_path, target: '_self' %></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-    <li><a href=""><%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %></a></li>
 
     <li>
       <a href="#">
         <stripe-form></stripe-form>
       </a>
     </li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">SOMETEXTIDK</a></li>
+    <li><%= link_to 'edit account', edit_user_registration_path, target: '_self' %></li>
+    <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %></li>
   </ul>
 </div> 
-
-
 
 
 <div class="row red lighten-4 clientView">
@@ -74,11 +66,11 @@
   <p class="alert"><%= alert %></p>
 
   <script>
-  $(function() {
-    $('.button-collapse').sideNav({
-      edge: 'right'
+    $( document ).ready(function() {
+      $('.sideMenu').sideNav({
+        edge: 'right'
+      });
     });
-  })
   </script>
 
   </body>
