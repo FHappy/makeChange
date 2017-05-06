@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505132800) do
+ActiveRecord::Schema.define(version: 20170505173133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,12 +24,13 @@ ActiveRecord::Schema.define(version: 20170505132800) do
     t.string   "charityName"
     t.string   "url"
     t.string   "missionStatement"
-    t.integer  "token_amount"
+    t.integer  "token_amount",     default: 0
     t.date     "time_started"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.boolean  "is_active?",       default: true
     t.string   "website"
+    t.integer  "total_earned",     default: 0
   end
 
   create_table "donations", force: :cascade do |t|
