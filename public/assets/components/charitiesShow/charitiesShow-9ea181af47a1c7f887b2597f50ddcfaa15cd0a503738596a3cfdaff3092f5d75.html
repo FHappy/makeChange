@@ -1,0 +1,23 @@
+<div class="charityShowBanner blue lighten-2">
+	<div class="row">
+			<div class="col l8 m12 s12 charityShowInfo">
+				<h2>{{ $ctrl.charity.charityName}}</h2>
+				<h4>{{ $ctrl.charity.city }}, {{ $ctrl.charity.state }} {{ $ctrl.charity.zip_code }}</h4>
+				<h6>{{ $ctrl.charity.category }}</h6>
+				<p ng-if="$ctrl.charity.mission_statement">{{ $ctrl.charity.mission_statement }}</p>
+				<p></p>
+				<a ng-href="{{ $ctrl.charity.url }}" target="_blank" class="websiteLink">Website</a>
+			</div>
+			<div class="col l4 m12 s12 lighten-2 charityShowDonateBox">
+					<h2>Feelin' saucy?</h2> 
+					<p>Donate!</p>
+					<stripe-form></stripe-form>
+			</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col l8 m12 s12">
+		<h1>COMMENTS</h1>
+	</div>
+</div>
