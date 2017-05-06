@@ -27,10 +27,29 @@ html {
 	height: 100vh;
 	align-content: center;
 	margin: 0 auto;
+	font-family: avenir;
+	letter-spacing: 0.1em;
+}
+
+.websiteLink {
+	text-decoration: underline;
+	color: black;
+}
+
+.nav-wrapper {
+	background-color: #4c4c4c;
 }
 
 .wrapper {
 	margin: 0 auto;
+}
+
+.nav-wrapper {
+	padding: 0px 25px;
+}
+
+.col .s12 {
+	padding: 0px;
 }
 
 .col {
@@ -39,13 +58,41 @@ html {
 
 .clientView {
 	margin-bottom: 0px;
-	height: 93vh;
 }
 
 .deviseForm {
 	border: 3px solid black;
 	max-width: 100%;
 	margin: 0 auto;
+}
+
+/*Page banners*/
+.charityIndexBanner {
+	height: 50vh;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+.charityShowBanner {
+	height: 50vh;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+.charityShowInfo,
+.charityShowDonateBox {
+	text-align: left;
+}
+
+.card {
+	height: 250px;
+	margin: 15px;
+}
+.card-content,
+.card-reveal {
+	text-align: left;
 }
 
   $green: 256;
