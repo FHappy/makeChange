@@ -1,12 +1,12 @@
-<div class="charityBanner blue lighten-2">
+<div class="charityIndexBanner blue lighten-2">
 	<h1>Charities Index</h1>
 </div>
+
 <!-- Charity Cards -->
 	<div class="row">
 		<div ng-repeat="charity in $ctrl.charities">
 
 			<div class="col s12 m6">
-			  	
 			  	<div class="card">
 				    <div class="card-image waves-effect waves-block waves-light">
 				      <img class="activator red lighten-2" src="">
@@ -26,13 +26,18 @@
 				    </div>
 				    <div class="card-reveal">
 						<span class="card-title grey-text text-darken-4">
-							Mission Statement
+							<h4>Mission Statement</h4>
 							<i class="material-icons right">
 								close
 							</i>
 						</span>
 						<p ng-if="charity.missionStatement">{{ charity.missionStatement }}</p>
-						<p>{{ charity.url }}</p>
+						<p ng-if="charity.website">
+							<a ng-href="http://{{ charity.website }}" target="_blank" class="websiteLink">Website</a>
+						</p>
+						<p ng-if="!charity.website">
+							<a ng-href="{{ charity.url }}" target="_blank" class="websiteLink">Website</a>
+						</p>
 						<span>
 							Catagories:
 						</span>

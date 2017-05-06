@@ -27,6 +27,17 @@ html {
 	height: 100vh;
 	align-content: center;
 	margin: 0 auto;
+	font-family: avenir;
+	letter-spacing: 0.1em;
+}
+
+.websiteLink {
+	text-decoration: underline;
+	color: black;
+}
+
+.nav-wrapper {
+	background-color: #4c4c4c;
 }
 
 .wrapper {
@@ -55,12 +66,24 @@ html {
 	margin: 0 auto;
 }
 
-.charityBanner {
-	height: 100vh;
+/*Page banners*/
+.charityIndexBanner {
+	height: 50vh;
 	display: flex;
 	justify-content: center;
 	align-content: center;
 	align-items: center;
+}
+.charityShowBanner {
+	height: 50vh;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+.charityShowInfo,
+.charityShowDonateBox {
+	text-align: left;
 }
 
 .card {
