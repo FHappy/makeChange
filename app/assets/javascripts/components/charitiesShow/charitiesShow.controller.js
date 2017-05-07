@@ -17,12 +17,7 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 
 	function activate() {
 		getCurrentUser();
-		CharitiesService
-			.findOneCharity($stateParams.ein)
-			.then(function(response) {
-				vm.charity = response.data.charity;
-				console.log(response.data);
-			});
+		getCharity();
 	}
 
 	activate();
@@ -32,6 +27,7 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 			.then(function resolve(response) {
 				vm.tokenAmount = 1;
 				getCurrentUser();
+				getCharity();
 			}, function reject(response) {
 
 			});
@@ -61,6 +57,15 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 			.getCurrentUser()
 			.then(function resolve(response) {
 				vm.currentUser = response.data.user;
+			});
+	}
+
+	function getCharity() {
+		CharitiesService
+			.findOneCharity($stateParams.ein)
+			.then(function(response) {
+				vm.charity = response.data.charity;
+				console.log(response.data);
 			});
 	}
 }
