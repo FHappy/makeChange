@@ -62,7 +62,8 @@ class Api::CharitiesController < ApplicationController
 			binding.pry
 			new_charity.save()
 		end
-		
+		current_user["token_amount"] -= token
+		current_user.save()
 
 	end
 	
