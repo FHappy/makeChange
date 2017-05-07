@@ -15,7 +15,7 @@
 						<p>{{ $ctrl.tokenAmount }}</p>
 						<button ng-click="$ctrl.incrementToken()"> + </button>
 						<button type="button" class="btn btn-default" 
-										ng-click="$ctrl.donate($ctrl.charity.ein, 1)">Donate</button>
+										ng-click="$ctrl.donate($ctrl.charity.ein, $ctrl.tokenAmount)">Donate</button>
 					</div>					
 					<stripe-form></stripe-form>
 			</div>
