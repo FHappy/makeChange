@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get "api/charities" => "api/charities#index", as: "charities_index"
   get "api/charities/:ein" => "api/charities#show", as: "charities_show"
   get "api/charities/search/:query" => "api/charities#search", as: "charities_search"
-  get "api/charities/donate" => "api/charties#donate", as: "charities_donate"
-  
+  post "api/charities" => "api/charities#donate", as: "charities_donate"
+
   namespace :api do
     resources :charges, only: [:index, :create]
   end
