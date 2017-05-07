@@ -17,7 +17,7 @@
 
   @import "materialize/components/color";
   $primary-color: color("blue", "lighten-2") !default;
-  $secondary-color: color("yellow", "base") !default;
+  $secondary-color: color("red", "lighten-2") !default;
   @import 'materialize';
   @import "https://fonts.googleapis.com/icon?family=Material+Icons";
   @import "materialize/extras/nouislider";
@@ -31,6 +31,11 @@ html {
 	letter-spacing: 0.1em;
 }
 
+.notice,
+.alert {
+	margin: 0px;
+}
+
 .websiteLink {
 	text-decoration: underline;
 	color: black;
@@ -42,6 +47,7 @@ html {
 
 .wrapper {
 	margin: 0 auto;
+
 }
 
 .nav-wrapper {
@@ -61,9 +67,15 @@ html {
 }
 
 .deviseForm {
-	border: 3px solid black;
+	/*border: 3px solid black;*/
+	background-color: white;
 	max-width: 100%;
+	width: 400px;
 	margin: 0 auto;
+}
+.z-depth-2 {
+	margin: 0px 10px;
+	padding: 10px;
 }
 
 /*Page banners*/
