@@ -46,10 +46,6 @@ html {
 	color: black;
 }
 
-.nav-wrapper {
-	background-color: #4c4c4c;
-}
-
 .clientView .infoWrapper {
 	padding-left: 0px;
 	padding-right: 0px;
@@ -102,11 +98,20 @@ html {
 	align-content: center;
 	align-items: center;
 }
+
+.parallaxText {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	color: white;
+}
+
 .charityShowInfo,
 .charityShowDonateBox {
 	text-align: left;
 }
-
+/*END*/
 .card {
 	height: 250px;
 	margin: 15px;
@@ -115,6 +120,8 @@ html {
 .card-reveal {
 	text-align: left;
 }
+
+
 
   $green: 256;
   $red: 256;
