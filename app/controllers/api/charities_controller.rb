@@ -32,7 +32,7 @@ class Api::CharitiesController < ApplicationController
 		
 		render json: {
 			suggested: @suggested,
-			charities: @org_charities
+			charities: @org_charities["data"]
 		}
 
 	end

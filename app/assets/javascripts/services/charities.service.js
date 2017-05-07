@@ -11,6 +11,12 @@ function CharitiesService($http) {
 	self.findOneCharity = findOneCharity;
 	self.indexQuery = indexQuery;
 	self.donate = donate;
+	self.getNameQueries = getNameQueries;
+
+	function getNameQueries(query) {
+		return $http.get(`/api/charities/search/${query}`);
+	}
+
 
 	function getAllCharities() {
 		return $http.get("/api/charities");
