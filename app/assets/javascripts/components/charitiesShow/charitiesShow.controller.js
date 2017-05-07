@@ -16,16 +16,12 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 	vm.decrementToken = decrementToken;
 
 	function activate() {
-		UsersService
-			.getCurrentUser()
-			.then(function resolve(response) {
-				vm.currentUser = response.data.user;
-				CharitiesService
-					.findOneCharity($stateParams.ein)
-					.then(function(response) {
-						vm.charity = response.data.charity;
-						console.log(response.data);
-					});
+		getCurrentUser();
+		CharitiesService
+			.findOneCharity($stateParams.ein)
+			.then(function(response) {
+				vm.charity = response.data.charity;
+				console.log(response.data);
 			});
 	}
 
@@ -34,7 +30,8 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 	function donate(ein, token) {
 		CharitiesService.donate(ein, token)
 			.then(function resolve(response) {
-
+				vm.tokenAmount = 1;
+				getCurrentUser();
 			}, function reject(response) {
 
 			});
@@ -57,5 +54,13 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 		if (vm.tokenAmount > 1) {
 			vm.tokenAmount--;
 		}
+	}
+
+	function getCurrentUser() {
+		UsersService
+			.getCurrentUser()
+			.then(function resolve(response) {
+				vm.currentUser = response.data.user;
+			});
 	}
 }
