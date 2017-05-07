@@ -12,7 +12,8 @@ Charity.all.destroy_all
 user1 = User.create(
 	username: "user1",
 	email: "user1@user.com",
-	password: "password"
+	password: "password",
+	token_amount: 5
 	)
 user2 = User.create(
 	username: "user2",

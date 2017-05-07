@@ -36,6 +36,33 @@ class Api::CharitiesController < ApplicationController
 		}
 
 	end
+
+	def donate
+\		ein = params[:ein]
+		token = params["token"]
+		@charity = Charity.find_by ein: ein
+		if @charity
+			@charity["token_amount"] += token
+			@charity.save()
+		else
+			new_charity = Charity.new()
+			@charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
+			new_charity["ein"] = @charity["ein"]
+			new_charity["city"] = @charity["city"]
+			new_charity["state"] = @charity["state"]
+			new_charity["zipCode"] = @charity["zipCode"]
+			new_charity["category"] = @charity["category"]
+			new_charity["charityName"] = @charity["charityName"]
+			new_charity["url"] = @charity["url"]
+			new_charity["missionStatement"] = @charity["missionStatement"]
+			new_charity["website"] = @charity["website"]
+			new_charity["token_amount"] = token
+			new_charity["time_started"] = Time.new()
+			new_charity.save()
+		end
+		current_user["token_amount"] -= token
+		current_user.save()
+	end
 	
 
 	private
