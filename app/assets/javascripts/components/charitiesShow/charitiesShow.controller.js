@@ -8,7 +8,6 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 	var vm = this;
 
 	vm.charity = null;
-	vm.charityExists = false;
 	vm.donate = donate;
 	vm.currentUser = null;
 	vm.tokenAmount = 1;
@@ -35,7 +34,7 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 
 	function incrementToken() {
 		var userTokens = vm.currentUser.token_amount;
-		if (vm.charityExists) {
+		if (vm.charity.created_at) {
 			var charityTokensLeft = 10 - vm.charity.token_amount;
 		} else {
 			var charityTokensLeft = 10 - vm.tokenAmount;
