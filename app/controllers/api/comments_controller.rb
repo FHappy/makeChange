@@ -1,7 +1,9 @@
 class Api::CommentsController < ApplicationController
 	def create
 		comment = Comment.create(req_body)
-
+		ActionCable.server.broadcast 'comments',
+			comment: comment
+		head :ok
 		render json: comment
 	end
 

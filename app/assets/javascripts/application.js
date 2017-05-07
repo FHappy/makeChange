@@ -17,6 +17,7 @@
 //= require angular-ui-router/release/angular-ui-router
 //= require materialize
 //= require materialize/extras/nouislider
+//= require_tree ./channels
 //= require_self
 //= require_tree .
 
