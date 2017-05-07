@@ -40,8 +40,8 @@ charity1 = Charity.create(
 	)
 charity2 = Charity.create(
 	ein: "010352636",
-	city: "Maine",
-	state: "PORTLAND",
+	city: "PORTLAND",
+	state: "Maine",
 	zipCode: "04104",
 	category: "Human Services - Multipurpose and Other",
 	charityName: "FAMILY CRISIS SERVICES",
@@ -176,6 +176,113 @@ Donation.create(
 	user_id: user3.id,
 	charity_id: charity5.id
 	)
-
+Comment.create(
+	user_id: user1.id,
+	charity_id: charity1.id,
+	title: "charity1 title",
+	content: "charity 1 content"
+	)
+Comment.create(
+	user_id: user2.id,
+	charity_id: charity1.id,
+	title: "charity1 title",
+	content: "charity 1 content"
+	)
+Comment.create(
+	user_id: user3.id,
+	charity_id: charity1.id,
+	title: "charity1 title",
+	content: "charity 1 content"
+	)
+Comment.create(
+	user_id: user1.id,
+	charity_id: charity2.id,
+	title: "charity2 title",
+	content: "charity 2 content"
+	)
+Comment.create(
+	user_id: user2.id,
+	charity_id: charity2.id,
+	title: "charity2 title",
+	content: "charity 2 content"
+	)
+Comment.create(
+	user_id: user3.id,
+	charity_id: charity2.id,
+	title: "charity2 title",
+	content: "charity 2 content"
+	)
+Comment.create(
+	user_id: user1.id,
+	charity_id: charity3.id,
+	title: "charity3 title",
+	content: "charity3 content"
+	)
+Comment.create(
+	user_id: user2.id,
+	charity_id: charity3.id,
+	title: "charity3 title",
+	content: "charity3 content"
+	)
+Comment.create(
+	user_id: user3.id,
+	charity_id: charity3.id,
+	title: "charity3 title",
+	content: "charity3 content"
+	)
+Comment.create(
+	user_id: user1.id,
+	charity_id: charity4.id,
+	title: "charity4 title",
+	content: "charity4 content"
+	)
+Comment.create(
+	user_id: user2.id,
+	charity_id: charity4.id,
+	title: "charity4 title",
+	content: "charity4 content"
+	)
+Comment.create(
+	user_id: user3.id,
+	charity_id: charity4.id,
+	title: "charity4 title",
+	content: "charity4 content"
+	)
+Comment.create(
+	user_id: user1.id,
+	charity_id: charity5.id,
+	title: "charity5 title",
+	content: "charity5 content"
+	)
+Comment.create(
+	user_id: user2.id,
+	charity_id: charity5.id,
+	title: "charity5 title",
+	content: "charity5 content"
+	)
+Comment.create(
+	user_id: user3.id,
+	charity_id: charity5.id,
+	title: "charity5 title",
+	content: "charity5 content"
+	)
+Comment.create(
+	user_id: user1.id,
+	charity_id: charity6.id,
+	title: "charity6 title",
+	content: "charity6 content"
+	)
+Comment.create(
+	user_id: user2.id,
+	charity_id: charity6.id,
+	title: "charity6 title",
+	content: "charity6 content"
+	)
+Comment.create(
+	user_id: user3.id,
+	charity_id: charity6.id,
+	title: "charity6 title",
+	content: "charity6 content"
+	)
 
 

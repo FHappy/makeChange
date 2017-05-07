@@ -13,14 +13,15 @@ function CharitiesIndexController(CharitiesService) {
 	vm.suggested = null;
 	vm.query = null;
 	vm.categoryQuery = null;
+	vm.locationQuery = null;
 	vm.searchByCategory = searchByCategory;
+	vm.searchByLocation = searchByLocation;
 
 	function activate() {
 		CharitiesService
 			.getAllCharities()
 			.then(function resolve(response) {
 				vm.charities = response.data.charities;
-
 			});
 	}
 
@@ -50,6 +51,21 @@ function CharitiesIndexController(CharitiesService) {
 				else {
 					vm.suggested = null;
 				}
+			});
+	}
+
+	function searchByLocation() {
+		CharitiesService
+			.getLocationQueries(vm.locationQuery)
+			.then(function(response) {
+				vm.charities = response.data.charities;
+				if (response.data.suggested.length > 0) {
+					vm.suggested = response.data.suggested;
+				}
+				else {
+					vm.suggested = null;
+				}
+				vm.locationQuery = null;
 			});
 	}
 

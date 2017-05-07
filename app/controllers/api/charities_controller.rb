@@ -5,21 +5,19 @@ class Api::CharitiesController < ApplicationController
 	end
 
 	def show
-		ein = params[:ein]
 		@charity = Charity.find_by ein: ein
 		if @charity
-			render json: {charity: @charity}
+			render json: { charity: @charity, comments: @charity.comments }
 		else
 			@charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
-			render json: {charity: @charity}
+			render json: { charity: @charity}
 		end
 	end
 
 	def search
-		query = params[:query].upcase
 		@suggested = []
 		Charity.all.each do |charity|
-			regex_query = Regexp.new("#{query}")
+			regex_query = Regexp.new("#{query.upcase}")
 			if regex_query =~ charity["charityName"]
 				@suggested << charity
 			end
@@ -36,7 +34,6 @@ class Api::CharitiesController < ApplicationController
 
 
 	def search_category
-		query = params[:query]
 		search_terms = {
 			A: "Arts, Culture and Humanities",
 			B: "Educational Institutions and Related Activities",
@@ -76,10 +73,39 @@ class Api::CharitiesController < ApplicationController
 		end
 
 		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities["data"]) }
-  end
+  	end
+
+  	def search_location
+  		@org_charities = []
+  		@suggested = []
+
+  		truncated_zip = query[0, 5]
+
+  		HTTParty.get("#{url}&city=#{query.upcase}")["data"].each do |charity|
+  			@org_charities << charity
+  		end
+  		HTTParty.get("#{url}&zipCode=#{truncated_zip}")["data"].each do |charity|
+  			@org_charities << charity
+  		end
+  		@org_charities.uniq!
+
+  		Charity.all.each do |charity|
+			regex_query = Regexp.new("#{query.upcase}")
+			if regex_query =~ charity["city"]
+				@suggested << charity
+			end
+		end
+		Charity.all.each do |charity|
+			if truncated_zip == charity["zipCode"]
+				@suggested << charity
+			end
+		end
+		@suggested.uniq!
+
+		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities) }
+  	end
   
 	def donate
-		ein = params[:ein]
 		token = params[:token]
 		@charity = Charity.find_by ein: ein
 
@@ -135,6 +161,14 @@ class Api::CharitiesController < ApplicationController
 
 	def url
 		url = "http://data.orghunter.com/v1/charitysearch?user_key=fd8d0a7418b42223ada1b88c40dfa0a9&eligible=1"
+	end
+
+	def query
+		params[:query]
+	end
+
+	def ein
+		params[:ein]
 	end
 
 	def sort_by_goal(charities)

@@ -2,9 +2,9 @@ angular
 	.module("makeChangeApp")
 	.controller("CharitiesShowController", CharitiesShowController);
 
-CharitiesShowController.$inject = ["$stateParams", "$http", "CharitiesService", "UsersService"];
+CharitiesShowController.$inject = ["$stateParams", "$http", "CharitiesService", "UsersService", "CommentsService"];
 
-function CharitiesShowController($stateParams, $http, CharitiesService, UsersService) {
+function CharitiesShowController($stateParams, $http, CharitiesService, UsersService, CommentsService) {
 	var vm = this;
 
 	vm.charity = null;
@@ -13,6 +13,13 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 	vm.tokenAmount = 1;
 	vm.incrementToken = incrementToken;
 	vm.decrementToken = decrementToken;
+	vm.newComment = {};
+	vm.comments = null;
+	vm.createComment = createComment;
+	vm.deleteComment = deleteComment;
+	vm.editedComment = null;
+	vm.editComment = editComment;
+	vm.updateComment = updateComment;
 
 	function activate() {
 		getCurrentUser();
@@ -64,7 +71,42 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 			.findOneCharity($stateParams.ein)
 			.then(function(response) {
 				vm.charity = response.data.charity;
-				console.log(response.data);
+				vm.comments = response.data.comments;
 			});
+	}
+
+	function createComment() {
+		CommentsService
+			.createComment({
+				charity_id: vm.charity.id,
+				user_id: vm.currentUser.id,
+				title: vm.newComment.title,
+				content: vm.newComment.content
+			})
+			.then(function(response) {
+				vm.newComment = {};
+				activate();
+			});
+	}
+
+	function deleteComment(commentId) {
+		CommentsService
+			.deleteComment(commentId)
+			.then(function(response) {
+				activate();
+			});
+	}
+
+	function editComment(comment) {
+		vm.editedComment = comment;
+	}
+
+	function updateComment() {
+		CommentsService
+			.updateComment(vm.editedComment)
+			.then(function(response) {
+				vm.editedComment = null;
+				activate();
+			})
 	}
 }
