@@ -8,10 +8,10 @@ class Api::CharitiesController < ApplicationController
 		ein = params[:ein]
 		@charity = Charity.find_by ein: ein
 		if @charity
-			render json: {charity: @charity, exists: true}
+			render json: {charity: @charity}
 		else
 			@charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
-			render json: {charity: @charity, exists: false}
+			render json: {charity: @charity}
 		end
 	end
 
