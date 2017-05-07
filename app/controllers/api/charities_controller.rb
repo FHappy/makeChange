@@ -17,9 +17,6 @@ class Api::CharitiesController < ApplicationController
 
 	def search
 		query = params[:query].upcase
-		# query = "%#{query}%"
-		# @db_charities = Charity.where("'charityName' ILIKE :query", query: query)
-		# binding.pry
 		@suggested = []
 		Charity.all.each do |charity|
 			regex_query = Regexp.new("#{query}")
