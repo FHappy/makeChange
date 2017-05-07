@@ -38,8 +38,7 @@ class Api::CharitiesController < ApplicationController
 	end
 
 	def donate
-		# binding.pry
-		ein = params[:ein]
+\		ein = params[:ein]
 		token = params["token"]
 		@charity = Charity.find_by ein: ein
 		if @charity
@@ -59,12 +58,10 @@ class Api::CharitiesController < ApplicationController
 			new_charity["website"] = @charity["website"]
 			new_charity["token_amount"] = token
 			new_charity["time_started"] = Time.new()
-			binding.pry
 			new_charity.save()
 		end
 		current_user["token_amount"] -= token
 		current_user.save()
-
 	end
 	
 
