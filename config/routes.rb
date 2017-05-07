@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  mount ActionCable.server => '/cable'
+
   
   get "api/users/current" => "api/users#current", as: "users_current"
   get "api/charities" => "api/charities#index", as: "charities_index"
