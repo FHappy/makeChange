@@ -38,7 +38,7 @@ class Api::CharitiesController < ApplicationController
 	end
 
 	def donate
-\		ein = params[:ein]
+		ein = params[:ein]
 		token = params["token"]
 		@charity = Charity.find_by ein: ein
 		if @charity
