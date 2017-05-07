@@ -9,14 +9,8 @@
 				<a ng-href="{{ $ctrl.charity.url }}" target="_blank" class="websiteLink">Website</a>
 			</div>
 			<div class="col l4 m12 s12 lighten-2 charityShowDonateBox">
-					<h2>Feelin' saucy?</h2>
-					<div ng-if="$ctrl.currentUser.token_amount > 0">
-						<button ng-click="$ctrl.decrementToken()"> - </button>
-						<p>{{ $ctrl.tokenAmount }}</p>
-						<button ng-click="$ctrl.incrementToken()"> + </button>
-						<button type="button" class="btn btn-default" 
-										ng-click="$ctrl.donate($ctrl.charity.ein, $ctrl.tokenAmount)">Donate</button>
-					</div>					
+					<h2>Feelin' saucy?</h2> 
+					<p>Donate!</p>
 					<stripe-form></stripe-form>
 			</div>
 	</div>

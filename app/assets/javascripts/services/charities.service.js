@@ -9,6 +9,7 @@ function CharitiesService($http) {
 
 	self.getAllCharities = getAllCharities;
 	self.findOneCharity = findOneCharity;
+	self.donate = donate;
 	self.getNameQueries = getNameQueries;
 	self.getCategoryQueries = getCategoryQueries;
 
@@ -26,5 +27,9 @@ function CharitiesService($http) {
 
 	function getCategoryQueries(query) {
 		return $http.get(`/api/charities/search_category/${query}`)
+	}
+
+	function donate(ein, token) {
+		return $http.post('/api/charities', {token: token, ein: ein});
 	}
 }
