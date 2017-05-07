@@ -8,6 +8,7 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 	var vm = this;
 
 	vm.charity = null;
+	vm.charityExists = false;
 	vm.donate = donate;
 	vm.currentUser = null;
 	vm.tokenAmount = 1;
@@ -21,9 +22,9 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 				vm.currentUser = response.data.user;
 				CharitiesService
 					.findOneCharity($stateParams.ein)
-					.then(function(res) {
-						vm.charity = res.data;
-						console.log(res.data);
+					.then(function(response) {
+						vm.charity = response.data.charity;
+						console.log(response.data);
 					});
 			});
 	}
@@ -41,8 +42,12 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 
 	function incrementToken() {
 		var userTokens = vm.currentUser.token_amount;
-		var charityTokensLeft = 10 - vm.charity.token_amount;
-		if (userTokens >= vm.tokenAmount && charityTokensLeft >= vm.tokenAmount) {
+		if (vm.charityExists) {
+			var charityTokensLeft = 10 - vm.charity.token_amount;
+		} else {
+			var charityTokensLeft = 10 - vm.tokenAmount;
+		}
+		if (userTokens > vm.tokenAmount && charityTokensLeft >= vm.tokenAmount) {
 			vm.tokenAmount++;
 		}
 	}
