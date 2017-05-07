@@ -11,6 +11,9 @@ function CharitiesIndexController(CharitiesService) {
 	vm.charities = [];
 	vm.searchByName = searchByName;
 	vm.suggested = null;
+	vm.query = null;
+	vm.categoryQuery = null;
+	vm.searchByCategory = searchByCategory;
 
 	function activate() {
 		CharitiesService
@@ -22,13 +25,31 @@ function CharitiesIndexController(CharitiesService) {
 	}
 
 	function searchByName() {
-		var query = $('.searchByName').val();
-		console.log(query)
 		CharitiesService
-			.getNameQueries(query)
+			.getNameQueries(vm.query)
 			.then(function(response) {
-				vm.charities = response.data.charities
-				vm.suggested = response.data.suggested
+				vm.charities = response.data.charities;
+				if (response.data.suggested.length > 0) {
+					vm.suggested = response.data.suggested;
+				}
+				else {
+					vm.suggested = null;
+				}
+				vm.query = null;
+			});
+	}
+
+	function searchByCategory() {
+		CharitiesService
+			.getCategoryQueries(vm.categoryQuery)
+			.then(function(response) {
+				vm.charities = response.data.charities;
+				if (response.data.suggested.length > 0) {
+					vm.suggested = response.data.suggested;
+				}
+				else {
+					vm.suggested = null;
+				}
 			});
 	}
 

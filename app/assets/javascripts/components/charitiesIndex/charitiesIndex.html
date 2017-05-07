@@ -4,11 +4,49 @@
 
 
 <div class="row">
-	<form ng-submit="$ctrl.searchByName()">
+	<form ng-submit="$ctrl.searchByName()" class="col s12 m4 offset-m1">
 		<div class="input-field">
-			<input id="search" class="searchByName" type="search" required>
-			<label class="label-icon" for="search"><i class="material-icons">search</i></label>
+			<input ng-model="$ctrl.query" id="search" class="searchByName" type="search" placeholder="search by name" required>
+			<label class="label-icon" for="search"><i class="material-icons" ng-class="">search</i></label>
 			<i class="material-icons">close</i>
+		</div>
+		<div class="input-field">
+			<input type="submit" value="Search Names">
+		</div>
+	</form>
+	<form class="col s12 m4 offset-m2"  ng-submit="$ctrl.searchByCategory()">
+		<div class="input-field">
+			<select ng-model="$ctrl.categoryQuery" required>
+				<option value="" selected disabled>search by category</option>
+				<option value="A">Arts, Culture and Humanities</option>
+				<option value="B">Educational Institutions and Related Activities</option>
+				<option value="C">Environmental Quality, Protection and Beautification</option>
+				<option value="D">Animal-Related</option>
+				<option value="E">Health - General and Rehabilitative</option>
+				<option value="F">Mental Health, Crisis Intervention</option>
+				<option value="G">Diseases, Disorders, Medical Disciplines</option>
+				<option value="H">Medical Research</option>
+				<option value="I">Crime, Legal-Related</option>
+				<option value="J">Employment, Job-Related</option>
+				<option value="K">Food, Agriculture and Nutrition</option>
+				<option value="L">Housing, Shelter</option>
+				<option value="M">Public Safety, Disaster Preparedness and Relief</option>
+				<option value="N">Recreation, Sports, Leisure, Athletics</option>
+				<option value="O">Youth Development</option>
+				<option value="P">Human Services - Multipurpose and Other</option>
+				<option value="Q">International, Foreign Affairs and National Security</option>
+				<option value="R">Civil Rights, Social Action, Advocacy</option>
+				<option value="S">Community Improvement, Capacity Building</option>
+				<option value="T">Philanthropy, Voluntarism and Grantmaking Foundations</option>
+				<option value="U">Science and Technology Research Institutes, Services</option>
+				<option value="V">Social Science Research Institutes, Services</option>
+				<option value="W">Public, Society Benefit - Multipurpose and Other</option>
+				<option value="X">Religion-Related, Spiritual Development</option>
+				<option value="Y">Mutual/Membership Benefit Organizations, Other</option>
+			</select>
+		</div>
+		<div class="input-field">
+			<input type="submit" value="Search Categories">
 		</div>
 	</form>
 </div>
@@ -109,3 +147,8 @@
 		</div>
 	</div>
 </div>
+<script>
+	$( document ).ready(function() {
+      $('select').material_select();
+    });
+</script>
