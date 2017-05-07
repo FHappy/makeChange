@@ -46,10 +46,6 @@ html {
 	color: black;
 }
 
-.nav-wrapper {
-	background-color: #4c4c4c;
-}
-
 .wrapper {
 	margin: 0 auto;
 
@@ -100,6 +96,14 @@ html {
 .charityShowInfo,
 .charityShowDonateBox {
 	text-align: left;
+}
+
+.infoWrapper {
+	color: white;
+}
+
+.clientView .infoWrapper {
+	padding: 0px;
 }
 
 .card {
