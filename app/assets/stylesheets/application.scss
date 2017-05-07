@@ -36,6 +36,11 @@ html {
 	margin: 0px;
 }
 
+.btn {
+	max-width: 100%;
+	text-align: center;
+}
+
 .websiteLink {
 	text-decoration: underline;
 	color: black;
@@ -67,7 +72,6 @@ html {
 }
 
 .deviseForm {
-	/*border: 3px solid black;*/
 	background-color: white;
 	max-width: 100%;
 	width: 400px;
