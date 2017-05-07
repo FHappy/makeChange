@@ -10,6 +10,9 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 	vm.charity = null;
 	vm.donate = donate;
 	vm.currentUser = null;
+	vm.tokenAmount = 1;
+	vm.incrementToken = incrementToken;
+	vm.decrementToken = decrementToken;
 
 	function activate() {
 		UsersService
@@ -23,7 +26,6 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 						console.log(res.data);
 					});
 			});
-		
 	}
 
 	activate();
@@ -35,5 +37,20 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 			}, function reject(response) {
 
 			});
+	}
+
+	function incrementToken() {
+		var userTokens = vm.currentUser.token_amount;
+		var charityTokensLeft = 10 - vm.charity.token_amount;
+		if (userTokens >= vm.tokenAmount && charityTokensLeft >= vm.tokenAmount) {
+			vm.tokenAmount++;
+		}
+	}
+
+	function decrementToken() {
+		var userTokens = vm.currentUser.token_amount;
+		if (vm.tokenAmount > 1) {
+			vm.tokenAmount--;
+		}
 	}
 }
