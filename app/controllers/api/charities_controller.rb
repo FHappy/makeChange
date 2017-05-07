@@ -38,9 +38,15 @@ class Api::CharitiesController < ApplicationController
 		ein = params[:ein]
 		token = params[:token]
 		@charity = Charity.find_by ein: ein
+
 		if @charity
 			@charity["token_amount"] += token
-			@charity.save()
+
+			if @charity["token_amount"] == 10
+				@charity["token_amount"] = 0
+				@charity["is_active?"] = false
+			end
+
 		else
 			@charity = Charity.new()
 			new_charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
@@ -55,8 +61,9 @@ class Api::CharitiesController < ApplicationController
 			@charity["website"] = new_charity["website"]
 			@charity["token_amount"] = token
 			@charity["time_started"] = Time.new()
-			@charity.save()
 		end
+
+		@charity.save()
 		current_user["token_amount"] -= token
 		current_user.save()
 		Donation.create(charity_id: @charity.id, user_id: current_user.id, token_amount: token)
