@@ -8,22 +8,30 @@ CharitiesIndexController.$inject = ["CharitiesService"];
 function CharitiesIndexController(CharitiesService) {
 	var vm = this;
 
-	vm.all = [];
-	vm.local = [];
-	vm.thirdParty = [];
+	vm.charities = [];
+	vm.searchByName = searchByName;
+	vm.suggested = null;
 
 	function activate() {
 		CharitiesService
 			.getAllCharities()
-			.then(function(res) {
-				vm.local = res.data.local;
-				vm.thirdParty = res.data.third_party;
-				vm.all.push(vm.local);
-				vm.all.push(vm.thirdParty);
-				vm.all = [].concat.apply([], vm.all);
-			});
+			.then(function resolve(response) {
+				vm.charities = response.data.charities;
 
+			});
 	}
+
+	function searchByName() {
+		var query = $('.searchByName').val();
+		console.log(query)
+		CharitiesService
+			.getNameQueries(query)
+			.then(function(response) {
+				vm.charities = response.data.charities
+				vm.suggested = response.data.suggested
+			});
+	}
+
 
 	activate();
 }

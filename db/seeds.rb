@@ -33,7 +33,9 @@ charity1 = Charity.create(
 	charityName: "NEW COMMUNITY HOPE",
 	url: "http://www.orghunter.com/organization/721336135",
 	missionStatement: "",
-	website: ""
+	website: "",
+	token_amount: 7,
+	total_earned: 20
 	)
 charity2 = Charity.create(
 	ein: "010352636",
@@ -44,7 +46,9 @@ charity2 = Charity.create(
 	charityName: "FAMILY CRISIS SERVICES",
 	url: "http://www.orghunter.com/organization/010352636",
 	missionStatement: "Domestic violence resource center offering safe and accessible services to victims 24 hotline, emergency shelter, outreach and court advocacy, school education and prevention.",
-	website: "www.familycrisis.org"
+	website: "www.familycrisis.org",
+	token_amount: 7,
+	total_earned: 25
 	)
 charity3 = Charity.create(
 	ein: "741109881",
@@ -55,7 +59,9 @@ charity3 = Charity.create(
 	charityName: "ST BONIFACE PARISH",
 	url: "http://www.orghunter.com/organization/741109881",
 	missionStatement: "",
-	website: ""
+	website: "",
+	token_amount: 8,
+	total_earned: 10
 	)
 charity4 = Charity.create(
 	ein: "731623980",
@@ -66,7 +72,9 @@ charity4 = Charity.create(
 	charityName: "MORNING STAR CENTER FOR SPIRITUAL LIVING INC",
 	url: "http://www.orghunter.com/organization/731623980",
 	missionStatement: "",
-	website: ""
+	website: "",
+	token_amount: 8,
+	total_earned: 30
 	)
 charity5 = Charity.create(
 	ein: "560547476",
@@ -77,7 +85,9 @@ charity5 = Charity.create(
 	charityName: "YWCA OF ASHEVILLE AND WESTERN NORTH CAROLINA INC",
 	url: "http://www.orghunter.com/organization/560547476",
 	missionStatement: "To eliminate racism, empower women and promote peace, justice, freedom and dignity for all through programs that balance disparities in health, childcare, education and employment.",
-	website: "www.ywcaofasheville.org"
+	website: "www.ywcaofasheville.org",
+	token_amount: 4,
+	total_earned: 35
 	)
 charity6 = Charity.create(
 	ein: "351408887",
@@ -88,7 +98,9 @@ charity6 = Charity.create(
 	charityName: "TEMPLE BETH-EL",
 	url: "http://www.orghunter.com/organization/351408887",
 	missionStatement: "",
-	website: ""
+	website: "",
+	token_amount: 2,
+	total_earned: 10
 	)
 
 Donation.create(
