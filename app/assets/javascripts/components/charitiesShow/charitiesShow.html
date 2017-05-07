@@ -22,8 +22,62 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col l8 m12 s12">
-		<h1>COMMENTS</h1>
+<div class="row" ng-if="$ctrl.charity.created_at">
+	<h2>New Comment:</h2>
+	<form ng-submit="$ctrl.createComment()" class="col s8 offset-s2">
+		<div class="input-field">
+			<input type="text" id="title" ng-model="$ctrl.newComment.title" required>
+			<label for="title">title</label>
+		</div>
+		<div class="input-field">
+			<textarea id="content" class="materialize-textarea" ng-model="$ctrl.newComment.content" required></textarea>
+			<label for="content">content</label>
+		</div>
+		<div class="input-field">
+			<input type="submit" value="Add New Comment">
+		</div>
+	</form>
+</div>
+
+<div class="row" ng-if="$ctrl.charity.created_at">
+	<h1>COMMENTS</h1>
+	<div class="card col s12 m10 l8 offset-m1 offset-l2" ng-if="$ctrl.newComment.title || $ctrl.newComment.content" style="height: auto;">
+		<div class="card-image waves-effect waves-block waves-light">
+			<img class="activator red lighten-2" src="">
+		</div>
+		<div class="card-content">
+			<span class="card-title">{{ $ctrl.newComment.title }}</span>
+			<p>{{ $ctrl.newComment.content }}</p>
+		</div>
+	</div>
+	<div class="card col s12 m10 l8 offset-m1 offset-l2" ng-repeat="comment in $ctrl.comments | orderBy: 'created_at':true" style="height: auto;">
+		<div class="card-image waves-effect waves-block waves-light">
+			<img class="activator red lighten-2" src="">
+		</div>
+		<div class="card-content">
+			<span class="card-title">{{ comment.title }}</span>
+			<p>{{ comment.content }}</p>
+		</div>
+		<div class="card-action" ng-if="comment.user_id == $ctrl.currentUser.id">
+			<div ng-if="$ctrl.editedComment.id != comment.id">
+				<a href="#" ng-click="$ctrl.editComment(comment)">Edit Comment</a>
+				<a href="#" ng-click="$ctrl.deleteComment(comment.id)">Delete Comment</a>
+			</div>
+			<div ng-if="$ctrl.editedComment.id === comment.id">
+				<form ng-submit="$ctrl.updateComment()">
+					<div class="input-field">
+						<input type="text" id=`editTitle-${comment.id}` ng-model="$ctrl.editedComment.title" required>
+						<label class="active" for=`editTitle-${comment.id}`>title</label>
+					</div>
+					<div class="input-field">
+						<textarea id=`editContent-${comment.id}` class="materialize-textarea" ng-model="$ctrl.editedComment.content" required></textarea>
+						<label class="active" for=`editContent-${comment.id}`>content</label>
+					</div>
+					<div class="input-field">
+						<input type="submit" value="Save Comment">
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
