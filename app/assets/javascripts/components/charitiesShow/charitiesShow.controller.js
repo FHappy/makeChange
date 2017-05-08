@@ -92,8 +92,8 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 				content: vm.newComment.content
 			})
 			.then(function(response) {
-				vm.newComment = {};
 				activate();
+				vm.newComment = {};
 			});
 	}
 
