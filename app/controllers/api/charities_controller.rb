@@ -10,7 +10,7 @@ class Api::CharitiesController < ApplicationController
 			render json: { charity: @charity, comments: @charity.comments, image: image }
 		else
 			@charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
-			render json: { charity: @charity}
+			render json: { charity: @charity, image: image }
 		end
 	end
 
@@ -35,13 +35,13 @@ class Api::CharitiesController < ApplicationController
 
 	def category_image
 		category_url = {
-			"Arts, Culture and Humanities": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Educational Institutions and Related Activities": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Environmental Quality, Protection and Beautification": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Animal-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Mental Health, Crisis Intervention": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Diseases, Disorders, Medical Disciplines": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Arts, Culture and Humanities": "http://culturextourism.com/wp-content/uploads/2014/06/Explore-Indigenous-Australian-Aboriginal-Art-Culture-Facts-400x210.jpg",
+			"Educational Institutions and Related Activities": "http://www.topeducationdegrees.org/wp-content/uploads/2016/01/6357758756001800821152486765_State-Education-Generic-jpg.jpg",
+			"Environmental Quality, Protection and Beautification": "https://static.pexels.com/photos/26559/pexels-photo-26559.jpg",
+			"Animal-Related": "http://www.hillcountryalliance.org/wp-content/uploads/2014/06/WildlifeCover.jpg",
+			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Okayama_Red_Cross_Hospital.jpg",
+			"Mental Health, Crisis Intervention": "https://www.qub.ac.uk/schools/media/Media,566209,en.jpg",
+			"Diseases, Disorders, Medical Disciplines": "https://www.nimml.org/images/highlights/Research_Infectious_Disease_6.1.14_i.jpg",
 			"Medical Research": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
 			"Crime, Legal-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
 			"Employment, Job-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
@@ -70,8 +70,7 @@ class Api::CharitiesController < ApplicationController
 			B: "Educational Institutions and Related Activities",
 			C: "Environmental Quality, Protection and Beautification",
 			D: "Animal-Related",
-			E: "Health - General and Rehabilitative",
-			F: "Mental Health, Crisis Intervention",
+			E: "Health - https://www.qub.ac.uk/schools/media/Media,566209,en.jpg",
 			G: "Diseases, Disorders, Medical Disciplines",
 			H: "Medical Research",
 			I: "Crime, Legal-Related",
@@ -204,13 +203,13 @@ class Api::CharitiesController < ApplicationController
 
 	def image
 		category_url = {
-			"Arts, Culture and Humanities": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Educational Institutions and Related Activities": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Environmental Quality, Protection and Beautification": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Animal-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Mental Health, Crisis Intervention": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
-			"Diseases, Disorders, Medical Disciplines": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Arts, Culture and Humanities": "http://culturextourism.com/wp-content/uploads/2014/06/Explore-Indigenous-Australian-Aboriginal-Art-Culture-Facts-400x210.jpg",
+			"Educational Institutions and Related Activities": "http://www.topeducationdegrees.org/wp-content/uploads/2016/01/6357758756001800821152486765_State-Education-Generic-jpg.jpg",
+			"Environmental Quality, Protection and Beautification": "https://static.pexels.com/photos/26559/pexels-photo-26559.jpg",
+			"Animal-Related": "http://www.hillcountryalliance.org/wp-content/uploads/2014/06/WildlifeCover.jpg",
+			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Okayama_Red_Cross_Hospital.jpg",
+			"Mental Health, Crisis Intervention": "https://www.qub.ac.uk/schools/media/Media,566209,en.jpg",
+			"Diseases, Disorders, Medical Disciplines": "https://www.nimml.org/images/highlights/Research_Infectious_Disease_6.1.14_i.jpg",
 			"Medical Research": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
 			"Crime, Legal-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
 			"Employment, Job-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",

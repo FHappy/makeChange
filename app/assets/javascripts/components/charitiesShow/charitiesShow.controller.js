@@ -20,6 +20,7 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 	vm.editedComment = null;
 	vm.editComment = editComment;
 	vm.updateComment = updateComment; 	
+	vm.image = null;
 
 	function activate() {
 		getCurrentUser();
