@@ -1,5 +1,4 @@
 <div class="col col s8 offset-s2 lighten-2 charityShowDonateBox">
-  <h2>Current Amount: {{ $ctrl.charity.token_amount }}</h2>
   <h2 class="right-align">ready to donate?</h2>
   <div ng-if="$ctrl.currentUser.token_amount > 0">
     <button ng-click="$ctrl.decrementToken()"> - </button>

@@ -29,14 +29,14 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 	activate();
 
 	var consumer = new ActionCableChannel("CommentsChannel");
-	var callback = function(response) {
-		vm.comments.push(response.comment);
+	var callback = function(comment) {
+		console.log(comment);
+		vm.comments.push(comment.comment);
 	};
 	consumer.subscribe(callback)
 		.then(function() {
 			console.log('it worked!');
 		});
-		
 	function donate(ein, token) {
 		CharitiesService.donate(ein, token)
 			.then(function resolve(response) {

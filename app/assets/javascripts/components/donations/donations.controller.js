@@ -2,9 +2,9 @@ angular
   .module("makeChangeApp")
   .controller("DonationsController", DonationsController);
 
-DonationsController.$inject = ['CharitiesService', 'UsersService', 'ActionCableChannel'];
+DonationsController.$inject = ['CharitiesService', 'UsersService', '$scope'];
 
-function DonationsController(CharitiesService, UsersService, ActionCableChannel) {
+function DonationsController(CharitiesService, UsersService, $scope) {
   var vm = this;
   vm.donate = donate;
   vm.tokenAmount = 1;
@@ -17,15 +17,6 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
   }
 
   activate();
-
-  var consumer = new ActionCableChannel("DonationsChannel");
-  var callback = function(response) {
-    getCharity(response.ein);
-  };
-  consumer.subscribe(callback)
-    .then(function() {
-      console.log('donation made!');
-    });
 
   function donate(ein, token) {
 		CharitiesService.donate(ein, token)

@@ -137,9 +137,6 @@ class Api::CharitiesController < ApplicationController
 		current_user["token_amount"] -= token
 		current_user.save()
 		Donation.create(charity_id: @charity.id, user_id: current_user.id, token_amount: token)
-		ActionCable.server.broadcast 'donations',
-			ein: @charity.ein
-		head :ok
 	end
 	
 

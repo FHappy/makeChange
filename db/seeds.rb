@@ -18,8 +18,7 @@ user1 = User.create(
 user2 = User.create(
 	username: "user2",
 	email: "user2@user.com",
-	password: "password",
-	token_amount: 7
+	password: "password"
 	)
 user3 = User.create(
 	username: "user3",
