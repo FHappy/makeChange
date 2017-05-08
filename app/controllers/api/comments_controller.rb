@@ -4,7 +4,6 @@ class Api::CommentsController < ApplicationController
 		ActionCable.server.broadcast 'comments',
 			comment: comment
 		head :ok
-		render json: comment
 	end
 
 	def destroy
