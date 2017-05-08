@@ -20,7 +20,7 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 	var consumer = new ActionCableChannel("DonationsChannel");
 	var callback = function(response) {
 		getCharity(response.ein);
-		vm.currentUser = response.user;
+		getCurrentUser();
 	};
 	consumer.subscribe(callback)
 		.then(function() {
