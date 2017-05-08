@@ -19,7 +19,8 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 	vm.deleteComment = deleteComment;
 	vm.editedComment = null;
 	vm.editComment = editComment;
-	vm.updateComment = updateComment;
+	vm.updateComment = updateComment; 	
+	vm.image = null;
 
 	function activate() {
 		getCurrentUser();
@@ -80,6 +81,7 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 			.then(function(response) {
 				vm.charity = response.data.charity;
 				vm.comments = response.data.comments;
+				vm.image = response.data.image[vm.charity.category];
 			});
 	}
 

@@ -1,16 +1,16 @@
 class Api::CharitiesController < ApplicationController
 	def index
 		@charities= Charity.all;
-		render json: {charities: sort_by_goal(@charities)}
+		render json: {charities: sort_by_goal(@charities), image: image}
 	end
 
 	def show
 		@charity = Charity.find_by ein: ein
 		if @charity
-			render json: { charity: @charity, comments: @charity.comments }
+			render json: { charity: @charity, comments: @charity.comments, image: image }
 		else
 			@charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
-			render json: { charity: @charity}
+			render json: { charity: @charity, image: image }
 		end
 	end
 
@@ -27,11 +27,42 @@ class Api::CharitiesController < ApplicationController
 		
 		render json: {
 			suggested: sort_by_goal(@suggested),
-			charities: de_dupe(@org_charities["data"])
+			charities: de_dupe(@org_charities["data"]),
+			image: image
 		}
 
 	end
 
+	def category_image
+		category_url = {
+			"Arts, Culture and Humanities": "http://culturextourism.com/wp-content/uploads/2014/06/Explore-Indigenous-Australian-Aboriginal-Art-Culture-Facts-400x210.jpg",
+			"Educational Institutions and Related Activities": "http://www.topeducationdegrees.org/wp-content/uploads/2016/01/6357758756001800821152486765_State-Education-Generic-jpg.jpg",
+			"Environmental Quality, Protection and Beautification": "https://static.pexels.com/photos/26559/pexels-photo-26559.jpg",
+			"Animal-Related": "http://www.hillcountryalliance.org/wp-content/uploads/2014/06/WildlifeCover.jpg",
+			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Okayama_Red_Cross_Hospital.jpg",
+			"Mental Health, Crisis Intervention": "https://www.qub.ac.uk/schools/media/Media,566209,en.jpg",
+			"Diseases, Disorders, Medical Disciplines": "https://www.nimml.org/images/highlights/Research_Infectious_Disease_6.1.14_i.jpg",
+			"Medical Research": "http://www.nabr.org/wp-content/uploads/2016/03/pexels-photo.jpg",
+			"Crime, Legal-Related": "https://booklogix.files.wordpress.com/2014/06/shutterstock_157163267_legal_angelablog.jpg",
+			"Employment, Job-Related": "http://incubasys.info/technomak/wp-content/uploads/2015/11/careers.jpg",
+			"Food, Agriculture and Nutrition": "http://www.hd-fit.net/img/HD%20Fitness%20Nutrition.JPG",
+			"Housing, Shelter": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Public Safety, Disaster Preparedness and Relief": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Recreation, Sports, Leisure, Athletics": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Youth Development": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Human Services - Multipurpose and Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"International, Foreign Affairs and National Security": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Civil Rights, Social Action, Advocacy": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Community Improvement, Capacity Building": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Philanthropy, Voluntarism and Grantmaking Foundations": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Science and Technology Research Institutes, Services": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Social Science Research Institutes, Services": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Public, Society Benefit - Multipurpose and Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Religion-Related, Spiritual Development": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Mutual/Membership Benefit Organizations, Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Not Provided": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg"
+		}.as_json
+	end
 
 	def search_category
 		search_terms = {
@@ -39,12 +70,11 @@ class Api::CharitiesController < ApplicationController
 			B: "Educational Institutions and Related Activities",
 			C: "Environmental Quality, Protection and Beautification",
 			D: "Animal-Related",
-			E: "Health - General and Rehabilitative",
-			F: "Mental Health, Crisis Intervention",
+			E: "Health - https://www.qub.ac.uk/schools/media/Media,566209,en.jpg",
 			G: "Diseases, Disorders, Medical Disciplines",
 			H: "Medical Research",
 			I: "Crime, Legal-Related",
-			J: "Employment, Job-Related",
+			J: "http://www.hd-fit.net/img/HD%20Fitness%20Nutrition.JPG",
 			K: "Food, Agriculture and Nutrition",
 			L: "Housing, Shelter",
 			M: "Public Safety, Disaster Preparedness and Relief",
@@ -72,7 +102,7 @@ class Api::CharitiesController < ApplicationController
 			end
 		end
 
-		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities["data"]) }
+		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities["data"]), image: image  }
   	end
 
   	def search_location
@@ -174,6 +204,37 @@ class Api::CharitiesController < ApplicationController
 
 	def ein
 		params[:ein]
+	end
+
+	def image
+		category_url = {
+			"Arts, Culture and Humanities": "http://culturextourism.com/wp-content/uploads/2014/06/Explore-Indigenous-Australian-Aboriginal-Art-Culture-Facts-400x210.jpg",
+			"Educational Institutions and Related Activities": "http://www.topeducationdegrees.org/wp-content/uploads/2016/01/6357758756001800821152486765_State-Education-Generic-jpg.jpg",
+			"Environmental Quality, Protection and Beautification": "https://static.pexels.com/photos/26559/pexels-photo-26559.jpg",
+			"Animal-Related": "http://www.hillcountryalliance.org/wp-content/uploads/2014/06/WildlifeCover.jpg",
+			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Okayama_Red_Cross_Hospital.jpg",
+			"Mental Health, Crisis Intervention": "https://www.qub.ac.uk/schools/media/Media,566209,en.jpg",
+			"Diseases, Disorders, Medical Disciplines": "https://www.nimml.org/images/highlights/Research_Infectious_Disease_6.1.14_i.jpg",
+			"Medical Research": "http://www.nabr.org/wp-content/uploads/2016/03/pexels-photo.jpg",
+			"Crime, Legal-Related": "https://booklogix.files.wordpress.com/2014/06/shutterstock_157163267_legal_angelablog.jpg",
+			"Employment, Job-Related": "http://incubasys.info/technomak/wp-content/uploads/2015/11/careers.jpg",
+			"Food, Agriculture and Nutrition": "http://www.hd-fit.net/img/HD%20Fitness%20Nutrition.JPG",
+			"Housing, Shelter": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Public Safety, Disaster Preparedness and Relief": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Recreation, Sports, Leisure, Athletics": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Youth Development": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Human Services - Multipurpose and Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"International, Foreign Affairs and National Security": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Civil Rights, Social Action, Advocacy": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Community Improvement, Capacity Building": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Philanthropy, Voluntarism and Grantmaking Foundations": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Science and Technology Research Institutes, Services": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Social Science Research Institutes, Services": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Public, Society Benefit - Multipurpose and Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Religion-Related, Spiritual Development": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Mutual/Membership Benefit Organizations, Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Not Provided": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg"
+		}.as_json
 	end
 
 	def sort_by_goal(charities)

@@ -50,6 +50,8 @@
         <a href="#!user"><img class="circle" src=""></a>
           <span class="black-text name">{{controller.user.username}}</span>
           <span class="black-text email">{{controller.user.email}}</span>
+          <hr>
+          <span class="black-text tokens"><span>tokens: </span>{{ controller.user.token_amount }}</span>
       </div>
     </li>
 
@@ -59,9 +61,9 @@
       </a>
     </li>
     <li><div class="divider"></div></li>
-    <li><a class="subheader">SOMETEXTIDK</a></li>
+    <li><a class="subheader">SETTINGS</a></li>
     <li><%= link_to 'edit account', edit_user_registration_path, target: '_self' %></li>
-    <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete', target: '_self' %></li>
+    <li><%= link_to 'sign out', destroy_user_session_path, method: 'delete', target: '_self' %></li>
   </ul>
 </div> 
 

@@ -16,12 +16,14 @@ function CharitiesIndexController(CharitiesService) {
 	vm.locationQuery = null;
 	vm.searchByCategory = searchByCategory;
 	vm.searchByLocation = searchByLocation;
+	vm.image = null;
 
 	function activate() {
 		CharitiesService
 			.getAllCharities()
 			.then(function resolve(response) {
 				vm.charities = response.data.charities;
+				vm.image = response.data.image;
 			});
 	}
 
