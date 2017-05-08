@@ -2,9 +2,9 @@ angular
 	.module("makeChangeApp")
 	.controller("CharitiesShowController", CharitiesShowController);
 
-CharitiesShowController.$inject = ["$stateParams", "$http", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel"];
+CharitiesShowController.$inject = ["$stateParams", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel"];
 
-function CharitiesShowController($stateParams, $http, CharitiesService, UsersService, CommentsService, ActionCableChannel) {
+function CharitiesShowController($stateParams, CharitiesService, UsersService, CommentsService, ActionCableChannel) {
 	var vm = this;
 
 	vm.charity = null;
@@ -55,7 +55,7 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 		} else {
 			var charityTokensLeft = 10 - vm.tokenAmount;
 		}
-		if (userTokens > vm.tokenAmount && charityTokensLeft >= vm.tokenAmount) {
+		if (userTokens > vm.tokenAmount && charityTokensLeft > vm.tokenAmount) {
 			vm.tokenAmount++;
 		}
 	}
