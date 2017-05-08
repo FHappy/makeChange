@@ -2,9 +2,9 @@ angular
 	.module("makeChangeApp")
 	.controller("CharitiesShowController", CharitiesShowController);
 
-CharitiesShowController.$inject = ["$stateParams", "$http", "CharitiesService", "UsersService", "CommentsService"];
+CharitiesShowController.$inject = ["$stateParams", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel"];
 
-function CharitiesShowController($stateParams, $http, CharitiesService, UsersService, CommentsService) {
+function CharitiesShowController($stateParams, CharitiesService, UsersService, CommentsService, ActionCableChannel) {
 	var vm = this;
 
 	vm.charity = null;
@@ -29,6 +29,14 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 
 	activate();
 
+	var consumer = new ActionCableChannel("CommentsChannel");
+	var callback = function(response) {
+		vm.comments.push(response.comment);
+	};
+	consumer.subscribe(callback)
+		.then(function() {
+			console.log('it worked!');
+		});
 	function donate(ein, token) {
 		CharitiesService.donate(ein, token)
 			.then(function resolve(response) {
@@ -47,7 +55,7 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 		} else {
 			var charityTokensLeft = 10 - vm.tokenAmount;
 		}
-		if (userTokens > vm.tokenAmount && charityTokensLeft >= vm.tokenAmount) {
+		if (userTokens > vm.tokenAmount && charityTokensLeft > vm.tokenAmount) {
 			vm.tokenAmount++;
 		}
 	}
@@ -86,8 +94,8 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 				content: vm.newComment.content
 			})
 			.then(function(response) {
-				vm.newComment = {};
 				activate();
+				vm.newComment = {};
 			});
 	}
 
