@@ -17,12 +17,14 @@
 //= require angular-ui-router/release/angular-ui-router
 //= require materialize
 //= require materialize/extras/nouislider
+//= require angular-actioncable
+//= require angular-websocket/dist/angular-websocket
 //= require_tree ./channels
 //= require_self
 //= require_tree .
 
 angular
-  .module('makeChangeApp', ['ui.router', 'stripe.checkout'])
+  .module('makeChangeApp', ['ui.router', 'stripe.checkout', 'ngActionCable'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('home', {

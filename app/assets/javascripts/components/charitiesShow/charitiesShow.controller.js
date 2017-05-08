@@ -2,9 +2,9 @@ angular
 	.module("makeChangeApp")
 	.controller("CharitiesShowController", CharitiesShowController);
 
-CharitiesShowController.$inject = ["$stateParams", "$http", "CharitiesService", "UsersService", "CommentsService"];
+CharitiesShowController.$inject = ["$stateParams", "$http", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel"];
 
-function CharitiesShowController($stateParams, $http, CharitiesService, UsersService, CommentsService) {
+function CharitiesShowController($stateParams, $http, CharitiesService, UsersService, CommentsService, ActionCableChannel) {
 	var vm = this;
 
 	vm.charity = null;
@@ -28,6 +28,15 @@ function CharitiesShowController($stateParams, $http, CharitiesService, UsersSer
 
 	activate();
 
+	var consumer = new ActionCableChannel("CommentsChannel");
+	var callback = function(comment) {
+		console.log(comment);
+		vm.comments.push(comment.comment);
+	};
+	consumer.subscribe(callback)
+		.then(function() {
+			console.log('it worked!');
+		});
 	function donate(ein, token) {
 		CharitiesService.donate(ein, token)
 			.then(function resolve(response) {
