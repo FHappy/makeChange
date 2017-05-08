@@ -87,7 +87,7 @@ html {
 	align-items: center;
 }
 .charityShowBanner {
-	height: 50vh;
+	/*height: 50vh;*/
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -96,6 +96,22 @@ html {
 .charityShowInfo,
 .charityShowDonateBox {
 	text-align: left;
+}
+.parallax-container {
+  height: 500px;
+}
+.parallaxText {
+	position: absolute;
+	margin: 0px 15px;
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+}
+
+.card {
+	color: black;
 }
 
 .infoWrapper {
