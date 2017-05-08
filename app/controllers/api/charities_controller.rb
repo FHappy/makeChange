@@ -1,13 +1,13 @@
 class Api::CharitiesController < ApplicationController
 	def index
 		@charities= Charity.all;
-		render json: {charities: sort_by_goal(@charities)}
+		render json: {charities: sort_by_goal(@charities), image: image}
 	end
 
 	def show
 		@charity = Charity.find_by ein: ein
 		if @charity
-			render json: { charity: @charity, comments: @charity.comments }
+			render json: { charity: @charity, comments: @charity.comments, image: image }
 		else
 			@charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
 			render json: { charity: @charity}
@@ -27,11 +27,42 @@ class Api::CharitiesController < ApplicationController
 		
 		render json: {
 			suggested: sort_by_goal(@suggested),
-			charities: de_dupe(@org_charities["data"])
+			charities: de_dupe(@org_charities["data"]),
+			image: image
 		}
 
 	end
 
+	def category_image
+		category_url = {
+			"Arts, Culture and Humanities": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Educational Institutions and Related Activities": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Environmental Quality, Protection and Beautification": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Animal-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Mental Health, Crisis Intervention": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Diseases, Disorders, Medical Disciplines": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Medical Research": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Crime, Legal-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Employment, Job-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Food, Agriculture and Nutrition": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Housing, Shelter": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Public Safety, Disaster Preparedness and Relief": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Recreation, Sports, Leisure, Athletics": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Youth Development": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Human Services - Multipurpose and Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"International, Foreign Affairs and National Security": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Civil Rights, Social Action, Advocacy": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Community Improvement, Capacity Building": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Philanthropy, Voluntarism and Grantmaking Foundations": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Science and Technology Research Institutes, Services": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Social Science Research Institutes, Services": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Public, Society Benefit - Multipurpose and Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Religion-Related, Spiritual Development": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Mutual/Membership Benefit Organizations, Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Not Provided": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg"
+		}.as_json
+	end
 
 	def search_category
 		search_terms = {
@@ -72,7 +103,7 @@ class Api::CharitiesController < ApplicationController
 			end
 		end
 
-		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities["data"]) }
+		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities["data"]), image: image  }
   	end
 
   	def search_location
@@ -169,6 +200,37 @@ class Api::CharitiesController < ApplicationController
 
 	def ein
 		params[:ein]
+	end
+
+	def image
+		category_url = {
+			"Arts, Culture and Humanities": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Educational Institutions and Related Activities": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Environmental Quality, Protection and Beautification": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Animal-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Mental Health, Crisis Intervention": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Diseases, Disorders, Medical Disciplines": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Medical Research": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Crime, Legal-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Employment, Job-Related": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Food, Agriculture and Nutrition": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Housing, Shelter": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Public Safety, Disaster Preparedness and Relief": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Recreation, Sports, Leisure, Athletics": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Youth Development": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Human Services - Multipurpose and Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"International, Foreign Affairs and National Security": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Civil Rights, Social Action, Advocacy": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Community Improvement, Capacity Building": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Philanthropy, Voluntarism and Grantmaking Foundations": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Science and Technology Research Institutes, Services": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Social Science Research Institutes, Services": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Public, Society Benefit - Multipurpose and Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Religion-Related, Spiritual Development": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Mutual/Membership Benefit Organizations, Other": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+			"Not Provided": "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg"
+		}.as_json
 	end
 
 	def sort_by_goal(charities)
