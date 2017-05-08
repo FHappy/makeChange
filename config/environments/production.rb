@@ -51,12 +51,12 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-  config.action_cable.allowed_request_origins = ['https://make-change.herokuapp.com', 'https://make-change.herokuapp.com']
   config.web_socket_server_url = "wss://make-change.herokuapp.com/cable"
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "makeChange_#{Rails.env}"
   config.action_mailer.perform_caching = false
+  config.action_cable.allowed_request_origins = ['https://make-change.herokuapp.com', 'http://make-change.herokuapp.com']
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
