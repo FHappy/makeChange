@@ -2,13 +2,14 @@
 	<div class="row donationParent" style="padding-top: 5%;">
 		<div class="col col s8 charityShowInfo">
 			<h2 class="flow-text"><strong>{{ $ctrl.charity.charityName}}</strong></h2>
+			<img ng-src="{{ $ctrl.image }}" style="width: 250px;">
 			<h4 class="flow-text">{{ $ctrl.charity.city }}, {{ $ctrl.charity.state }} {{ $ctrl.charity.zip_code }}</h4>
 			<h6>{{ $ctrl.charity.category }}</h6>
-			<p ng-if="$ctrl.charity.mission_statement">{{ $ctrl.charity.mission_statement }}</p>
+			<p ng-if="$ctrl.charity.missionStatement">{{ $ctrl.charity.missionStatement }}</p>
 			<p></p>
 			<a ng-href="{{ $ctrl.charity.url }}" target="_blank" class="websiteLink">Website</a>
 		</div>
-		<donations charity="$ctrl.charity"></donations>
+    <donations charity="$ctrl.charity"></donations>
 	</div>
 </div>
 
