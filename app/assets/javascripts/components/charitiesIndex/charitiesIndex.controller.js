@@ -12,11 +12,18 @@ function CharitiesIndexController(CharitiesService) {
 	vm.searchByName = searchByName;
 	vm.suggested = null;
 	vm.query = null;
+	vm.nameQuery = null;
 	vm.categoryQuery = null;
 	vm.locationQuery = null;
 	vm.searchByCategory = searchByCategory;
 	vm.searchByLocation = searchByLocation;
 	vm.image = null;
+	vm.currentPage = 1;
+	vm.nextPage = nextPage;
+	vm.previousPage = previousPage;
+	vm.currentSearch = null;
+	vm.resetPage = resetPage;
+	vm.currentQuery = null;
 
 	function activate() {
 		CharitiesService
@@ -29,7 +36,7 @@ function CharitiesIndexController(CharitiesService) {
 
 	function searchByName(page) {
 		CharitiesService
-			.getNameQueries(vm.query, page)
+			.getNameQueries(vm.currentQuery, page)
 			.then(function(response) {
 				vm.charities = response.data.charities;
 				if (response.data.suggested.length > 0) {
@@ -38,13 +45,14 @@ function CharitiesIndexController(CharitiesService) {
 				else {
 					vm.suggested = null;
 				}
+				vm.currentSearch = 'Searching by name...';
 				vm.query = null;
 			});
 	}
 
 	function searchByCategory(page) {
 		CharitiesService
-			.getCategoryQueries(vm.categoryQuery, page)
+			.getCategoryQueries(vm.currentQuery, page)
 			.then(function(response) {
 				vm.charities = response.data.charities;
 				if (response.data.suggested.length > 0) {
@@ -53,12 +61,13 @@ function CharitiesIndexController(CharitiesService) {
 				else {
 					vm.suggested = null;
 				}
+				vm.currentSearch = 'Searching by category...';
 			});
 	}
 
 	function searchByLocation(page) {
 		CharitiesService
-			.getLocationQueries(vm.locationQuery, page)
+			.getLocationQueries(vm.currentQuery, page)
 			.then(function(response) {
 				vm.charities = response.data.charities;
 				if (response.data.suggested.length > 0) {
@@ -68,7 +77,39 @@ function CharitiesIndexController(CharitiesService) {
 					vm.suggested = null;
 				}
 				vm.locationQuery = null;
+				vm.currentSearch = 'Searching by location...';
 			});
+	}
+
+	function nextPage() {
+		vm.currentPage++;
+		changePage(vm.currentPage);
+	}
+
+	function previousPage() {
+		vm.currentPage--;
+		changePage(vm.currentPage);
+	}
+
+	function changePage(page) {
+		switch (vm.currentSearch) {
+			case 'Searching by name...':
+				searchByName(page);
+				break;
+			
+			case 'Searching by category...':
+				searchByCategory(page);
+				break;
+			
+			case 'Searching by location...':
+				searchByLocation(page);
+				break;
+		}
+	}
+
+	function resetPage(query) {
+		vm.currentQuery = query;
+		vm.currentPage = 1;
 	}
 
 

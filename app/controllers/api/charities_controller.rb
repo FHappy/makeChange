@@ -116,10 +116,10 @@ class Api::CharitiesController < ApplicationController
 
   		truncated_zip = query[0, 5]
 
-  		HTTParty.get("#{url}&city=#{query.upcase}")["data"].each do |charity|
+  		HTTParty.get("#{url}&city=#{query.upcase}&start=#{page}")["data"].each do |charity|
   			@org_charities << charity
   		end
-  		HTTParty.get("#{url}&zipCode=#{truncated_zip}")["data"].each do |charity|
+  		HTTParty.get("#{url}&zipCode=#{truncated_zip}&start=#{page}")["data"].each do |charity|
   			@org_charities << charity
   		end
   		@org_charities.uniq!
