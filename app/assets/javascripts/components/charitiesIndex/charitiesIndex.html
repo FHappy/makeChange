@@ -10,7 +10,7 @@
 
 <div class="row">
 <!-- Search By Name -->
-	<form ng-submit="$ctrl.searchByName()" class="col s6 offset-s3">
+	<form ng-submit="$ctrl.searchByName(1)" class="col s6 offset-s3">
 											<!--BEFORE col s12 m4 offset-m1 -->
 		<div class="input-field">
 			<input ng-model="$ctrl.query" id="search" class="searchByName" type="search" placeholder="search by name" required>
@@ -22,7 +22,7 @@
 		</div>
 	</form>
 <!-- Search By Category -->
-	<form class="col s6 offset-s3"  ng-submit="$ctrl.searchByCategory()">
+	<form class="col s6 offset-s3"  ng-submit="$ctrl.searchByCategory(1)">
 		<div class="input-field">
 			<select ng-model="$ctrl.categoryQuery" required>
 				<option value="" selected disabled>search by category</option>
@@ -58,7 +58,7 @@
 		</div>
 	</form>
 <!-- Search By Location -->
-	<form ng-submit="$ctrl.searchByLocation()" class="col s6 offset-s3">
+	<form ng-submit="$ctrl.searchByLocation(1)" class="col s6 offset-s3">
 		<div class="input-field">
 			<input ng-model="$ctrl.locationQuery" id="search2" class="searchByName" type="search" placeholder="search city or zip code" required>
 			<label class="label-icon" for="search2"><i class="material-icons" ng-class="">search</i></label>

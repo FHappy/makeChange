@@ -14,8 +14,8 @@ function CharitiesService($http) {
 	self.getCategoryQueries = getCategoryQueries;
 	self.getLocationQueries = getLocationQueries;
 
-	function getNameQueries(query) {
-		return $http.get(`/api/charities/search/${query}`);
+	function getNameQueries(query, page) {
+		return $http.get(`/api/charities/search/${query}/${page}`);
 	}
 
 	function getAllCharities() {
@@ -26,15 +26,15 @@ function CharitiesService($http) {
 		return $http.get(`/api/charities/${ein}`);
 	}
 
-	function getCategoryQueries(query) {
-		return $http.get(`/api/charities/search_category/${query}`);
+	function getCategoryQueries(query, page) {
+		return $http.get(`/api/charities/search_category/${query}/${page}`);
 	}
 
 	function donate(ein, token) {
 		return $http.post('/api/charities', {token: token, ein: ein});
 	}
 
-	function getLocationQueries(query) {
-		return $http.get(`/api/charities/search_location/${query}`);
+	function getLocationQueries(query, page) {
+		return $http.get(`/api/charities/search_location/${query}/${page}`);
 	}
 }

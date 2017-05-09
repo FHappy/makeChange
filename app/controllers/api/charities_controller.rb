@@ -36,7 +36,7 @@ class Api::CharitiesController < ApplicationController
 	def category_image
 		category_url = {
 			"Arts, Culture and Humanities": "http://culturextourism.com/wp-content/uploads/2014/06/Explore-Indigenous-Australian-Aboriginal-Art-Culture-Facts-400x210.jpg",
-			"Educational Institutions and Related Activities": "http://www.topeducationdegrees.org/wp-content/uploads/2016/01/6357758756001800821152486765_State-Education-Generic-jpg.jpg",
+			"Educational Institutions and Related Activities": "http://i.imgur.com/9aKFZIB.png",
 			"Environmental Quality, Protection and Beautification": "https://static.pexels.com/photos/26559/pexels-photo-26559.jpg",
 			"Animal-Related": "http://www.hillcountryalliance.org/wp-content/uploads/2014/06/WildlifeCover.jpg",
 			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Okayama_Red_Cross_Hospital.jpg",
@@ -94,8 +94,11 @@ class Api::CharitiesController < ApplicationController
 			Y: "Mutual/Membership Benefit Organizations, Other"
 		}.as_json
 		search_term = search_terms[query]
-
-		@org_charities = HTTParty.get("#{url}&category=#{query}")
+		if page
+			@org_charities = HTTParty.get("#{url}&category=#{query}&start=#{page}")
+		else
+			@org_charities = HTTParty.get("#{url}&category=#{query}")
+		end
 		@suggested = []
 
 		Charity.all.each do |charity|
@@ -105,7 +108,7 @@ class Api::CharitiesController < ApplicationController
 		end
 
 		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities["data"]), image: image  }
-  	end
+	end
 
   	def search_location
   		@org_charities = []
@@ -208,10 +211,14 @@ class Api::CharitiesController < ApplicationController
 		params[:ein]
 	end
 
+	def page
+		(params[:page].to_i - 1) * 20 + 1
+	end
+
 	def image
 		category_url = {
 			"Arts, Culture and Humanities": "http://culturextourism.com/wp-content/uploads/2014/06/Explore-Indigenous-Australian-Aboriginal-Art-Culture-Facts-400x210.jpg",
-			"Educational Institutions and Related Activities": "http://www.topeducationdegrees.org/wp-content/uploads/2016/01/6357758756001800821152486765_State-Education-Generic-jpg.jpg",
+			"Educational Institutions and Related Activities": "http://i.imgur.com/9aKFZIB.png",
 			"Environmental Quality, Protection and Beautification": "https://static.pexels.com/photos/26559/pexels-photo-26559.jpg",
 			"Animal-Related": "http://www.hillcountryalliance.org/wp-content/uploads/2014/06/WildlifeCover.jpg",
 			"Health - General and Rehabilitative": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Okayama_Red_Cross_Hospital.jpg",
