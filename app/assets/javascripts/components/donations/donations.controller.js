@@ -12,6 +12,7 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
   	vm.incrementToken = incrementToken;
   	vm.decrementToken = decrementToken;
   	vm.getTokenAmount = getTokenAmount;
+  	vm.openModal = openModal;
 
   	function activate() {
     	getCurrentUser();
@@ -80,5 +81,10 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 			.then(function(response) {
 				vm.charity = response.data.charity;
 			});
+	}
+
+	function openModal(ein) {
+		$(`#modal-${ein}`).modal("open");
+		console.log(`#modal-${ein}`)
 	}
 }

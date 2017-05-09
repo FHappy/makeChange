@@ -211,18 +211,13 @@
 <script>
 	$( document ).ready(function() {
     	$('select').material_select();
-    });
-    $(document).ready(function(){
     	$('.parallax').parallax();
+    	setTimeout(function(){
+    	  height = $(".donationParent").css("height");
+    	  height = parseInt(height.slice(0, height.length - 2)) * .8
+    	  $(".donateContainer").css("height", `${height}px`);
+    	  $(".donateContainer").css("margin-top", "-5%");
+    	  $('.modal').modal();
+    	}, 100);
     });
-</script>
-<script type="text/javascript">
-  $(function(){
-    setTimeout(function(){
-      height = $(".donationParent").css("height");
-      height = parseInt(height.slice(0, height.length - 2)) * .8
-      $(".donateContainer").css("height", `${height}px`);
-      $(".donateContainer").css("margin-top", "-5%");
-    }, 100);
-  });
 </script>
