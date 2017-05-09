@@ -74,13 +74,13 @@
 <div class="row" ng-if="$ctrl.suggested">
 	<h1>Suggested Results: </h1>
 	<div ng-repeat="charity in $ctrl.suggested">
-		<div class="col s12 m6">
-		  	<div class="card">
+		<div class="col s12 l6">
+		  	<div class="card donationParent">
 			    <div class="card-image waves-effect waves-block waves-light">
 			      <img class="activator red lighten-2" src="">
 			    </div>
-			    <div class="card-content">
-			      <span class="card-title activator grey-text text-darken-4">
+			    <div class="card-content row">
+			      <span class="card-title activator grey-text text-darken-4 col s7">
 			      	<h3>
 			      		<a ui-sref="charitiesShow({ ein: charity.ein })">
 			      			<h5>{{ charity.charityName | limitTo:46}}<span ng-if="charity.charityName.length > 46">...</span></h5>
@@ -90,8 +90,8 @@
 			      		</a>
 			      	</h3>
 			      	<i class="material-icons right">more_vert</i>
-							<donations charity="charity"></donations>
 			      </span>
+			      <donations charity="charity"></donations>
 			    </div>
 			    <div class="card-reveal">
 					<span class="card-title grey-text text-darken-4">
@@ -126,16 +126,16 @@
 <div class="row">
 	<h1 ng-if="$ctrl.suggested">All Results: </h1>
 	<div ng-repeat="charity in $ctrl.charities">
-		<div class="col s12 m6">
-		  	<div class="card">
+		<div class="col s12 l6">
+		  	<div class="card  donationParent">
 			    <div class="card-image waves-effect waves-block waves-light">
 			      <img class="activator red lighten-2" src="">
 			    </div>
-			    <div class="card-content">
-			      <span class="card-title activator grey-text text-darken-4">
+			    <div class="card-content row">
+			      <span class="card-title activator grey-text text-darken-4 col s7">
 			      	<h3>
 			      		<a ui-sref="charitiesShow({ ein: charity.ein })">
-			      			<h5>{{ charity.charityName | limitTo:46}}<span ng-if="charity.charityName.length > 46">...</span></h5>
+			      			<h5>{{ charity.charityName | limitTo:20}}<span ng-if="charity.charityName.length > 20">...</span></h5>
 			      			<h6>
 			      				{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}
 			      			</h6>
@@ -143,6 +143,7 @@
 			      	</h3>
 			      	<i class="material-icons right">more_vert</i>
 			      </span>
+			      <donations charity="charity"></donations>
 			    </div>
 			    <div class="card-reveal">
 					<span class="card-title grey-text text-darken-4">
@@ -214,4 +215,14 @@
     $(document).ready(function(){
       $('.parallax').parallax();
     });
+</script>
+<script type="text/javascript">
+  $(function(){
+    setTimeout(function(){
+      height = $(".donationParent").css("height");
+      height = parseInt(height.slice(0, height.length - 2)) * .8
+      $(".donateContainer").css("height", `${height}px`);
+      $(".donateContainer").css("margin-top", "-5%");
+    }, 100);
+  });
 </script>

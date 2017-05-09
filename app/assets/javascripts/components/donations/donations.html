@@ -1,11 +1,49 @@
-<div class="col col s8 offset-s2 lighten-2 charityShowDonateBox">
+<!-- <div class="col col s8 offset-s2 lighten-2 charityShowDonateBox">
   <h2 class="right-align">ready to donate?</h2>
   <h2>Current Charity Token Amount: {{$ctrl.charity.token_amount}}</h2>
   <h6>Current user token amount: {{$ctrl.currentUser.token_amount}}</h6>
   <div ng-if="$ctrl.currentUser.token_amount > 0">
-    <button ng-click="$ctrl.decrementToken()"> - </button>
+    
     <p>{{ $ctrl.tokenAmount }}</p>
-    <button ng-click="$ctrl.incrementToken($ctrl.charity)"> + </button>
-    <button type="button" class="btn btn-default" ng-click="$ctrl.donate($ctrl.charity.ein, $ctrl.tokenAmount)">Donate</button>
+    
+    
   </div>					
+</div> -->
+
+
+<div class="col s3 offset-s1 row donateContainer">
+	<div class="progressBar col s12 row green lighten-4">
+    <div class="tokensToGo col s12">{{ 10 - $ctrl.charity.token_amount }} TO GO!</div>
+		<div ng-repeat="num in $ctrl.getTokenAmount($ctrl.charity.token_amount)" class="col s12 white progressBarFiller">
+		</div>
+	</div>
+	<a class="btn blue col s12 donateButton" ng-click="$ctrl.donate($ctrl.charity.ein, $ctrl.tokenAmount)">Donate!</a>
 </div>
+<!-- <div class="row col s12">
+<button ng-click="$ctrl.decrementToken()" class="btn col s3">-</button>
+
+<button ng-click="$ctrl.incrementToken($ctrl.charity)" class="btn col s3 offset-s1">+</button>
+</div> -->
+<a class="waves-effect waves-light btn" href="#modal1">Modal</a>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h3>You Have {{ vm.currentUser.token_amount }} Tokens</h3>
+    <h4>Donate How Many?</h4>
+    <h1>{{ vm.tokenAmount }}</h1>
+    <div class="">
+      
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    setTimeout(function(){
+      height = $(".donationParent").css("height");
+      height = parseInt(height.slice(0, height.length - 2)) * .8
+      $(".donateContainer").css("height", `${height}px`);
+      $(".donateContainer").css("margin-top", "-5%");
+    }, 100);
+  });
+</script>

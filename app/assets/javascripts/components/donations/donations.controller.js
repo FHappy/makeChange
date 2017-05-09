@@ -5,21 +5,22 @@ angular
 DonationsController.$inject = ['CharitiesService', 'UsersService', 'ActionCableChannel'];
 
 function DonationsController(CharitiesService, UsersService, ActionCableChannel) {
-  var vm = this;
-  vm.donate = donate;
-  vm.tokenAmount = 1;
-  vm.currentUser = null;
-  vm.incrementToken = incrementToken;
-  vm.decrementToken = decrementToken;
+  	var vm = this;
+  	vm.donate = donate;
+  	vm.tokenAmount = 1;
+  	vm.currentUser = null;
+  	vm.incrementToken = incrementToken;
+  	vm.decrementToken = decrementToken;
+  	vm.getTokenAmount = getTokenAmount;
 
-  function activate() {
-    getCurrentUser();
-  }
+  	function activate() {
+    	getCurrentUser();
+  	}
 
-  activate();
+	activate();
 	var consumer = new ActionCableChannel("DonationsChannel");
 	var callback = function(response) {
-		getCharity(response.ein);
+		getCharity(vm.charity.ein);
 		getCurrentUser();
 	};
 	consumer.subscribe(callback)
@@ -27,7 +28,7 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 			console.log('donation made?');
 		});
 
-  function donate(ein, token) {
+  	function donate(ein, token) {
 		CharitiesService.donate(ein, token)
 			.then(function resolve(response) {
 				vm.tokenAmount = 1;
@@ -38,7 +39,15 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 			});
 	}
 
-  function incrementToken(charity) {
+	function getTokenAmount(charityTokenAmount) {
+		array = [1,2,3,4,5,6,7,8,9,10];
+		for (var i = 0; i < charityTokenAmount; i++){
+			array.pop();
+		}
+		return array
+	}
+
+  	function incrementToken(charity) {
 		var userTokens = vm.currentUser.token_amount;
 		if (charity.created_at) {
 			var charityTokensLeft = 10 - charity.token_amount;
@@ -57,7 +66,7 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 		}
 	}
 
-  function getCurrentUser() {
+  	function getCurrentUser() {
 		UsersService
 			.getCurrentUser()
 			.then(function resolve(response) {
