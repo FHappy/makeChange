@@ -1,0 +1,238 @@
+<div class="parallax-container">
+	<div class="parallax">
+		<img src="http://www.hdwallpapers.in/walls/flowers_high_resolution-wide.jpg">
+		<div class="parallaxText col l6 m12 s12 offset-l3">
+			<h1 class="left-align">HEADER</h1>
+			<h5 class="left-align">lorem ipsum dolor sit amet, consectetur a	dipisicing elit. Voluptatibus consequuntur sequi voluptate maiores soluta consequatur officia rem laboriosam repellendus rerum animi, obcaecati illum aliquid quos nesciunt velit, in, est eveniet.</h5>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+<!-- Search By Name -->
+	<form ng-submit="$ctrl.resetPage($ctrl.query); $ctrl.searchByName(1)" class="col s6 offset-s3">
+											<!--BEFORE col s12 m4 offset-m1 -->
+		<div class="input-field">
+			<input ng-model="$ctrl.query" id="search" class="searchByName" type="search" placeholder="search by name" required>
+			<label class="label-icon" for="search"><i class="material-icons" ng-class="">search</i></label>
+			<i class="material-icons">close</i>
+		</div>
+		<div class="input-field left-align">
+			<input type="submit" value="Search Names" class="btn waves-effect waves-light">
+		</div>
+	</form>
+<!-- Search By Category -->
+	<form class="col s6 offset-s3"  ng-submit="$ctrl.resetPage($ctrl.categoryQuery); $ctrl.searchByCategory(1)">
+		<div class="input-field">
+			<select ng-model="$ctrl.categoryQuery" required>
+				<option value="" selected disabled>search by category</option>
+				<option value="A">Arts, Culture and Humanities</option>
+				<option value="B">Educational Institutions and Related Activities</option>
+				<option value="C">Environmental Quality, Protection and Beautification</option>
+				<option value="D">Animal-Related</option>
+				<option value="E">Health - General and Rehabilitative</option>
+				<option value="F">Mental Health, Crisis Intervention</option>
+				<option value="G">Diseases, Disorders, Medical Disciplines</option>
+				<option value="H">Medical Research</option>
+				<option value="I">Crime, Legal-Related</option>
+				<option value="J">Employment, Job-Related</option>
+				<option value="K">Food, Agriculture and Nutrition</option>
+				<option value="L">Housing, Shelter</option>
+				<option value="M">Public Safety, Disaster Preparedness and Relief</option>
+				<option value="N">Recreation, Sports, Leisure, Athletics</option>
+				<option value="O">Youth Development</option>
+				<option value="P">Human Services - Multipurpose and Other</option>
+				<option value="Q">International, Foreign Affairs and National Security</option>
+				<option value="R">Civil Rights, Social Action, Advocacy</option>
+				<option value="S">Community Improvement, Capacity Building</option>
+				<option value="T">Philanthropy, Voluntarism and Grantmaking Foundations</option>
+				<option value="U">Science and Technology Research Institutes, Services</option>
+				<option value="V">Social Science Research Institutes, Services</option>
+				<option value="W">Public, Society Benefit - Multipurpose and Other</option>
+				<option value="X">Religion-Related, Spiritual Development</option>
+				<option value="Y">Mutual/Membership Benefit Organizations, Other</option>
+			</select>
+		</div>
+		<div class="input-field left-align">
+			<input type="submit" value="Search Categories" class="btn waves-effect waves-light">
+		</div>
+	</form>
+<!-- Search By Location -->
+	<form ng-submit="$ctrl.resetPage($ctrl.locationQuery); $ctrl.searchByLocation(1); " class="col s6 offset-s3">
+		<div class="input-field">
+			<input ng-model="$ctrl.locationQuery" id="search2" class="searchByName" type="search" placeholder="search city or zip code" required>
+			<label class="label-icon" for="search2"><i class="material-icons" ng-class="">search</i></label>
+			<i class="material-icons">close</i>
+		</div>
+		<div class="input-field left-align">
+			<input type="submit" value="Search Locations" class="btn waves-effect waves-light">
+		</div>
+	</form>
+</div>
+
+<!-- suggested -->
+<div class="row" ng-if="$ctrl.suggested">
+	<h1>Suggested Results: </h1>
+	<div ng-repeat="charity in $ctrl.suggested">
+		<div class="col s12 l6">
+		  	<div class="card donationParent">
+			    <div class="card-image waves-effect waves-block waves-light">
+			      <img class="activator red lighten-2" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 250px;">
+			    </div>
+			    <div class="card-content row">
+			      <span class="card-title activator grey-text text-darken-4 col s7">
+			      	<h3>
+			      		<a ui-sref="charitiesShow({ ein: charity.ein })">
+			      			<h5>{{ charity.charityName | limitTo:46}}<span ng-if="charity.charityName.length > 46">...</span></h5>
+			      			<h6>
+			      				{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}
+			      			</h6>
+			      		</a>
+			      	</h3>
+			      	<i class="material-icons right">more_vert</i>
+			      </span>
+			      <donations charity="charity"></donations>
+			    </div>
+			    <div class="card-reveal">
+					<span class="card-title grey-text text-darken-4">
+						<h4 ng-if="charity.missionStatement">Mission Statement</h4>
+						<i class="material-icons right">
+								close
+							</i>
+					</span>
+					<p ng-if="charity.missionStatement">{{ charity.missionStatement }}</p>
+					<p ng-if="charity.website">
+						<a ng-href="http://{{ charity.website }}" target="_blank" class="websiteLink">Website</a>
+					</p>
+					<p ng-if="!charity.website">
+						<a ng-href="{{ charity.url }}" target="_blank" class="websiteLink">Website</a>
+					</p>
+					<div ng-if="charity.category != 'Not Provided'">
+						<span>
+							Catagories:
+						</span>
+						<br>
+						<span><h6><strong>{{ charity.category }}</strong></h6></span>
+					</div>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<hr class="col s12">
+</div>
+
+<!-- Charity Cards -->
+
+<div class="row">
+	<h1 ng-if="$ctrl.suggested">All Results: </h1>
+	<div ng-repeat="charity in $ctrl.charities" class="container">
+		<div class="col s12">
+		  	<div class="card horizontal donationParent">
+
+			    <div class="card-image waves-effect waves-block waves-light">
+			      <img class="activator lighten-2" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 250px;">
+			    </div>
+				<div class="card-stacked">
+				    <div class="card-content row">
+				      <span class="card-title activator grey-text text-darken-4">
+				      	<h3>
+				      		<a ui-sref="charitiesShow({ ein: charity.ein })">
+				      			<h5>{{ charity.charityName | limitTo:20}}<span ng-if="charity.charityName.length > 20">...</span></h5>
+				      			<h6>
+				      				{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}
+				      			</h6>
+				      		</a>
+				      	</h3>
+				      <i class="material-icons right">more_vert</i>
+				      </span>
+				      <!-- <donations charity="charity"></donations> -->
+				    </div>
+				    <div class="card-action row">
+				      	<div class="progress red col s8">
+				        	<div class="determinate blue" ng-style='$ctrl.progressBarWidth(charity.token_amount)'><</div>
+				    	</div>
+				    </div>
+				</div>
+			    <div class="card-reveal">
+					<span class="card-title grey-text text-darken-4">
+						<h4 ng-if="charity.missionStatement">Mission Statement</h4>
+						<i class="material-icons right">
+								close
+							</i>
+					</span>
+					<p ng-if="charity.missionStatement">{{ charity.missionStatement }}</p>
+					<p ng-if="charity.website">
+						<a ng-href="http://{{ charity.website }}" target="_blank" class="websiteLink">Website</a>
+					</p>
+					<p ng-if="!charity.website">
+						<a ng-href="{{ charity.url }}" target="_blank" class="websiteLink">Website</a>
+					</p>
+					<div ng-if="charity.category != 'Not Provided'">
+						<span>
+							Catagories:
+						</span>
+						<br>
+						<span><h6 ng-if="charity.category != 'Not Provided'"><strong>{{ charity.category }}</strong></h6></span>
+					</div>
+			    </div>
+			</div>
+
+		</div>
+	</div>
+	<div ng-if="$ctrl.currentSearch">
+		<h6>{{ $ctrl.currentSearch }}</h6>
+		<button ng-if="$ctrl.currentPage > 1" ng-click="$ctrl.previousPage()"> Previous </button>
+		<p>{{ $ctrl.currentPage }}</p>
+		<button ng-if="$ctrl.charities.length === 20" ng-click="$ctrl.nextPage()"> Next </button>
+	</div>
+	
+</div>
+
+<div class="parallax-container">
+	<div class="parallax">
+		<img src="http://allpicts.in/download/369/2014/10/Pink_Hydrangea_Flowers_wallpaper_in_high_resolution-1920x1080.jpg/">
+		<div class="parallaxText col l5 m12 s12">
+			<h5 class="right-align">"You know, I'm sick of following my dreams, man. I'm just going to ask where they're going and hook up with 'em later.."</h5>
+			<h2 class="right-align">-Mitch Hedberg</h2>
+		</div>
+	</div>
+</div>
+
+<footer class="page-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col l6 s12">
+				<h5 class="white-text left-align">Footer Content</h5>
+				<p class="grey-text text-lighten-4 left-align">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet qui nisi commodi aliquam consectetur laboriosam, vero ea facere, ad beatae eveniet quae quod repudiandae at animi voluptatem recusandae doloribus! Tenetur.
+				</p>
+			</div>
+			<div class="col l4 offset-l2 s12">
+				<h5 class="white-text left-align">Learn More</h5>
+				<ul>
+					<li class="left-align"><a class="grey-text text-lighten-3" href="#!">Team</a></li>
+					<li class="left-align"><a class="grey-text text-lighten-3" href="#!">Careers</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			&copy; 2017 makeChange
+		</div>
+	</div>
+</footer>
+
+<script>
+	$( document ).ready(function() {
+    	$('select').material_select();
+    	$('.parallax').parallax();
+    	setTimeout(function(){
+    	  height = $(".donationParent").css("height");
+    	  height = parseInt(height.slice(0, height.length - 2)) * .8
+    	  $(".donateContainer").css("height", `${height}px`);
+    	  $(".donateContainer").css("margin-top", "-5%");
+    	  $('.modal').modal();
+    	}, 100);
+    });
+</script>
