@@ -2,8 +2,8 @@
 	<div class="parallax">
 		<img src="http://www.hdwallpapers.in/walls/flowers_high_resolution-wide.jpg">
 		<div class="parallaxText col l6 m12 s12 offset-l3">
-			<h1 class="left-align">HEADER</h1>
-			<h5 class="left-align">lorem ipsum dolor sit amet, consectetur a	dipisicing elit. Voluptatibus consequuntur sequi voluptate maiores soluta consequatur officia rem laboriosam repellendus rerum animi, obcaecati illum aliquid quos nesciunt velit, in, est eveniet.</h5>
+			<h1 class="left-align white-text">HEADER</h1>
+			<h5 class="left-align white-text">lorem ipsum dolor sit amet, consectetur a	dipisicing elit. Voluptatibus consequuntur sequi voluptate maiores soluta consequatur officia rem laboriosam repellendus rerum animi, obcaecati illum aliquid quos nesciunt velit, in, est eveniet.</h5>
 		</div>
 	</div>
 </div>
@@ -22,7 +22,7 @@
 		</div>
 	</form>
 <!-- Search By Category -->
-	<form class="col s6 offset-s3"  ng-submit="$ctrl.searchByCategory()">
+	<form class="col s6 offset-s3" ng-submit="$ctrl.searchByCategory()">
 		<div class="input-field">
 			<select ng-model="$ctrl.categoryQuery" required>
 				<option value="" selected disabled>search by category</option>
@@ -128,9 +128,6 @@
 	<div ng-repeat="charity in $ctrl.charities">
 		<div class="col s12 m6">
 		  	<div class="card">
-			    <div class="card-image waves-effect waves-block waves-light">
-			      <img class="activator red lighten-2" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 250px;">
-			    </div>
 			    <div class="card-content">
 			      <span class="card-title activator grey-text text-darken-4">
 			      	<h3>
@@ -143,6 +140,9 @@
 			      	</h3>
 			      	<i class="material-icons right">more_vert</i>
 			      </span>
+			    </div>
+			    <div class="card-image waves-effect waves-block waves-light">
+			      <img class="activator red lighten-2" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 100px;">
 			    </div>
 			    <div class="card-reveal">
 					<span class="card-title grey-text text-darken-4">
@@ -163,7 +163,11 @@
 							Catagories:
 						</span>
 						<br>
-						<span><h6 ng-if="charity.category != 'Not Provided'"><strong>{{ charity.category }}</strong></h6></span>
+						<span>
+							<h6 ng-if="charity.category != 'Not Provided'" class="chip">
+							<strong>{{ charity.category }}</strong>
+							</h6>
+						</span>
 					</div>
 			    </div>
 			</div>
@@ -176,8 +180,8 @@
 	<div class="parallax">
 		<img src="http://allpicts.in/download/369/2014/10/Pink_Hydrangea_Flowers_wallpaper_in_high_resolution-1920x1080.jpg/">
 		<div class="parallaxText col l5 m12 s12">
-			<h5 class="right-align">"You know, I'm sick of following my dreams, man. I'm just going to ask where they're going and hook up with 'em later.."</h5>
-			<h2 class="right-align">-Mitch Hedberg</h2>
+			<h5 class="right-align white-text">"You know, I'm sick of following my dreams, man. I'm just going to ask where they're going and hook up with 'em later.."</h5>
+			<h2 class="right-align white-text">-Mitch Hedberg</h2>
 		</div>
 	</div>
 </div>
