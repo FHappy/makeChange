@@ -82,6 +82,8 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 			.then(function(response) {
 				vm.charity = response.data.charity;
 				vm.comments = response.data.comments;
+				console.log(response.data.image[vm.charity.category]);
+				console.log(response.data.charity.category)
 				vm.image = response.data.image[vm.charity.category];
 			});
 	}
