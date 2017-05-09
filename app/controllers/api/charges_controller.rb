@@ -24,6 +24,10 @@ class Api::ChargesController < ApplicationController
       :description => 'makeChange donation',
       :currency => 'usd'
     )
+    @tokens = (@amount / 500) * 5
+    current_user["token_amount"] += @tokens
+    current_user.save()
+    binding.pry
     render json: {message: "Payment for #{@amount} successfully submitted"}, status: 200
     rescue Stripe::CardError => e
       # flash[:alert] = e.message
