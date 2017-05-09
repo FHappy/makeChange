@@ -1,13 +1,26 @@
 <div class="charityShowBanner indigo accent-1">
+<<<<<<< HEAD
+	<div class="row">
+		<div class="col col s8 offset-s2 charityShowInfo">
+			<h2>{{ $ctrl.charity.charityName}}</h2>
+
+
+			<h4>{{ $ctrl.charity.city }}, {{ $ctrl.charity.state }} {{ $ctrl.charity.zip_code }}</h4>
+			<h6 class="chip">{{ $ctrl.charity.category }}</h6>
+=======
 	<div class="row donationParent" style="padding-top: 5%;">
 		<div class="col col s8 charityShowInfo">
 			<h2 class="flow-text"><strong>{{ $ctrl.charity.charityName}}</strong></h2>
 			<img ng-src="{{ $ctrl.image }}" style="width: 250px;">
 			<h4 class="flow-text">{{ $ctrl.charity.city }}, {{ $ctrl.charity.state }} {{ $ctrl.charity.zip_code }}</h4>
 			<h6>{{ $ctrl.charity.category }}</h6>
+>>>>>>> a9d3c68dafd9148578124465b30258957dd150fd
 			<p ng-if="$ctrl.charity.missionStatement">{{ $ctrl.charity.missionStatement }}</p>
 			<p></p>
 			<a ng-href="{{ $ctrl.charity.url }}" target="_blank" class="websiteLink">Website</a>
+			<p>
+				<img ng-src="{{ $ctrl.image }}" style="width: 150px;">
+			</p>
 		</div>
     <donations charity="$ctrl.charity"></donations>
 	</div>
