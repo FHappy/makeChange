@@ -1,7 +1,7 @@
 class Api::CharitiesController < ApplicationController
 	def index
 		@charities= Charity.all;
-		render json: {charities: sort_by_goal(@charities), image: image}
+		render json: {charities: sort_by_goal(@charities), image: image, backgroundImageOne: ActionController::Base.helpers.asset_path("background/colorHanzzz.jpg")}
 	end
 
 	def show
