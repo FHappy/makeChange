@@ -24,6 +24,7 @@ function CharitiesIndexController(CharitiesService) {
 	vm.currentSearch = null;
 	vm.resetPage = resetPage;
 	vm.currentQuery = null;
+	vm.progressBarWidth = progressBarWidth;
 
 	function activate() {
 		CharitiesService
@@ -110,6 +111,11 @@ function CharitiesIndexController(CharitiesService) {
 	function resetPage(query) {
 		vm.currentQuery = query;
 		vm.currentPage = 1;
+	}
+
+	function progressBarWidth(charityTokenAmount) {
+		var width = (charityTokenAmount / 10) * 100;
+		return { "width": `${width}%` }
 	}
 
 

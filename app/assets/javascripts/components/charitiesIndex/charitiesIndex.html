@@ -125,26 +125,34 @@
 
 <div class="row">
 	<h1 ng-if="$ctrl.suggested">All Results: </h1>
-	<div ng-repeat="charity in $ctrl.charities">
-		<div class="col s12 l6">
-		  	<div class="card  donationParent">
+	<div ng-repeat="charity in $ctrl.charities" class="container">
+		<div class="col s12">
+		  	<div class="card horizontal donationParent">
+
 			    <div class="card-image waves-effect waves-block waves-light">
-			      <img class="activator red lighten-2" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 250px;">
+			      <img class="activator lighten-2" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 250px;">
 			    </div>
-			    <div class="card-content row">
-			      <span class="card-title activator grey-text text-darken-4 col s7">
-			      	<h3>
-			      		<a ui-sref="charitiesShow({ ein: charity.ein })">
-			      			<h5>{{ charity.charityName | limitTo:20}}<span ng-if="charity.charityName.length > 20">...</span></h5>
-			      			<h6>
-			      				{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}
-			      			</h6>
-			      		</a>
-			      	</h3>
-			      	<i class="material-icons right">more_vert</i>
-			      </span>
-			      <donations charity="charity"></donations>
-			    </div>
+				<div class="card-stacked">
+				    <div class="card-content row">
+				      <span class="card-title activator grey-text text-darken-4">
+				      	<h3>
+				      		<a ui-sref="charitiesShow({ ein: charity.ein })">
+				      			<h5>{{ charity.charityName | limitTo:20}}<span ng-if="charity.charityName.length > 20">...</span></h5>
+				      			<h6>
+				      				{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}
+				      			</h6>
+				      		</a>
+				      	</h3>
+				      <i class="material-icons right">more_vert</i>
+				      </span>
+				      <!-- <donations charity="charity"></donations> -->
+				    </div>
+				    <div class="card-action row">
+				      	<div class="progress red col s8">
+				        	<div class="determinate blue" ng-style='$ctrl.progressBarWidth(charity.token_amount)'><</div>
+				    	</div>
+				    </div>
+				</div>
 			    <div class="card-reveal">
 					<span class="card-title grey-text text-darken-4">
 						<h4 ng-if="charity.missionStatement">Mission Statement</h4>
