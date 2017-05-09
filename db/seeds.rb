@@ -13,17 +13,19 @@ user1 = User.create(
 	username: "user1",
 	email: "user1@user.com",
 	password: "password",
-	token_amount: 5
+	token_amount: 500
 	)
 user2 = User.create(
 	username: "user2",
 	email: "user2@user.com",
-	password: "password"
+	password: "password",
+	token_amount: 50
 	)
 user3 = User.create(
 	username: "user3",
 	email: "user3@user.com",
-	password: "password"
+	password: "password",
+	token_amount: 5
 	)
 charity1 = Charity.create(
 	ein: "721336135",
