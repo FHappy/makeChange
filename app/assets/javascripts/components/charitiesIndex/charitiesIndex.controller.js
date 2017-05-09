@@ -26,6 +26,7 @@ function CharitiesIndexController(CharitiesService) {
 	vm.currentQuery = null;
 	vm.progressBarWidth = progressBarWidth;
 	vm.backgroundImageOne = null;
+	vm.backgroundImageTwo = null;
 
 	function activate() {
 		CharitiesService
@@ -34,6 +35,7 @@ function CharitiesIndexController(CharitiesService) {
 				vm.charities = response.data.charities;
 				vm.image = response.data.image;
 				vm.backgroundImageOne = response.data.backgroundImageOne;
+				vm.backgroundImageTwo = response.data.backgroundImageTwo;
 			});
 	}
 
