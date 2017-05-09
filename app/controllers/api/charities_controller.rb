@@ -62,8 +62,11 @@ class Api::CharitiesController < ApplicationController
 			Y: "Mutual/Membership Benefit Organizations, Other"
 		}.as_json
 		search_term = search_terms[query]
-
-		@org_charities = HTTParty.get("#{url}&category=#{query}")
+		if page
+			@org_charities = HTTParty.get("#{url}&category=#{query}&start=#{page}")
+		else
+			@org_charities = HTTParty.get("#{url}&category=#{query}")
+		end
 		@suggested = []
 
 		Charity.all.each do |charity|
@@ -73,7 +76,7 @@ class Api::CharitiesController < ApplicationController
 		end
 
 		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities["data"]), image: image  }
-  	end
+	end
 
   	def search_location
   		@org_charities = []
@@ -81,10 +84,10 @@ class Api::CharitiesController < ApplicationController
 
   		truncated_zip = query[0, 5]
 
-  		HTTParty.get("#{url}&city=#{query.upcase}")["data"].each do |charity|
+  		HTTParty.get("#{url}&city=#{query.upcase}&start=#{page}")["data"].each do |charity|
   			@org_charities << charity
   		end
-  		HTTParty.get("#{url}&zipCode=#{truncated_zip}")["data"].each do |charity|
+  		HTTParty.get("#{url}&zipCode=#{truncated_zip}&start=#{page}")["data"].each do |charity|
   			@org_charities << charity
   		end
   		@org_charities.uniq!
@@ -174,6 +177,10 @@ class Api::CharitiesController < ApplicationController
 
 	def ein
 		params[:ein]
+	end
+
+	def page
+		(params[:page].to_i - 1) * 20 + 1
 	end
 
 	def image
