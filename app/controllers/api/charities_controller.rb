@@ -23,7 +23,7 @@ class Api::CharitiesController < ApplicationController
 			end
 		end
 		
-		@org_charities = HTTParty.get("#{url}&searchTerm=#{query}")
+		@org_charities = HTTParty.get("#{url}&searchTerm=#{query}&start=#{page}")
 		
 		render json: {
 			suggested: sort_by_goal(@suggested),
