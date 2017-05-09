@@ -37,6 +37,7 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 		.then(function() {
 			console.log('it worked!');
 		});
+		
 	function donate(ein, token) {
 		CharitiesService.donate(ein, token)
 			.then(function resolve(response) {
