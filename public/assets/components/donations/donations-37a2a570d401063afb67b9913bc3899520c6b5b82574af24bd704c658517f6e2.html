@@ -1,0 +1,44 @@
+<!-- <div class="col col s8 offset-s2 lighten-2 charityShowDonateBox">
+  <h2 class="right-align">ready to donate?</h2>
+  <h2>Current Charity Token Amount: {{$ctrl.charity.token_amount}}</h2>
+  <h6>Current user token amount: {{$ctrl.currentUser.token_amount}}</h6>
+  <div ng-if="$ctrl.currentUser.token_amount > 0">
+    
+    <p>{{ $ctrl.tokenAmount }}</p>
+    
+    
+  </div>					
+</div> -->
+
+
+<!-- <div class="col s3 offset-s1 row donateContainer">
+	<div class="progressBar col s12 row green lighten-4">
+    <div class="tokensToGo col s12">{{ 10 - $ctrl.charity.token_amount }} TO GO!</div>
+		<div ng-repeat="num in $ctrl.getTokenAmount($ctrl.charity.token_amount)" class="col s12 white progressBarFiller">
+		</div>
+	</div>
+</div> -->
+
+<button class="btn blue donateButton" data-target="modal-{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
+<stripe-form ng-if="$ctrl.currentUser.token_amount === 0"></stripe-form>
+
+<div id="modal-{{$ctrl.charity.ein}}" class="modal">
+  <div class="modal-content">
+    <h3 class="center-align">You Have {{ $ctrl.currentUser.token_amount }} Tokens</h3>
+    <h4 class="center-align">Donate How Many?</h4>
+    <h1 class="center-align">{{ $ctrl.tokenAmount }}</h1>
+    <div class="modal-button-container center">
+      <a ng-click="$ctrl.decrementToken()" class="btn red">-</a>
+      <a class="btn blue modal-close" ng-click="$ctrl.donate($ctrl.charity.ein, $ctrl.tokenAmount)">Donate!</a>
+      <a ng-click="$ctrl.incrementToken($ctrl.charity)" class="btn green">+</a>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('.modal').modal();
+    }, 500);
+  });
+</script>
