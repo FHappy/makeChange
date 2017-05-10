@@ -11,14 +11,16 @@
 </div> -->
 
 
-<div class="col s3 offset-s1 row donateContainer">
+<!-- <div class="col s3 offset-s1 row donateContainer">
 	<div class="progressBar col s12 row green lighten-4">
     <div class="tokensToGo col s12">{{ 10 - $ctrl.charity.token_amount }} TO GO!</div>
 		<div ng-repeat="num in $ctrl.getTokenAmount($ctrl.charity.token_amount)" class="col s12 white progressBarFiller">
 		</div>
 	</div>
-	<button class="btn blue col s12 donateButton" data-target="modal-{{$ctrl.charity.ein}}">Donate!</button>
-</div>
+</div> -->
+
+<button class="btn blue donateButton" data-target="modal-{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
+<stripe-form ng-if="$ctrl.currentUser.token_amount === 0"></stripe-form>
 
 <div id="modal-{{$ctrl.charity.ein}}" class="modal">
   <div class="modal-content">
@@ -26,9 +28,9 @@
     <h4 class="center-align">Donate How Many?</h4>
     <h1 class="center-align">{{ $ctrl.tokenAmount }}</h1>
     <div class="modal-button-container center">
-      <a ng-click="$ctrl.incrementToken($ctrl.charity)" class="btn green">+</a>
-      <a class="btn blue" ng-click="$ctrl.donate($ctrl.charity.ein, $ctrl.tokenAmount)">Donate!</a>
       <a ng-click="$ctrl.decrementToken()" class="btn red">-</a>
+      <a class="btn blue modal-close" ng-click="$ctrl.donate($ctrl.charity.ein, $ctrl.tokenAmount)">Donate!</a>
+      <a ng-click="$ctrl.incrementToken($ctrl.charity)" class="btn green">+</a>
     </div>
   </div>
 </div>
@@ -36,11 +38,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
     setTimeout(function(){
-      height = $(".donationParent").css("height");
-      height = parseInt(height.slice(0, height.length - 2)) * .8
-      $(".donateContainer").css("height", `${height}px`);
-      $(".donateContainer").css("margin-top", "-5%");
       $('.modal').modal();
-    }, 100);
+    }, 500);
   });
 </script>
