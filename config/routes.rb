@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  
   get "api/users/current" => "api/users#current", as: "users_current"
   get "api/charities" => "api/charities#index", as: "charities_index"
   get "api/charities/:ein" => "api/charities#show", as: "charities_show"
@@ -14,6 +13,7 @@ Rails.application.routes.draw do
   post "api/comments" => "api/comments#create", as: "comments_create"
   delete "api/comments/:id" => "api/comments#destroy", as: "comments_destroy"
   patch "api/comments" => "api/comments#update", as: "comments_update"
+  get "users/auth/connect" => "api/charges#connect", as: "charges_connect"
 
   namespace :api do
     resources :charges, only: [:index, :create]

@@ -33,4 +33,10 @@ class Api::ChargesController < ApplicationController
     end
     
   end
+
+  def connect
+    
+
+  end
+  
 end
