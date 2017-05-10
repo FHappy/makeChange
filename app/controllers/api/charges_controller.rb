@@ -8,6 +8,7 @@ class Api::ChargesController < ApplicationController
   def create
     begin
     @amount = 575
+    
     token = params["charge"]["token"]
 
     customer = Stripe::Customer.create(
