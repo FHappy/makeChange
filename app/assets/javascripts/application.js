@@ -19,12 +19,13 @@
 //= require materialize/extras/nouislider
 //= require angular-actioncable
 //= require angular-websocket/dist/angular-websocket
+//= require angular-socialshare/dist/angular-socialshare
 //= require_tree ./channels
 //= require_self
 //= require_tree .
 
 angular
-  .module('makeChangeApp', ['ui.router', 'stripe.checkout', 'ngActionCable'])
+  .module('makeChangeApp', ['ui.router', 'stripe.checkout', 'ngActionCable', '720kb.socialshare'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('home', {

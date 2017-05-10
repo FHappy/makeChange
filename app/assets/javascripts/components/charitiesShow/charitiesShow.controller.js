@@ -2,9 +2,9 @@ angular
 	.module("makeChangeApp")
 	.controller("CharitiesShowController", CharitiesShowController);
 
-CharitiesShowController.$inject = ["$stateParams", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel"];
+CharitiesShowController.$inject = ["$stateParams", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel", "Socialshare"];
 
-function CharitiesShowController($stateParams, CharitiesService, UsersService, CommentsService, ActionCableChannel) {
+function CharitiesShowController($stateParams, CharitiesService, UsersService, CommentsService, ActionCableChannel, Socialshare) {
 	var vm = this;
 
 	vm.charity = null;
@@ -28,6 +28,15 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 	}
 
 	activate();
+
+	Socialshare.share({
+      'provider': 'facebook',
+      'attrs': {
+        'socialshareUrl': "http://make-change.herokuapp.com",
+				"socialshare-title": "This app is incredible!",
+				"socialshare-caption": "Come contribute to #{vm.charity.charityName}!"
+      }
+    });
 
 	var consumer = new ActionCableChannel("CommentsChannel");
 	var callback = function(response) {
