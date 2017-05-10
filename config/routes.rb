@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   mount ActionCable.server => '/cable'
 
@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   post "api/comments" => "api/comments#create", as: "comments_create"
   delete "api/comments/:id" => "api/comments#destroy", as: "comments_destroy"
   patch "api/comments" => "api/comments#update", as: "comments_update"
-  get "users/auth/connect" => "api/charges#connect", as: "charges_connect"
 
   namespace :api do
     resources :charges, only: [:index, :create]
