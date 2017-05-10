@@ -20,4 +20,5 @@ class OmniauthCallbacksController < ApplicationController
     end
   end
   
+  
 end
