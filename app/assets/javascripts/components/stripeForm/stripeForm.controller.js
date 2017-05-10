@@ -10,7 +10,7 @@ function StripeFormController(StripeCheckout, $http, FlashMessage) {
   vm.isLoading = false;
 
   var handler = StripeCheckout.configure({
-    name: 'boop boop',
+    name: 'makeChange',
     token: function(token, args) {
       console.log(token.id);
     }
@@ -18,8 +18,8 @@ function StripeFormController(StripeCheckout, $http, FlashMessage) {
 
   function doCheckout(token, args) {
     var options = {
-      description: 'one hundred dollahs!',
-      amount: 10000
+      description: '10 Tokens',
+      amount: 575
     };
 
     handler.open(options)
