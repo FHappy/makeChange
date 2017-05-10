@@ -8,7 +8,6 @@ class Api::ChargesController < ApplicationController
   def create
     begin
     @amount = 575
-
     token = params["charge"]["token"]
 
     customer = Stripe::Customer.create(
@@ -27,7 +26,7 @@ class Api::ChargesController < ApplicationController
     current_user.save()
 
     render json: {message: "Payment for #{@amount} successfully submitted"}, status: 200
-    
+
     rescue Stripe::CardError => e
       render json: {message: e.message}, status: 517
     end
