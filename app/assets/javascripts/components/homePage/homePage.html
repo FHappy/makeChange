@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
 	<div class="col s12 green accent-1">
 		<div class="row userHome">
 			<div class="col s12">
@@ -10,20 +10,56 @@
 			</div>
 		</div>
 	</div>
+</div> -->
+
+<div class="parallax-container">
+	<div class="parallax">
+		<img ng-src="{{ $ctrl.userHomeBackgroundImage }}">
+		<div class="parallaxText col l6 m12 s12 offset-l3">
+			<h1>welcome home, {{ $ctrl.user.username }}</h1>
+			<div class="container">
+				<hr>
+			</div>
+			<h2>your contributions:</h2>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="col s12" ng-repeat="charity in $ctrl.charities">
+	  <div class="card-panel grey lighten-5 z-depth-1">
+	    <div class="row valign-wrapper">
+	   	<img ng-src="{{ $ctrl.image[charity.category] }}" alt="" style="width: 150px; border-radius: 100px;">
+	      <div class="col s12">
+	        <div class="black-text left-align">
+	          	<h3><a ui-sref="charitiesShow({ ein: charity.ein })">{{ charity.charityName }}</a></h3>
+	          	
+				<p ng-if="charity.missionStatement">{{ charity.missionStatement }}</p>
+	          	<p class="chip flow-text">
+	          		{{ charity.category }}
+	          	</p>
+				<a ng-href="http://{{ charity.website }}" target="_blank" class="websiteLink" style="text-decoration: none">website: {{charity.charityName}}</a>
+	          	<hr>
+
+          	  	<div class="progress z-depth-3 grey lighten-2 col s8" style="height: 20px;">
+          	    	<div class="determinate teal {{ $ctrl.progressColor(charity.token_amount) }}" ng-style='$ctrl.progressBarWidth(charity.token_amount)'></div>
+          		</div>
+				<div class="col s2">
+          			<donations charity="charity"></donations>
+				</div>
+
+	        </div>
+	      </div>
+	  	</div>
+	  </div>
+	</div>
 </div>
 
 
-<div class="col s6" ng-repeat="charity in $ctrl.charities">
-  <div class="card-panel grey lighten-5 z-depth-1">
-    <div class="row valign-wrapper">
-      <div class="col s12">
-        <span class="black-text left-align">
-          	<h3><a ui-sref="charitiesShow({ ein: charity.ein })">{{ charity.charityName }}</a></h3>
-          	<p>Catagories:</p>
-          	<p>{{ charity.category }}</p>
-			<a ng-href="http://{{ charity.website }}" target="_blank" class="websiteLink">Website</a>
-        </span>
-      </div>
-  	</div>
-  </div>
-</div>
+<script>
+	$( document ).ready(function() {
+    	$('select').material_select();
+    	$('.parallax').parallax();
+    });
+</script>
+
