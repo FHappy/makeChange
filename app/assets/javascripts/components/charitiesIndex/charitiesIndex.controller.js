@@ -28,6 +28,7 @@ function CharitiesIndexController(CharitiesService) {
 	vm.backgroundImageOne = null;
 	vm.backgroundImageTwo = null;
 	vm.progressColor = progressColor;
+	vm.disabledOrNot = disabledOrNot;
 
 	function activate() {
 		CharitiesService
@@ -135,6 +136,15 @@ function CharitiesIndexController(CharitiesService) {
 		}
 		else {
 			return `accent-${11 - charityTokenAmount}`;
+		}
+	}
+
+	function disabledOrNot(buttonName) {
+		if (buttonName === "previous" && vm.currentPage === 1) {
+			return "disabled"
+		}
+		if (buttonName === "next" && vm.charities.length < 20) {
+			return "disabled"
 		}
 	}
 

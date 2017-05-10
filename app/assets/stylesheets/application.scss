@@ -87,7 +87,6 @@ html {
 	align-items: center;
 }
 .charityShowBanner {
-	/*height: 50vh;*/
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -110,47 +109,10 @@ html {
 	align-content: center;
 }
 
-.progressBar {
-	height: 80%;
-	border: black 3px solid;
-	margin-top: 10%;
-	position: relative;
-}
-.progressBarFiller {
-	height: 10%;
-}
-.tokensToGo {
-	height: 5%;
-	font-size: 1.1em;
-	display: flex;
-	justify-content: center;
-	align-items: flex-end;
-	position: absolute;
-	top: 50%;
-}
-.donateButton {
-	height: 15%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.card {
-	color: black;
-}
-
-.infoWrapper {
-	// color: white;
-}
-
 .clientView .infoWrapper {
 	padding: 0px;
 }
 
-.card-content,
-.card-reveal {
-	text-align: left;
-}
 
   $green: 256;
   $red: 256;

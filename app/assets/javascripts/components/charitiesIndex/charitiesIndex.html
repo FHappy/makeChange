@@ -144,7 +144,6 @@
 					      			<h6 class="flow-text">{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}</h6>
 					      		</a>
 					      	</h3>
-					      	<!-- <i class="material-icons right">more_vert</i> -->
 				      	</span>
 				    </div>
 				    <div class="card-action row">
@@ -178,13 +177,13 @@
 
 		</div>
 	</div>
-	<div ng-if="$ctrl.currentSearch">
-		<h6>{{ $ctrl.currentSearch }}</h6>
-		<button ng-if="$ctrl.currentPage > 1" ng-click="$ctrl.previousPage()"> Previous </button>
-		<p>{{ $ctrl.currentPage }}</p>
-		<button ng-if="$ctrl.charities.length === 20" ng-click="$ctrl.nextPage()"> Next </button>
+	<!-- Page Buttons -->
+	<div ng-if="$ctrl.currentSearch" class="row">
+		<h5 class="col s12 center">{{ $ctrl.currentSearch }}</h5>
+		<button ng-click="$ctrl.previousPage()" class="btn col l1 m3 s4 offset-m2 offset-l4 offset-s1 {{ $ctrl.disabledOrNot('previous') }}">Previous</button>
+		<h2 class="col s2">{{ $ctrl.currentPage }}</h2>
+		<button ng-click="$ctrl.nextPage()" class="btn col l1 m3 s4 {{ $ctrl.disabledOrNot('next') }}">Next</button>
 	</div>
-	
 </div>
 
 <div class="parallax-container">
