@@ -1,25 +1,4 @@
-<!-- <div class="col col s8 offset-s2 lighten-2 charityShowDonateBox">
-  <h2 class="right-align">ready to donate?</h2>
-  <h2>Current Charity Token Amount: {{$ctrl.charity.token_amount}}</h2>
-  <h6>Current user token amount: {{$ctrl.currentUser.token_amount}}</h6>
-  <div ng-if="$ctrl.currentUser.token_amount > 0">
-    
-    <p>{{ $ctrl.tokenAmount }}</p>
-    
-    
-  </div>					
-</div> -->
-
-
-<!-- <div class="col s3 offset-s1 row donateContainer">
-	<div class="progressBar col s12 row green lighten-4">
-    <div class="tokensToGo col s12">{{ 10 - $ctrl.charity.token_amount }} TO GO!</div>
-		<div ng-repeat="num in $ctrl.getTokenAmount($ctrl.charity.token_amount)" class="col s12 white progressBarFiller">
-		</div>
-	</div>
-</div> -->
-
-<button class="btn blue donateButton" data-target="modal-{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
+<button class="btn blue" data-target="modal-{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
 <stripe-form ng-if="$ctrl.currentUser.token_amount === 0"></stripe-form>
 
 <div id="modal-{{$ctrl.charity.ein}}" class="modal">

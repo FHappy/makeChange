@@ -28,6 +28,8 @@ function CharitiesIndexController(CharitiesService) {
 	vm.backgroundImageOne = null;
 	vm.backgroundImageTwo = null;
 	vm.progressColor = progressColor;
+	vm.disabledOrNot = disabledOrNot;
+	vm.loading = false;
 
 	function activate() {
 		CharitiesService
@@ -41,6 +43,7 @@ function CharitiesIndexController(CharitiesService) {
 	}
 
 	function searchByName(page) {
+		vm.loading = true;
 		CharitiesService
 			.getNameQueries(vm.currentQuery, page)
 			.then(function(response) {
@@ -53,10 +56,12 @@ function CharitiesIndexController(CharitiesService) {
 				}
 				vm.currentSearch = 'Searching by name...';
 				vm.query = null;
+				vm.loading = false;
 			});
 	}
 
 	function searchByCategory(page) {
+		vm.loading = true;
 		CharitiesService
 			.getCategoryQueries(vm.currentQuery, page)
 			.then(function(response) {
@@ -68,10 +73,12 @@ function CharitiesIndexController(CharitiesService) {
 					vm.suggested = null;
 				}
 				vm.currentSearch = 'Searching by category...';
+				vm.loading = false;
 			});
 	}
 
 	function searchByLocation(page) {
+		vm.loading = true;
 		CharitiesService
 			.getLocationQueries(vm.currentQuery, page)
 			.then(function(response) {
@@ -84,6 +91,7 @@ function CharitiesIndexController(CharitiesService) {
 				}
 				vm.locationQuery = null;
 				vm.currentSearch = 'Searching by location...';
+				vm.loading = false;
 			});
 	}
 
@@ -135,6 +143,18 @@ function CharitiesIndexController(CharitiesService) {
 		}
 		else {
 			return `accent-${11 - charityTokenAmount}`;
+		}
+	}
+
+	function disabledOrNot(buttonName) {
+		if (vm.loading === true) {
+			return "disabled"
+		}
+		if (buttonName === "previous" && vm.currentPage === 1) {
+			return "disabled"
+		}
+		if (buttonName === "next" && vm.charities.length < 20) {
+			return "disabled"
 		}
 	}
 
