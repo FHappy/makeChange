@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   mount ActionCable.server => '/cable'
 
-  
   get "api/users/current" => "api/users#current", as: "users_current"
   get "api/charities" => "api/charities#index", as: "charities_index"
   get "api/charities/:ein" => "api/charities#show", as: "charities_show"
