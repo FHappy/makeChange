@@ -9,8 +9,6 @@ class Api::ChargesController < ApplicationController
     begin
     @amount = 575
 
-    Stripe.api_key = "sk_test_VMkXZrajoyfxdGbjLZ8l329p"
-
     token = params["charge"]["token"]
 
     customer = Stripe::Customer.create(
@@ -27,13 +25,10 @@ class Api::ChargesController < ApplicationController
     @tokens = (@amount / 500) * 5
     current_user["token_amount"] += @tokens
     current_user.save()
-    binding.pry
+
     render json: {message: "Payment for #{@amount} successfully submitted"}, status: 200
+    
     rescue Stripe::CardError => e
-      # flash[:alert] = e.message
-      # return {
-      #   alert: e.message
-      # }
       render json: {message: e.message}, status: 517
     end
     
