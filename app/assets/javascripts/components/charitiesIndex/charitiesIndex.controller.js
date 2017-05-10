@@ -27,6 +27,7 @@ function CharitiesIndexController(CharitiesService) {
 	vm.progressBarWidth = progressBarWidth;
 	vm.backgroundImageOne = null;
 	vm.backgroundImageTwo = null;
+	vm.progressColor = progressColor;
 
 	function activate() {
 		CharitiesService
@@ -120,6 +121,21 @@ function CharitiesIndexController(CharitiesService) {
 	function progressBarWidth(charityTokenAmount) {
 		var width = (charityTokenAmount / 10) * 100;
 		return { "width": `${width}%` }
+	}
+
+	function progressColor(charityTokenAmount) {
+		if (charityTokenAmount < 5) {
+			return `darken-${5 - charityTokenAmount}`;
+		}
+		else if (charityTokenAmount === 5) {
+			return ``;
+		}
+		else if (charityTokenAmount > 5 && charityTokenAmount < 8) {
+			return `lighten-${charityTokenAmount - 5}`;
+		}
+		else {
+			return `accent-${11 - charityTokenAmount}`;
+		}
 	}
 
 

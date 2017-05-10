@@ -5,6 +5,7 @@ function HomePageController(UsersService) {
 
   vm.user = null;
   vm.charities = null;
+  vm.currentUser = currentUser;
 
   function currentUser() {
   	UsersService

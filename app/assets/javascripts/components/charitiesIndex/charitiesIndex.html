@@ -71,34 +71,40 @@
 </div>
 
 <!-- suggested -->
+
 <div class="row" ng-if="$ctrl.suggested">
 	<h1>Suggested Results: </h1>
-	<div ng-repeat="charity in $ctrl.suggested">
-		<div class="col s12 l6">
-		  	<div class="card donationParent">
-			    <div class="card-image waves-effect waves-block waves-light">
-			      <img class="activator red lighten-2" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 250px;">
+	<div ng-repeat="charity in $ctrl.suggested" class="container">
+		<div class="col s12">
+		  	<div class="card horizontal donationParent">
+			    <div class="card-image">
+			    	<img class="activator lighten-2" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 250px;">
 			    </div>
-			    <div class="card-content row">
-			      <span class="card-title activator grey-text text-darken-4 col s7">
-			      	<h3>
-			      		<a ui-sref="charitiesShow({ ein: charity.ein })">
-			      			<h5>{{ charity.charityName | limitTo:46}}<span ng-if="charity.charityName.length > 46">...</span></h5>
-			      			<h6>
-			      				{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}
-			      			</h6>
-			      		</a>
-			      	</h3>
-			      	<i class="material-icons right">more_vert</i>
-			      </span>
-			      <donations charity="charity"></donations>
-			    </div>
+				<div class="card-stacked">
+				    <div class="card-content row">
+				    	<span class="card-title activator grey-text text-darken-4">
+					      	<h3>
+					      		<a ui-sref="charitiesShow({ ein: charity.ein })">
+					      			<h5>{{ charity.charityName | limitTo:20}}<span ng-if="charity.charityName.length > 20">...</span></h5>
+					      			<h6>{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}</h6>
+					      		</a>
+					      	</h3>
+					      	<i class="material-icons right">more_vert</i>
+				      	</span>
+				    </div>
+				    <div class="card-action row">
+				      	<div class="progress z-depth-3 grey lighten-2 col s8" style="height: 20px;">
+				        	<div class="determinate teal {{ $ctrl.progressColor(charity.token_amount) }}" ng-style='$ctrl.progressBarWidth(charity.token_amount)'></div>
+				    	</div>
+				    	<div class="col s4">
+				    		<donations charity="charity"></donations>
+				    	</div>
+				    </div>
+				</div>
 			    <div class="card-reveal">
 					<span class="card-title grey-text text-darken-4">
 						<h4 ng-if="charity.missionStatement">Mission Statement</h4>
-						<i class="material-icons right">
-								close
-							</i>
+						<i class="material-icons right">close</i>
 					</span>
 					<p ng-if="charity.missionStatement">{{ charity.missionStatement }}</p>
 					<p ng-if="charity.website">
@@ -108,11 +114,9 @@
 						<a ng-href="{{ charity.url }}" target="_blank" class="websiteLink">Website</a>
 					</p>
 					<div ng-if="charity.category != 'Not Provided'">
-						<span>
-							Catagories:
-						</span>
+						<span>Catagories:</span>
 						<br>
-						<span><h6><strong>{{ charity.category }}</strong></h6></span>
+						<span><h6 ng-if="charity.category != 'Not Provided'"><strong>{{ charity.category }}</strong></h6></span>
 					</div>
 			    </div>
 			</div>
@@ -128,37 +132,34 @@
 	<div ng-repeat="charity in $ctrl.charities" class="container">
 		<div class="col s12">
 		  	<div class="card horizontal donationParent">
-
-			    <div class="card-image waves-effect waves-block waves-light">
-			      <img class="activator lighten-2" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 250px;">
+			    <div class="card-image">
+			    	<a href="#"><img class="activator lighten-2 hoverable" ng-src="{{ $ctrl.image[charity.category] }}" style="width: 150px; border-radius: 100px;"></a>
 			    </div>
 				<div class="card-stacked">
 				    <div class="card-content row">
-				      <span class="card-title activator grey-text text-darken-4">
-				      	<h3>
-				      		<a ui-sref="charitiesShow({ ein: charity.ein })">
-				      			<h5>{{ charity.charityName | limitTo:20}}<span ng-if="charity.charityName.length > 20">...</span></h5>
-				      			<h6>
-				      				{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}
-				      			</h6>
-				      		</a>
-				      	</h3>
-				      <i class="material-icons right">more_vert</i>
-				      </span>
-				      <!-- <donations charity="charity"></donations> -->
+				    	<span class="card-title activator grey-text text-darken-4">
+					      	<h3>
+					      		<a ui-sref="charitiesShow({ ein: charity.ein })">
+					      			<h5 class="flow-text">{{ charity.charityName}}</h5>
+					      			<h6 class="flow-text">{{ charity.city }}, {{ charity.state }} {{ charity.zipCode.slice(0, 5) }}</h6>
+					      		</a>
+					      	</h3>
+					      	<!-- <i class="material-icons right">more_vert</i> -->
+				      	</span>
 				    </div>
 				    <div class="card-action row">
-				      	<div class="progress red col s8">
-				        	<div class="determinate blue" ng-style='$ctrl.progressBarWidth(charity.token_amount)'><</div>
+				      	<div class="progress z-depth-3 grey lighten-2 col s8" style="height: 20px;">
+				        	<div class="determinate teal {{ $ctrl.progressColor(charity.token_amount) }}" ng-style='$ctrl.progressBarWidth(charity.token_amount)'></div>
+				    	</div>
+				    	<div class="col s4">
+				    		<donations charity="charity"></donations>
 				    	</div>
 				    </div>
 				</div>
 			    <div class="card-reveal">
 					<span class="card-title grey-text text-darken-4">
 						<h4 ng-if="charity.missionStatement">Mission Statement</h4>
-						<i class="material-icons right">
-								close
-							</i>
+						<i class="material-icons right">close</i>
 					</span>
 					<p ng-if="charity.missionStatement">{{ charity.missionStatement }}</p>
 					<p ng-if="charity.website">
@@ -168,9 +169,7 @@
 						<a ng-href="{{ charity.url }}" target="_blank" class="websiteLink">Website</a>
 					</p>
 					<div ng-if="charity.category != 'Not Provided'">
-						<span>
-							Catagories:
-						</span>
+						<span>Catagories:</span>
 						<br>
 						<span><h6 ng-if="charity.category != 'Not Provided'"><strong>{{ charity.category }}</strong></h6></span>
 					</div>
@@ -228,11 +227,7 @@
     	$('select').material_select();
     	$('.parallax').parallax();
     	setTimeout(function(){
-    	  height = $(".donationParent").css("height");
-    	  height = parseInt(height.slice(0, height.length - 2)) * .8
-    	  $(".donateContainer").css("height", `${height}px`);
-    	  $(".donateContainer").css("margin-top", "-5%");
     	  $('.modal').modal();
-    	}, 100);
+    	}, 500);
     });
 </script>
