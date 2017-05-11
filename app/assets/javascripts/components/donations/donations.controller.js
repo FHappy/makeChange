@@ -17,18 +17,18 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
   		getCurrentUser();
   		if (vm.charity && vm.charity.time_started) {
 			var end = new Date(vm.charity.time_started);
-			// end.setDate(end.getDate() + 3);
+			end.setDate(end.getDate() + 3);
 			setTimeout(function(){
-				$(`#time-left-${vm.charity.ein}`).countdown({until: end, alwaysExpire: true, onExpiry: });
+				$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true});
 			}, 500)
 		}
 		else {
 	  		vm.$onChanges = function(){
 	  			if (vm.charity.time_started) {
 					var end = new Date(vm.charity.time_started);
-					// end.setDate(end.getDate() + 3);
+					end.setDate(end.getDate() + 3);
 					setTimeout(function(){
-						$(`#time-left-${vm.charity.ein}`).countdown({until: end, alwaysExpire: true, onExpiry: });
+						$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true});
 					}, 500)
 				}
 	  		}
@@ -99,7 +99,12 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 	}
 
 	function refund() {
-		
+		CharitiesService
+			.refund(vm.charity.ein)
+			.then(function(response) {
+				vm.charity = response.data.charity;
+				alert("refunded");
+			});
 	}
 	
 }
