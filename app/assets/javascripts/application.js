@@ -20,6 +20,8 @@
 //= require angular-actioncable
 //= require angular-websocket/dist/angular-websocket
 //= require angular-socialshare/dist/angular-socialshare
+//= require jquery.plugin.js
+//= require jquery.countdown.js
 //= require_tree ./channels
 //= require_self
 //= require_tree .

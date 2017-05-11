@@ -18,6 +18,6 @@ Rails.application.routes.draw do
     resources :charges, only: [:index, :create]
   end
   
-  root to: 'client#index'
+  root to: 'splash_page#index'
   get '*path', to: 'client#index'
 end
