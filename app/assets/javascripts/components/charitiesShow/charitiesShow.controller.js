@@ -21,6 +21,7 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 	vm.editComment = editComment;
 	vm.updateComment = updateComment; 	
 	vm.image = null;
+	vm.timeStarted = null;
 
 	function activate() {
 		getCurrentUser();
@@ -91,9 +92,13 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 			.then(function(response) {
 				vm.charity = response.data.charity;
 				vm.comments = response.data.comments;
-				console.log(response.data.image[vm.charity.category]);
-				console.log(response.data.charity.category)
 				vm.image = response.data.image[vm.charity.category];
+				console.log(vm.charity);
+				if (vm.charity.time_started) {
+					vm.timeStarted = new Date(vm.charity.time_started);
+					var end = vm.timeStarted.setDate(vm.timeStarted.getDate() + 3);
+					$("#countdown-test").countdown({until: end});
+				} 
 			});
 	}
 
