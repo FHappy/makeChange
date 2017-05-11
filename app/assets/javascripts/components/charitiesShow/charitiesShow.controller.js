@@ -29,8 +29,6 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 
 	activate();
 
-	
-
 	var consumer = new ActionCableChannel("CommentsChannel");
 	var callback = function(response) {
 		vm.comments.push(response.comment);

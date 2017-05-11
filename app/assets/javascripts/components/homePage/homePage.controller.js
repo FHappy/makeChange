@@ -5,11 +5,11 @@ function HomePageController(UsersService) {
 
   vm.user = null;
   vm.charities = null;
-  vm.currentUser = currentUser;
+  vm.getCurrentUser = getCurrentUser;
   vm.userHomeBackgroundImage = null;
   vm.image = null;
 
-  function currentUser() {
+  function getCurrentUser() {
   	UsersService
   		.getCurrentUser()
   		.then(function(res) {
@@ -22,7 +22,7 @@ function HomePageController(UsersService) {
   }
 
   function activate() {
-  	currentUser();
+  	getCurrentUser();
   }
 
   activate();
