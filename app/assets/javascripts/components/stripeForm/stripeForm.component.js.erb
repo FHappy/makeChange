@@ -1,6 +1,9 @@
 const StripeFormComponent = {
   controller: 'StripeFormController',
-  templateUrl: '<%= asset_path("components/stripeForm/stripeForm") %>'
+  templateUrl: '<%= asset_path("components/stripeForm/stripeForm") %>',
+  bindings: {
+    user: '='
+  }
 };
 
 angular
