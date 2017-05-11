@@ -112,7 +112,17 @@ class Api::CharitiesController < ApplicationController
 		token = params[:token]
 		@charity = Charity.find_by ein: ein
 
-		if @charity
+		if @charity && @charity["is_active?"]
+			@charity["token_amount"] += token
+
+			if @charity["token_amount"] == 10
+				@charity["token_amount"] = 0
+				@charity["is_active?"] = false
+			end
+
+		elsif @charity
+			@charity["is_active?"] = true
+			@charity["time_started"] = (Time.new().to_f) * 1000
 			@charity["token_amount"] += token
 
 			if @charity["token_amount"] == 10

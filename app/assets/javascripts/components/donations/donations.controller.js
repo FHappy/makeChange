@@ -12,13 +12,18 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
   	vm.incrementToken = incrementToken;
   	vm.decrementToken = decrementToken;
   	vm.getTokenAmount = getTokenAmount;
-  	vm.openModal = openModal;
-
-  	function activate() {
-    	getCurrentUser();
+  	vm.charity = null;
+	vm.$onInit = function() {
+  		getCurrentUser();
+  		vm.$onChanges = function(){
+  			if (vm.charity.time_started) {
+				var end = new Date(vm.charity.time_started);
+				end.setDate(end.getDate() + 3);
+				$(`#time-left-${vm.charity.ein}`).countdown({until: end});
+			}
+  		}
   	}
 
-	activate();
 	var consumer = new ActionCableChannel("DonationsChannel");
 	var callback = function(response) {
 		getCharity(vm.charity.ein);
@@ -82,9 +87,5 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 				vm.charity = response.data.charity;
 			});
 	}
-
-	function openModal(ein) {
-		$(`#modal-${ein}`).modal("open");
-		console.log(`#modal-${ein}`)
-	}
+	
 }

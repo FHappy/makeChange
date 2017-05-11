@@ -2,9 +2,9 @@ angular
 	.module("makeChangeApp")
 	.controller("CharitiesShowController", CharitiesShowController);
 
-CharitiesShowController.$inject = ["$stateParams", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel", "Socialshare"];
+CharitiesShowController.$inject = ["$stateParams", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel"];
 
-function CharitiesShowController($stateParams, CharitiesService, UsersService, CommentsService, ActionCableChannel, Socialshare) {
+function CharitiesShowController($stateParams, CharitiesService, UsersService, CommentsService, ActionCableChannel) {
 	var vm = this;
 
 	vm.charity = null;
@@ -21,7 +21,6 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 	vm.editComment = editComment;
 	vm.updateComment = updateComment; 	
 	vm.image = null;
-	vm.timeStarted = null;
 
 	function activate() {
 		getCurrentUser();
@@ -30,14 +29,7 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 
 	activate();
 
-	Socialshare.share({
-      'provider': 'facebook',
-      'attrs': {
-        'socialshareUrl': "http://make-change.herokuapp.com",
-				"socialshare-title": "This app is incredible!",
-				"socialshare-caption": "Come contribute to #{vm.charity.charityName}!"
-      }
-    });
+	
 
 	var consumer = new ActionCableChannel("CommentsChannel");
 	var callback = function(response) {
@@ -92,13 +84,7 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 			.then(function(response) {
 				vm.charity = response.data.charity;
 				vm.comments = response.data.comments;
-				vm.image = response.data.image[vm.charity.category];
-				console.log(vm.charity);
-				if (vm.charity.time_started) {
-					vm.timeStarted = new Date(vm.charity.time_started);
-					var end = vm.timeStarted.setDate(vm.timeStarted.getDate() + 3);
-					$("#countdown-test").countdown({until: end});
-				} 
+				vm.image = response.data.image[vm.charity.category]; 
 			});
 	}
 
