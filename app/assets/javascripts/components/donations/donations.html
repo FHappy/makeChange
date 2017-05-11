@@ -1,6 +1,14 @@
-<h6>Time Left: <span id="time-left-{{$ctrl.charity.ein}}"></span></h6>
-<button class="btn blue" data-target="{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
-<stripe-form ng-if="$ctrl.currentUser.token_amount === 0"></stripe-form>
+<div class="row">
+  <h6 ng-show="$ctrl.charity.time_started"><span id="time-left-{{$ctrl.charity.ein}}"></span></h6>
+</div>
+
+<div class="row">
+  <div class="progress z-depth-3 grey lighten-2 col l9 m8 s12" style="height: 20px;">
+    <div class="determinate teal {{ $ctrl.progressColor($ctrl.charity.token_amount) }}" ng-style='$ctrl.progressBarWidth($ctrl.charity.token_amount)'></div>
+  </div>
+  <button class="btn blue col l2 offset-l1 m3 offset-m1 s12" data-target="{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
+  <stripe-form ng-if="$ctrl.currentUser.token_amount === 0"></stripe-form>
+</div>
 
 <div id="{{$ctrl.charity.ein}}" class="modal">
   <div class="modal-content">

@@ -11,15 +11,16 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
   	vm.currentUser = null;
   	vm.incrementToken = incrementToken;
   	vm.decrementToken = decrementToken;
-  	vm.getTokenAmount = getTokenAmount;
   	vm.charity = null;
+  	vm.progressBarWidth = progressBarWidth;
+  	vm.progressColor = progressColor;
 	vm.$onInit = function() {
   		getCurrentUser();
   		if (vm.charity && vm.charity.time_started) {
 			var end = new Date(vm.charity.time_started);
 			end.setDate(end.getDate() + 3);
 			setTimeout(function(){
-				$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true});
+				$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true, layout: '<span class="hide-on-small-only">Only {dn} {dl}, {hn} {hl}, {mn} {ml}, {sn} {sl} left!</span><span class="hide-on-med-and-up">Only {dn}:{hn}:{mn}:{sn} Left!</span>'});
 			}, 500)
 		}
 		else {
@@ -28,7 +29,7 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 					var end = new Date(vm.charity.time_started);
 					end.setDate(end.getDate() + 3);
 					setTimeout(function(){
-						$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true});
+						$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true, layout: '<span class="hide-on-small-only">Only {dn} {dl}, {hn} {hl}, {mn} {ml}, {sn} {sl} left!</span><span class="hide-on-med-and-up">Only {dn}:{hn}:{mn}:{sn} Left!</span>'});
 					}, 500)
 				}
 	  		}
@@ -38,7 +39,6 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 	var consumer = new ActionCableChannel("DonationsChannel");
 	var callback = function(response) {
 		getCharity(vm.charity.ein);
-		getCurrentUser();
 	};
 	consumer.subscribe(callback)
 		.then(function() {
@@ -48,19 +48,8 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 		CharitiesService.donate(ein, token)
 			.then(function resolve(response) {
 				vm.tokenAmount = 1;
-				getCurrentUser();
 				getCharity(ein);
-			}, function reject(response) {
-
 			});
-	}
-
-	function getTokenAmount(charityTokenAmount) {
-		array = [1,2,3,4,5,6,7,8,9,10];
-		for (var i = 0; i < charityTokenAmount; i++){
-			array.pop();
-		}
-		return array
 	}
 
   	function incrementToken(charity) {
@@ -95,6 +84,7 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 			.findOneCharity(ein)
 			.then(function(response) {
 				vm.charity = response.data.charity;
+				vm.$onInit();
 			});
 	}
 
@@ -103,8 +93,27 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 			.refund(vm.charity.ein)
 			.then(function(response) {
 				vm.charity = response.data.charity;
-				alert("refunded");
 			});
+	}
+
+	function progressBarWidth(charityTokenAmount) {
+		var width = (charityTokenAmount / 10) * 100;
+		return { "width": `${width}%` }
+	}
+
+	function progressColor(charityTokenAmount) {
+		if (charityTokenAmount < 5) {
+			return `darken-${5 - charityTokenAmount}`;
+		}
+		else if (charityTokenAmount === 5) {
+			return ``;
+		}
+		else if (charityTokenAmount > 5 && charityTokenAmount < 8) {
+			return `lighten-${charityTokenAmount - 5}`;
+		}
+		else {
+			return `accent-${11 - charityTokenAmount}`;
+		}
 	}
 	
 }
