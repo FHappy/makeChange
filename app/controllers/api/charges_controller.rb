@@ -7,7 +7,7 @@ class Api::ChargesController < ApplicationController
   
   def create
     begin
-    @amount = 575
+    @amount = 545
     
     token = params["charge"]["token"]
 
@@ -31,8 +31,19 @@ class Api::ChargesController < ApplicationController
 
     rescue Stripe::CardError => e
       render json: {message: e.message}, status: 517
-    end
-    
+    end 
+  end
+
+
+  def goal_completion
+    transfer = Stripe::Transfer.create({
+      :amount => 545,
+      :currency => "usd",
+      :destination => ENV["makeMyDonation_uid"],
+      :transfer_group => "{TO_CHARITIES}"
+    })
+
+
   end
   
 end
