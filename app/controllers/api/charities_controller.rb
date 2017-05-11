@@ -23,11 +23,15 @@ class Api::CharitiesController < ApplicationController
 			end
 		end
 		
-		@org_charities = HTTParty.get("#{url}&searchTerm=#{query}&start=#{page}")
-		
+		@org_charities = HTTParty.get("#{url}&searchTerm=#{query}&start=#{page}")["data"]
+		@org_charities = de_dupe(@org_charities)
+		@org_charities.each do |charity|
+			add_lat_long(charity)
+		end
+
 		render json: {
 			suggested: sort_by_goal(@suggested),
-			charities: de_dupe(@org_charities["data"]),
+			charities: @org_charities,
 			image: image
 		}
 
@@ -270,8 +274,9 @@ class Api::CharitiesController < ApplicationController
 
 	def add_lat_long(charity)
 		url = "http://data.orghunter.com/v1/charitygeolocation?user_key=fd8d0a7418b42223ada1b88c40dfa0a9"
-		charity["latitude"] = HTTParty.post("#{url}&ein=#{charity['ein']}").as_json["data"]["latitude"]
-		charity["longitude"] = HTTParty.post("#{url}&ein=#{charity['ein']}").as_json["data"]["longitude"]
+		result = HTTParty.post("#{url}&ein=#{charity['ein']}").as_json["data"]
+		charity["latitude"] = result["latitude"]	
+		charity["longitude"] = result["longitude"]		
 	end	
 		
 end
