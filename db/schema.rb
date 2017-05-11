@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510171243) do
+ActiveRecord::Schema.define(version: 20170511132625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 20170510171243) do
     t.string   "url"
     t.string   "missionStatement"
     t.integer  "token_amount",     default: 0
-    t.datetime "time_started"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.boolean  "is_active?",       default: true
     t.string   "website"
     t.integer  "total_earned",     default: 0
+    t.float    "time_started"
   end
 
   create_table "comments", force: :cascade do |t|
