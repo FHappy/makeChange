@@ -20,12 +20,14 @@
 //= require angular-actioncable
 //= require angular-websocket/dist/angular-websocket
 //= require angular-socialshare/dist/angular-socialshare
+//= require sweetalert/lib/sweet-alert
+//= require angular-sweetalert/SweetAlert
 //= require_tree ./channels
 //= require_self
 //= require_tree .
 
 angular
-  .module('makeChangeApp', ['ui.router', 'stripe.checkout', 'ngActionCable', '720kb.socialshare'])
+  .module('makeChangeApp', ['ui.router', 'stripe.checkout', 'ngActionCable', '720kb.socialshare', 'oitozero.ngSweetAlert'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('home', {

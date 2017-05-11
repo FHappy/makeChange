@@ -1,13 +1,13 @@
-StripeFormController.$inject = ['StripeCheckout', '$http', 'FlashMessage'];
+StripeFormController.$inject = ['StripeCheckout', '$http', 'SweetAlert'];
 
-function StripeFormController(StripeCheckout, $http, FlashMessage) {
+function StripeFormController(StripeCheckout, $http, SweetAlert) {
   const vm = this;
 
   vm.description = 'hello world';
   vm.doCheckout = doCheckout;
   vm.alertMessage = '';
   vm.noticeMessage = '';
-  vm.isLoading = false;
+  vm.confirm = confirm;
 
   var handler = StripeCheckout.configure({
     name: 'makeChange',
@@ -26,25 +26,39 @@ function StripeFormController(StripeCheckout, $http, FlashMessage) {
       .then(function resolve(response) {
         vm.isLoading = true;
         console.log(response);
-        // alert("Got stripe token: " + response[0].id);
         var token = {
           token: response[0].id
         };
-        $http.post('/api/charges', token)
-          .then(function (response) {
-            // console.log('successful payment submitted!');
-            var alert = response.data.message;
-            vm.alertMessage = alert;
-          })
-          .catch(function(response) {
-            console.log(response.data.message);
-            var error = response.data.message;
-            vm.alertMessage = error;
-          });
+        vm.confirm(token);
       });
       
 
-  };
+  }
+
+  function confirm(token) {
+    SweetAlert.swal({
+            title: "Are you sure you want to purchase 10 tokens?", 
+            text: "No refunds are available.", 
+            type: "warning", 
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            closeOnConfirm: false, 
+            closeOnCancel: false
+      }, function(isConfirm) {
+        if (isConfirm) {
+          $http.post('/api/charges', token)
+            .then(function (response) {
+              SweetAlert.swal("Success!", response.data.message, "success");
+            })
+            .catch(function(response) {
+              SweetAlert.swal("Something went wrong...", response.data.message, "error");
+            });
+        } else {
+          SweetAlert.swal("Cancelled!", "Your payment has been cancelled.", "error");
+        }
+      }
+    )};
 }
 
 angular
