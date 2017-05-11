@@ -3,10 +3,9 @@ StripeFormController.$inject = ['StripeCheckout', '$http', 'SweetAlert'];
 function StripeFormController(StripeCheckout, $http, SweetAlert) {
   const vm = this;
 
-  vm.description = 'hello world';
+  vm.description = '10 tokens';
+  vm.amount = 575;
   vm.doCheckout = doCheckout;
-  vm.alertMessage = '';
-  vm.noticeMessage = '';
   vm.confirm = confirm;
 
   var handler = StripeCheckout.configure({
@@ -18,8 +17,8 @@ function StripeFormController(StripeCheckout, $http, SweetAlert) {
 
   function doCheckout(token, args) {
     var options = {
-      description: '10 Tokens',
-      amount: 575
+      description: vm.description,
+      amount: vm.amount
     };
 
     handler.open(options)
