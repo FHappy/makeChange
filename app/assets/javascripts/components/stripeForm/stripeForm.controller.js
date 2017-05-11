@@ -1,6 +1,6 @@
-StripeFormController.$inject = ['StripeCheckout', '$http', 'SweetAlert'];
+StripeFormController.$inject = ['StripeCheckout', '$http', 'SweetAlert', 'UsersService'];
 
-function StripeFormController(StripeCheckout, $http, SweetAlert) {
+function StripeFormController(StripeCheckout, $http, SweetAlert, UsersService) {
   const vm = this;
 
   vm.description = '10 tokens';
@@ -30,8 +30,6 @@ function StripeFormController(StripeCheckout, $http, SweetAlert) {
         };
         vm.confirm(token);
       });
-      
-
   }
 
   function confirm(token) {
@@ -49,6 +47,7 @@ function StripeFormController(StripeCheckout, $http, SweetAlert) {
           $http.post('/api/charges', token)
             .then(function (response) {
               SweetAlert.swal("Success!", response.data.message, "success");
+              vm.user.token_amount += 5;
             })
             .catch(function(response) {
               SweetAlert.swal("Something went wrong...", response.data.message, "error");
