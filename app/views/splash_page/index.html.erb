@@ -1,1 +1,135 @@
-<h5>FUUUUUUUUUUUUUDGE</h5>
+<style>
+	.row {
+		margin-bottom: 0px;
+	}
+	.headerContainer {
+		background-image: url(assets/background/splashHands.png);
+		background-size: cover;
+		height: 50vh;
+	}
+	.information {
+		display: flex;
+		flex-direction: column;
+	}
+	.imageContainer {
+		margin-top: -300px;
+	}
+	.screenshot {
+		width: 600px;
+	}
+	.moreInfo {
+		margin-bottom: 50px;
+	}
+	.signUpLink {
+		position: relative;
+		z-index: 100;
+	}
+	.introText {
+		position: relative;
+		z-index: 100;
+		font-weight: bolder;
+	}
+	a {
+		text-decoration: none;
+		color: white;
+	}	
+
+</style>
+
+	<div class="navbar-fixed">
+		<nav class="transparent z-depth-0">
+		  <div class="nav-wrapper">
+		    <a href="#" class="brand-logo black-text">logo</a>
+		  </div>
+		</nav>
+	</div>
+
+
+
+
+<div class="row">
+	<div class="col s12 headerContainer">
+		<div class="col s6 offset-s3">
+				<h1 class="introText">makeChange</h1>
+				<h5 class="introText">
+					why keep your change
+					<br>
+					when you can <em>make</em> change with it
+				</h5>
+				<button class="btn waves-effect waves-light signUpLink" type="submit" name="action"><%= link_to('Join Us', new_user_session_path) %>
+				  <i class="material-icons right">play_arrow</i>
+				</button>
+
+
+		</div>
+	</div>
+</div>
+
+<div class="row moreInfo">
+		<div class="col s8 offset-s2">
+			<div class="imageContainer">
+				<%=image_tag("background/makeChangeLaptop.png", class: "screenshot")%>
+			</div>
+			<div class="row">
+
+				<div class="col s12">
+					<h2>HOW IT WORKS</h2>
+					<div class="row">
+						<div class="col l4 m12 s12">
+							<a class="btn btn-floating pulse left-align"><i class="material-icons">work</i></a>
+							<p class="left-align">
+							First you buy our tokens Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias minus vel suscipit, consectetur adipisicing elit. Alias minus vel suscipit.
+							</p>
+						</div>
+						<div class="col l4 m12 s12">
+							<a class="btn btn-floating pulse left-align"><i class="material-icons">menu</i></a>
+							<p class="left-align">
+							Next you find the charity you want to donate to lorem ipsum dolor sit amet, consectetur lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero repudiandae itaque, earum nobis temporibus.
+							</p>
+						</div>
+						<div class="col l4 m12 s12">
+							<a class="btn btn-floating pulse left-align"><i class="material-icons">trending_flat</i></a>
+							<p class="left-align">
+							Then all the proceeds are accumulated, once the goal has been met, your charity will recieve the donations! ipsum dolor sit amet, consectetur adipisicing elit. Cum, itaque amet odio quos holla lmao sweet.
+							</p>
+						</div>
+					</div>
+					<button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to('Already a Member?', new_user_session_path) %>
+					  <i class="material-icons right"></i>
+					</button>
+					<button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to('Sign Up!', new_user_registration_path) %>
+					  <i class="material-icons right"></i>
+					</button>
+				</div>
+
+			</div>
+		</div>
+		
+</div>
+
+<footer class="page-footer">
+	<div class="footer-copyright">
+		<div class="container center-align">
+			&copy; 2017 makeChange
+		</div>
+	</div>
+</footer>
+
+
+
+<script>
+	$(document).ready(function(){
+	  $('.slider').slider();
+	});	
+
+// Pause slider
+$('.slider').slider('pause');
+// Start slider
+$('.slider').slider('start');
+// Next slide
+$('.slider').slider('next');
+// Previous slide
+$('.slider').slider('prev');
+      
+</script>
+
