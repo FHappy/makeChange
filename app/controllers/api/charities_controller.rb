@@ -112,13 +112,25 @@ class Api::CharitiesController < ApplicationController
 		token = params[:token]
 		@charity = Charity.find_by ein: ein
 
-		if @charity
+		if @charity && @charity["time_started"]
 			@charity["token_amount"] += token
 
 			if @charity["token_amount"] == 10
+        @charity["total_earned"] += 5
 				@charity["token_amount"] = 0
-				@charity["total_earned"] += 5
-				@charity["is_active?"] = false
+				@charity["time_started"] = nil
+        goal_completion(@charity)
+			end
+
+		elsif @charity
+			@charity["time_started"] = (Time.new().to_f) * 1000
+			@charity["token_amount"] += token
+
+			if @charity["token_amount"] == 10
+        @charity["total_earned"] += 5
+				@charity["token_amount"] = 0
+				@charity["time_started"] = nil
+        goal_completion(@charity)
 			end
 
 		else
@@ -135,6 +147,12 @@ class Api::CharitiesController < ApplicationController
 			@charity["website"] = new_charity["website"]
 			@charity["token_amount"] = token
 			@charity["time_started"] = (Time.new().to_f) * 1000
+      if @charity["token_amount"] == 10
+        @charity["total_earned"] += 5
+				@charity["token_amount"] = 0
+				@charity["time_started"] = nil
+        goal_completion(@charity)
+			end
 		end
 
 		@charity.save()
@@ -146,6 +164,24 @@ class Api::CharitiesController < ApplicationController
 			user: current_user
 		head :ok
 
+	end
+
+	def refund
+		@charity = Charity.find_by ein: ein
+		@donations = @charity.donations.select { |donation| donation["active?"] }
+		@donations.each do |donation|
+			amount = donation.token_amount
+			user = donation.user
+			user["token_amount"] += amount
+			donation["active?"] = false
+			user.save()
+			donation.save()
+		end
+		@charity["token_amount"] = 0
+		@charity["time_started"] = nil
+		@charity.save()
+
+		render json: {charity: @charity}
 	end
 	
 
@@ -197,7 +233,6 @@ class Api::CharitiesController < ApplicationController
 			"Crime, Legal-Related": ActionController::Base.helpers.asset_path("makeChangeIcons/crime_legal-related.png"),
 			"Employment, Job-Related": ActionController::Base.helpers.asset_path("makeChangeIcons/employment.png"),
 			"Food, Agriculture and Nutrition": ActionController::Base.helpers.asset_path("makeChangeIcons/nutrition.png"),
-			# Housing icon missing
 			"Housing, Shelter": ActionController::Base.helpers.asset_path("makeChangeIcons/housing.png"),
 			"Public Safety, Disaster Preparedness and Relief": ActionController::Base.helpers.asset_path("makeChangeIcons/publicSafety.png"),
 			"Recreation, Sports, Leisure, Athletics": ActionController::Base.helpers.asset_path("makeChangeIcons/recreation.png"),

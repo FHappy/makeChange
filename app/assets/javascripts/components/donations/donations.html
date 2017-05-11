@@ -1,7 +1,8 @@
-<button class="btn blue" data-target="modal-{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
+<h6>Time Left: <span id="time-left-{{$ctrl.charity.ein}}"></span></h6>
+<button class="btn blue" data-target="{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
 <stripe-form ng-if="$ctrl.currentUser.token_amount === 0"></stripe-form>
 
-<div id="modal-{{$ctrl.charity.ein}}" class="modal">
+<div id="{{$ctrl.charity.ein}}" class="modal">
   <div class="modal-content">
     <h3 class="center-align">You Have {{ $ctrl.currentUser.token_amount }} Tokens</h3>
     <h4 class="center-align">Donate How Many?</h4>
