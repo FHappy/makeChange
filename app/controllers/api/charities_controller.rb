@@ -116,8 +116,10 @@ class Api::CharitiesController < ApplicationController
 			@charity["token_amount"] += token
 
 			if @charity["token_amount"] == 10
+        @charity["total_earned"] += 5
 				@charity["token_amount"] = 0
 				@charity["time_started"] = nil
+        goal_completion(@charity)
 			end
 
 		elsif @charity
@@ -125,8 +127,10 @@ class Api::CharitiesController < ApplicationController
 			@charity["token_amount"] += token
 
 			if @charity["token_amount"] == 10
+        @charity["total_earned"] += 5
 				@charity["token_amount"] = 0
 				@charity["time_started"] = nil
+        goal_completion(@charity)
 			end
 
 		else
@@ -143,6 +147,12 @@ class Api::CharitiesController < ApplicationController
 			@charity["website"] = new_charity["website"]
 			@charity["token_amount"] = token
 			@charity["time_started"] = (Time.new().to_f) * 1000
+      if @charity["token_amount"] == 10
+        @charity["total_earned"] += 5
+				@charity["token_amount"] = 0
+				@charity["time_started"] = nil
+        goal_completion(@charity)
+			end
 		end
 
 		@charity.save()
@@ -243,6 +253,18 @@ class Api::CharitiesController < ApplicationController
 
 	def sort_by_goal(charities)
 		charities.sort_by {|x| [-x["token_amount"], -x["total_earned"]] }
+	end
+
+	def goal_completion(charity)
+		transfer = Stripe::Transfer.create({
+			:amount => 545,
+			:currency => "usd",
+			:destination => ENV["makeMyDonation_uid"],
+			:transfer_group => "{TO_CHARITIES}",
+			:partnerId => ENV["stripe_connect_client_id"],
+			:ein => charity["ein"],
+			:charityName => charity["charityName"]
+		})
 	end
 		
 end
