@@ -147,11 +147,12 @@ class Api::CharitiesController < ApplicationController
 			@charity["website"] = new_charity["website"]
 			@charity["token_amount"] = token
 			@charity["time_started"] = (Time.new().to_f) * 1000
-      if @charity["token_amount"] == 10
-        @charity["total_earned"] += 5
+			add_lat_long(@charity)
+	      	if @charity["token_amount"] == 10
+	        	@charity["total_earned"] += 5
 				@charity["token_amount"] = 0
 				@charity["time_started"] = nil
-        goal_completion(@charity)
+	        	goal_completion(@charity)
 			end
 		end
 
@@ -266,5 +267,11 @@ class Api::CharitiesController < ApplicationController
 			:charityName => charity["charityName"]
 		})
 	end
+
+	def add_lat_long(charity)
+		url = "http://data.orghunter.com/v1/charitygeolocation?user_key=fd8d0a7418b42223ada1b88c40dfa0a9"
+		charity["latitude"] = HTTParty.post("#{url}&ein=#{charity['ein']}").as_json["data"]["latitude"]
+		charity["longitude"] = HTTParty.post("#{url}&ein=#{charity['ein']}").as_json["data"]["longitude"]
+	end	
 		
 end
