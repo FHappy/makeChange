@@ -133,7 +133,7 @@ class Api::CharitiesController < ApplicationController
 			@charity["missionStatement"] = new_charity["missionStatement"]
 			@charity["website"] = new_charity["website"]
 			@charity["token_amount"] = token
-			@charity["time_started"] = Time.new()
+			@charity["time_started"] = (Time.new().to_f) * 1000
 		end
 
 		@charity.save()

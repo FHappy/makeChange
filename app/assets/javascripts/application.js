@@ -22,6 +22,8 @@
 //= require angular-socialshare/dist/angular-socialshare
 //= require sweetalert/lib/sweet-alert
 //= require angular-sweetalert/SweetAlert
+//= require jquery.plugin.js
+//= require jquery.countdown.js
 //= require_tree ./channels
 //= require_self
 //= require_tree .
