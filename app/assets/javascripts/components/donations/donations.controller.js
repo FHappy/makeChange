@@ -15,12 +15,23 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
   	vm.charity = null;
 	vm.$onInit = function() {
   		getCurrentUser();
-  		vm.$onChanges = function(){
-  			if (vm.charity.time_started) {
-				var end = new Date(vm.charity.time_started);
-				end.setDate(end.getDate() + 3);
-				$(`#time-left-${vm.charity.ein}`).countdown({until: end});
-			}
+  		if (vm.charity && vm.charity.time_started) {
+			var end = new Date(vm.charity.time_started);
+			// end.setDate(end.getDate() + 3);
+			setTimeout(function(){
+				$(`#time-left-${vm.charity.ein}`).countdown({until: end, alwaysExpire: true, onExpiry: });
+			}, 500)
+		}
+		else {
+	  		vm.$onChanges = function(){
+	  			if (vm.charity.time_started) {
+					var end = new Date(vm.charity.time_started);
+					// end.setDate(end.getDate() + 3);
+					setTimeout(function(){
+						$(`#time-left-${vm.charity.ein}`).countdown({until: end, alwaysExpire: true, onExpiry: });
+					}, 500)
+				}
+	  		}
   		}
   	}
 
@@ -31,7 +42,6 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 	};
 	consumer.subscribe(callback)
 		.then(function() {
-			console.log('donation made?');
 		});
 
   	function donate(ein, token) {
@@ -86,6 +96,10 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 			.then(function(response) {
 				vm.charity = response.data.charity;
 			});
+	}
+
+	function refund() {
+		
 	}
 	
 }

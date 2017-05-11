@@ -117,7 +117,7 @@ class Api::CharitiesController < ApplicationController
 
 			if @charity["token_amount"] == 10
 				@charity["token_amount"] = 0
-				@charity["is_active?"] = false
+				@charity["is_active?"] = nil
 			end
 
 		elsif @charity
@@ -127,7 +127,7 @@ class Api::CharitiesController < ApplicationController
 
 			if @charity["token_amount"] == 10
 				@charity["token_amount"] = 0
-				@charity["is_active?"] = false
+				@charity["is_active?"] = nil
 			end
 
 		else
