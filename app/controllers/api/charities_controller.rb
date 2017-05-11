@@ -258,7 +258,7 @@ class Api::CharitiesController < ApplicationController
 	def goal_completion(charity)
 		binding.pry
 		transfer = Stripe::Transfer.create({
-			:amount => 545,
+			:amount => 500,
 			:currency => "usd",
 			:destination => ENV["makeMyDonation_uid"],
 			:transfer_group => "{TO_CHARITIES}",
