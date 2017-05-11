@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post "api/comments" => "api/comments#create", as: "comments_create"
   delete "api/comments/:id" => "api/comments#destroy", as: "comments_destroy"
   patch "api/comments" => "api/comments#update", as: "comments_update"
+  get "api/charges/goal/:ein" => "api/charges#goal_completion", as: "charges_goal"
 
   namespace :api do
     resources :charges, only: [:index, :create]

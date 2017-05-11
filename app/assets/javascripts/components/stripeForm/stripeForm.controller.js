@@ -4,7 +4,7 @@ function StripeFormController(StripeCheckout, $http, SweetAlert, UsersService) {
   const vm = this;
 
   vm.description = '10 tokens';
-  vm.amount = 575;
+  vm.amount = 545;
   vm.doCheckout = doCheckout;
   vm.confirm = confirm;
 

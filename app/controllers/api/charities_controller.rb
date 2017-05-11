@@ -117,6 +117,7 @@ class Api::CharitiesController < ApplicationController
 
 			if @charity["token_amount"] == 10
 				@charity["token_amount"] = 0
+				@charity["total_earned"] += 5
 				@charity["is_active?"] = false
 			end
 
@@ -217,6 +218,18 @@ class Api::CharitiesController < ApplicationController
 
 	def sort_by_goal(charities)
 		charities.sort_by {|x| [-x["token_amount"], -x["total_earned"]] }
+	end
+
+	def goal_completion(charity)
+		transfer = Stripe::Transfer.create({
+			:amount => 545,
+			:currency => "usd",
+			:destination => ENV["makeMyDonation_uid"],
+			:transfer_group => "{TO_CHARITIES}",
+			:partnerId => ENV["stripe_connect_client_id"],
+			:ein => charity["ein"],
+			:charityName => charity["charityName"]
+		})
 	end
 		
 end

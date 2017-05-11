@@ -36,14 +36,19 @@ class Api::ChargesController < ApplicationController
 
 
   def goal_completion
+    ein = params["ein"]
+    @charity = Charity.find(ein: ein)
+    charityName = @charity["charityName"]
+
     transfer = Stripe::Transfer.create({
       :amount => 545,
       :currency => "usd",
       :destination => ENV["makeMyDonation_uid"],
-      :transfer_group => "{TO_CHARITIES}"
+      :transfer_group => "{TO_CHARITIES}",
+      :partnerId => ENV["stripe_connect_client_id"],
+      :ein => ein,
+      :charityName => charityName
     })
-
-
   end
   
 end
