@@ -30,6 +30,9 @@ function CharitiesIndexController(CharitiesService, NgMap) {
 	vm.loading = false;
 	vm.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDqvhqBcDAJrmCiaSkp_6SfUET_rvDP2l8"
 	vm.mapCenter = [37.09024, -95.712891];
+	vm.showDetail = showDetail;
+	vm.charityInfoWindow = null;
+	vm.hideDetail = hideDetail;
 
 	function activate() {
 		CharitiesService
@@ -39,8 +42,21 @@ function CharitiesIndexController(CharitiesService, NgMap) {
 				vm.image = response.data.image;
 				vm.backgroundImageOne = response.data.backgroundImageOne;
 				vm.backgroundImageTwo = response.data.backgroundImageTwo;
-				console.log(vm.mapCenter);
 			});
+	}
+
+	NgMap.getMap()
+		.then(function(map) {
+			vm.map = map;
+		});
+
+	function showDetail(e, charity) {
+		vm.charityInfoWindow = charity;
+		vm.map.showInfoWindow('charity-iw', charity.ein);
+	}
+
+	function hideDetail() {
+		vm.map.hideInfoWindow('charity-iw');
 	}
 
 	function searchByName(page) {
