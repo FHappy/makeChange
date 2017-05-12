@@ -15,8 +15,6 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel,
   	vm.decrementToken = decrementToken;
   	vm.progressBarWidth = progressBarWidth;
   	vm.progressColor = progressColor;
-		vm.showSwal = showSwal;
-
 
 	vm.$onInit = function() {
 		getCurrentUser();
@@ -119,11 +117,6 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel,
 		}
 	}
 	
-	function showSwal() {
-		SweetAlert.swal({
-			
-		})
-	}
 	$scope.$on("$destroy", function() {
 		$(`#time-left-${vm.charity.ein}`).countdown("destroy");
 	});
