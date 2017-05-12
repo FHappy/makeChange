@@ -1,41 +1,41 @@
+
+
 angular
   .module("makeChangeApp")
   .controller("DonationsController", DonationsController);
 
-DonationsController.$inject = ['CharitiesService', 'UsersService', 'ActionCableChannel'];
+DonationsController.$inject = ['CharitiesService', 'UsersService', 'ActionCableChannel', "$timeout", "$scope"];
 
-function DonationsController(CharitiesService, UsersService, ActionCableChannel) {
+function DonationsController(CharitiesService, UsersService, ActionCableChannel, $timeout, $scope) {
   	var vm = this;
   	vm.donate = donate;
   	vm.tokenAmount = 1;
   	vm.currentUser = null;
   	vm.incrementToken = incrementToken;
   	vm.decrementToken = decrementToken;
-  	vm.charity = null;
   	vm.progressBarWidth = progressBarWidth;
   	vm.progressColor = progressColor;
 	vm.$onInit = function() {
-  		getCurrentUser();
-  		if (vm.charity && vm.charity.time_started) {
+		getCurrentUser();
+		if (vm.charity && vm.charity.time_started) {
 			var end = new Date(vm.charity.time_started);
 			end.setDate(end.getDate() + 3);
-			setTimeout(function(){
-				$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true, layout: '<span class="hide-on-small-only">Only {dn} {dl}, {hn} {hl}, {mn} {ml}, {sn} {sl} left!</span><span class="hide-on-med-and-up">Only {dn}:{hn}:{mn}:{sn} Left!</span>'});
-			}, 500)
+			$timeout(function() {
+				$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true, layout: '<span class="hide-on-small-only">Only {dn} {dl}, {hn} {hl}, {mn} {ml}, {sn} {sl} left!</span><span class="hide-on-med-and-up">Only {dn}:{hn}:{mn}:{sn} Left!</span>'});				
+			}, 500);
 		}
-		else {
-	  		vm.$onChanges = function(){
-	  			if (vm.charity.time_started) {
+		else{
+			vm.$onChanges = function(){
+				if (vm.charity.time_started) {
 					var end = new Date(vm.charity.time_started);
 					end.setDate(end.getDate() + 3);
-					setTimeout(function(){
-						$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true, layout: '<span class="hide-on-small-only">Only {dn} {dl}, {hn} {hl}, {mn} {ml}, {sn} {sl} left!</span><span class="hide-on-med-and-up">Only {dn}:{hn}:{mn}:{sn} Left!</span>'});
-					}, 500)
+					$timeout(function() {
+						$(`#time-left-${vm.charity.ein}`).countdown({until: end, onExpiry: refund, alwaysExpire: true, layout: '<span class="hide-on-small-only">Only {dn} {dl}, {hn} {hl}, {mn} {ml}, {sn} {sl} left!</span><span class="hide-on-med-and-up">Only {dn}:{hn}:{mn}:{sn} Left!</span>'});				
+					}, 500);
 				}
-	  		}
-  		}
+			}
+		}
   	}
-
 	var consumer = new ActionCableChannel("DonationsChannel");
 	var callback = function(response) {
 		getCharity(vm.charity.ein);
@@ -116,4 +116,7 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel)
 		}
 	}
 	
+	$scope.$on("$destroy", function() {
+		$(`#time-left-${vm.charity.ein}`).countdown("destroy");
+	});
 }
