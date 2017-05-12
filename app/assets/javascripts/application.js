@@ -24,12 +24,13 @@
 //= require angular-sweetalert/SweetAlert
 //= require jquery.plugin.js
 //= require jquery.countdown.js
+//= require ng-map
 //= require_tree ./channels
 //= require_self
 //= require_tree .
 
 angular
-  .module('makeChangeApp', ['ui.router', 'stripe.checkout', 'ngActionCable', '720kb.socialshare', 'oitozero.ngSweetAlert'])
+  .module('makeChangeApp', ['ui.router', 'stripe.checkout', 'ngActionCable', '720kb.socialshare', 'oitozero.ngSweetAlert', 'ngMap'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('home', {
