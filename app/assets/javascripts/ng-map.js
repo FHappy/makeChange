@@ -3314,7 +3314,7 @@ angular.module('ngMap', []);
         el.style.display = 'block';
       }
       if (getStyle(el, 'height').match(/^(0|auto)/)) {
-        el.style.height = '300px';
+        el.style.height = '550px';
       }
     }
   };
