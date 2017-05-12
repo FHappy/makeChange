@@ -38,6 +38,12 @@
 	.headerLogo {
 		background-color: black;
 	}
+/*	@media (max-width: 1200px) {
+		.moreInfoContent {
+			display: flex;
+			flex-direction: column;
+		}
+	}	*/
 </style>
 
 	<div class="navbar-fixed">
@@ -71,40 +77,42 @@
 	</div>
 </div>
 
-
-
 <div class="row moreInfo">
 		<div class="col s12">
-			<div class="row valign-wrapper">
+			<!-- primary -->
+			<div class="row valign-wrapper moreInfoContent">
 				<div class="col l6 m12 s12">
-				<%=image_tag("background/makeChangeLaptop.png", class: "screenshot")%>
+					<%=image_tag("background/makeChangeLaptop.png", class: "screenshot")%>
 				</div>
-				<div class="col l6 m12 s12 left-align">
-					<a class="btn btn-floating pulse left-align"><i class="material-icons">menu</i></a>
+				<div class="col l5 m12 s12 left-align">
+					<a class="btn btn-floating pulse left-align"><i class="material-icons">work</i></a>
 					<p class="left-align">
-					Next you find the charity you want to donate to lorem ipsum dolor sit amet, consectetur lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero repudiandae itaque, earum nobis temporibus.
+					First you purchase tokens. Tokens are the way in which we can communicate and transfer your donations to charities all over the nation.
 					</p>
 				</div>
 			</div>
-			<div class="row valign-wrapper">
-				<div class="col l6 m12 s12">
+			<!-- secondary -->
+			<div class="row valign-wrapper moreInfoContent">
+				<div class="col l5 m12 s12">
 					<a class="btn btn-floating pulse right-align"><i class="material-icons">menu</i></a>
 					<p class="right-align">
-					Next you find the charity you want to donate to lorem ipsum dolor sit amet, consectetur lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero repudiandae itaque, earum nobis temporibus.
+					Next you find the charity you want to donate to. We've taken the time to make searching for your favorite charities as seemless as possible, with the ability to search by name, catagory, and locations!
 					</p>
 				</div>
 				<div class="col l6 m12 s12">
-				<%=image_tag("background/makeChangeLaptop.png", class: "screenshot")%>
+					<%=image_tag("background/makeChangeLaptop.png", class: "screenshot")%>
 				</div>
 			</div>
-			<div class="row valign-wrapper">
+			<!-- tertiary -->
+			<div class="row valign-wrapper moreInfoContent">
 				<div class="col l6 m12 s12">
-				<%=image_tag("background/makeChangeLaptop.png", class: "screenshot")%>
+					<%=image_tag("background/makeChangeLaptop.png", class: "screenshot")%>
 				</div>
-				<div class="col l6 m12 s12">
-					<a class="btn btn-floating pulse left-align"><i class="material-icons">menu</i></a>
+				<div class="col l5 m12 s12">
+					<a class="btn btn-floating pulse left-align"><i class="material-icons">trending_flat</i></a>
 					<p class="left-align">
-					Next you find the charity you want to donate to lorem ipsum dolor sit amet, consectetur lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero repudiandae itaque, earum nobis temporibus.
+					Finally, once the goal has been met, all the proceeds are accumulated and your charity will recieve the donations!
+					To make sure your charities donations are met, make sure to share the charities donation page via facebook and twitter!
 					</p>
 				</div>
 			</div>
@@ -119,22 +127,4 @@
 		</div>
 	</div>
 </footer>
-
-
-
-<script>
-	$(document).ready(function(){
-	  $('.slider').slider();
-	});	
-
-// Pause slider
-$('.slider').slider('pause');
-// Start slider
-$('.slider').slider('start');
-// Next slide
-$('.slider').slider('next');
-// Previous slide
-$('.slider').slider('prev');
-      
-</script>
 
