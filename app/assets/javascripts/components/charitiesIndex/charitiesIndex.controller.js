@@ -3,9 +3,9 @@ angular
 	.controller("CharitiesIndexController", CharitiesIndexController);
 
 
-CharitiesIndexController.$inject = ["CharitiesService", "NgMap"];
+CharitiesIndexController.$inject = ["CharitiesService", "NgMap", "$timeout"];
 
-function CharitiesIndexController(CharitiesService, NgMap) {
+function CharitiesIndexController(CharitiesService, NgMap, $timeout) {
 	var vm = this;
 
 	vm.charities = [];
@@ -48,6 +48,13 @@ function CharitiesIndexController(CharitiesService, NgMap) {
 	NgMap.getMap()
 		.then(function(map) {
 			vm.map = map;
+			google.maps.event.trigger(map, "resize");
+			$('#modal1').modal({
+		ready: function(modal, trigger) {
+			google.maps.event.trigger(map, "resize");
+			modal.css("width", "100%");
+		}
+	});
 		});
 
 	function showDetail(e, charity) {
