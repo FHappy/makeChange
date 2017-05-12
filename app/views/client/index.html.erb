@@ -9,7 +9,6 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application', "https://js.stripe.com/v2/", "https://checkout.stripe.com/checkout.js" %>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"
-
                                    src="src/js/angular-socialshare.js"
                                    src="http://maps.google.com/maps/api/js"></script>
   </head>
@@ -21,13 +20,13 @@
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <a ui-sref="charitiesIndex" class="brand-logo"><%= image_tag 'MAKECHANGE', class: "logo-image" %></a>
+        <a ui-sref="charitiesIndex" class="brand-logo"><img class="logo-image" ng-src="{{controller.logo}}" alt=""></a>
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
         <% if user_signed_in? %>
           <li><a ui-sref="charitiesIndex">charity search</a></li>
           <li>//</li>
-          <li><%= link_to 'home', root_path %></li>
+          <li><%= link_to 'Your Charities', root_path %></li>
           <li>//</li>
           <li><a href="#" data-activates="slide-out" class="sideMenu" ng-click="controller.currentUser()">user menu</a></li>
         <% end %>
@@ -50,9 +49,8 @@
       <li>
         <div class="userView">
           <div class="background teal lighten-3">
-          <img ng-src="{{controller.user.img_url}}" alt="">
           </div>
-          <a href="#!user"><img class="circle" src=""></a>
+          <a href="#!user"><img class="circle" ng-src="{{controller.user.img_url}}"></a>
             <span class="black-text name">{{controller.user.username}}</span>
             <span class="black-text email">{{controller.user.email}}</span>
             <hr>

@@ -12,6 +12,10 @@
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true %>
       </div>
+      <div class="field">
+        <%= f.label 'User Image Url' %><br />
+        <%= f.text_field :img_url, autofocus: true, placeholder: "Add link to profile img here.", :value => nil %>
+      </div>
     </div>
     <hr>
     <div class="z-depth-2">

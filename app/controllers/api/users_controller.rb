@@ -3,7 +3,13 @@ class Api::UsersController < ApplicationController
 		@user = current_user
 		@user_charities = @user.charities.uniq
 
-		render json: { user: @user, charities: @user_charities, userHomeBackgroundImage: ActionController::Base.helpers.asset_path("background/userHands.png"), image: image}
+		render json: { 
+			user: @user, 
+			charities: @user_charities, 
+			userHomeBackgroundImage: ActionController::Base.helpers.asset_path("background/userHands.png"), 
+			image: image,
+			logo: ActionController::Base.helpers.asset_path("logo.png")
+		}
 	end
 
 	def image
