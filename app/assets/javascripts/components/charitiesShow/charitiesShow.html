@@ -24,7 +24,7 @@
 					<img ng-src="{{ $ctrl.image }}" style="width: 150px;">
 					<h2 class="flow-text"><strong>{{ $ctrl.charity.charityName}}</strong></h2>
 					<h4 class="flow-text">{{ $ctrl.charity.city }}, {{ $ctrl.charity.state }} {{ $ctrl.charity.zip_code }}</h4>
-					<h6>{{ $ctrl.charity.category }}</h6>
+					<h6 class="chip grey lighten-1">{{ $ctrl.charity.category }}</h6>
 					<p ng-if="$ctrl.charity.missionStatement">{{ $ctrl.charity.missionStatement }}</p>
 					<p></p>
 					<a ng-href="{{ $ctrl.charity.url }}" target="_blank" class="websiteLink">Website</a>
