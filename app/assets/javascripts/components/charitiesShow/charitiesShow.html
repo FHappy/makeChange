@@ -40,7 +40,7 @@
 		</div>
 	</form>
 </div>
-<a href="#" class="btn btn-medium" 
+<a href="#" class="btn btn-medium blue darken-3" 
 	socialshare 
 	socialshare-provider="facebook"
 	socialshareUrl="http://make-change.herokuapp.com/charities/{{$ctrl.charity.ein}}"
@@ -49,12 +49,13 @@
 	<i class="fa fa-facebook" aria-hidden="true"></i> facebook
 </a>
 
-<a href="#" class="btn btn-medium" 
+<a href="#" class="btn btn-medium blue lighten-2" 
 	socialshare
 	socialshare-provider="twitter"
 	socialshareUrl="http://make-change.herokuapp.com/charities/{{$ctrl.charity.ein}}"
 	socialshare-title="This app is incredible!"
-	socialshare-caption="Come contribute to {{$ctrl.charity.charityName}}!">
+	socialshare-caption="Come contribute to {{$ctrl.charity.charityName}}!"
+	socialshare-hashtags="nonprofit, makeChange, {{$ctrl.charity.charityName}}">
 	<i class="fa fa-twitter" aria-hidden="true"></i> twitter 
 </a>
 
