@@ -271,7 +271,6 @@ class Api::CharitiesController < ApplicationController
 	end
 
 	def goal_completion(charity)
-		binding.pry
 		transfer = Stripe::Transfer.create({
 			:amount => 500,
 			:currency => "usd",

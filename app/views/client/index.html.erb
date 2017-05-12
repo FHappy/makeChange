@@ -72,14 +72,52 @@
     </ul>
   </div> 
 </div>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
 <div class="row clientView">
     <div class="col s12 infoWrapper">
       <ui-view></ui-view>
     </div>
 </div>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+<footer class="page-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text left-align">makeChange</h5>
+        <p class="grey-text text-lighten-4 left-align">
+          When it comes to charity, every little bit counts! If you and a few other friends can scrounge together a few cents each, you can launch a successful fundraising campaign for the charity that matters most to you.Our site is built with the idea that people are more likely to donate to a charity when there is an achievable goal and sense of urgency. If you have some spare change, you can make change.
+        </p>
+        <p>
+          <strong>Disclaimer: You will not be able to declare ANY donated funds on your tax return.</strong>
+        </p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text left-align">Learn More:</h5>
+        <div class="col s3 offset-s1">
+          <p class="left-align">Team:</p>
+          <ul class="left-align">
+            <li><a ng-href="https://liamtrobinson.bitballoon.com" class="grey-text text-darken-1 hoverable" target="_blank">Liam</a></li>
+            <li><a ng-href="https://github.com/fhappy" class="grey-text text-darken-1 hoverable" target="_blank">Hassan</a></li>
+            <li><a ng-href="https://www.linkedin.com/in/randygaleano/" class="grey-text text-darken-1 hoverable" target="_blank">Randy</a></li>
+          </ul>
+        </div>
+        <div class="col s3 offset-s1">
+          <p><a ng-href="http://orghunter.com/about-us" class="left-align grey-text text-darken-1 hoverable" target="_blank">OrgHunter</a></p>
+        </div>
+        <div class="col s3 offset-s1">
+          <p><%= link_to "makeChange", root_path, target: "_self", class: "grey-text text-darken-1 left-align hoverable" %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container center-align">
+      &copy; 2017 makeChange
+    </div>
+  </div>
+</footer>
 
   <script>
     $( document ).ready(function() {

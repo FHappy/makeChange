@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   delete "api/comments/:id" => "api/comments#destroy", as: "comments_destroy"
   patch "api/comments" => "api/comments#update", as: "comments_update"
   get "api/charities/refund/:ein" => "api/charities#refund", as: "charities_refund"
+  get "/" => "splash_page#index", as: "home"
 
   namespace :api do
     resources :charges, only: [:index, :create]

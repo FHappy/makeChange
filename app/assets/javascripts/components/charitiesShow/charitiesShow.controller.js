@@ -8,11 +8,7 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 	var vm = this;
 
 	vm.charity = null;
-	vm.donate = donate;
 	vm.currentUser = null;
-	vm.tokenAmount = 1;
-	vm.incrementToken = incrementToken;
-	vm.decrementToken = decrementToken;
 	vm.newComment = {};
 	vm.comments = null;
 	vm.createComment = createComment;
@@ -26,7 +22,6 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 	function activate() {
 		getCurrentUser();
 		getCharity();
-		console.log(vm.googleMapsUrl);
 	}
 
 	activate();
@@ -40,36 +35,6 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 		.then(function() {
 			console.log('it worked!');
 		});
-		
-	function donate(ein, token) {
-		CharitiesService.donate(ein, token)
-			.then(function resolve(response) {
-				vm.tokenAmount = 1;
-				getCurrentUser();
-				getCharity();
-			}, function reject(response) {
-
-			});
-	}
-
-	function incrementToken() {
-		var userTokens = vm.currentUser.token_amount;
-		if (vm.charity.created_at) {
-			var charityTokensLeft = 10 - vm.charity.token_amount;
-		} else {
-			var charityTokensLeft = 10 - vm.tokenAmount;
-		}
-		if (userTokens > vm.tokenAmount && charityTokensLeft > vm.tokenAmount) {
-			vm.tokenAmount++;
-		}
-	}
-
-	function decrementToken() {
-		var userTokens = vm.currentUser.token_amount;
-		if (vm.tokenAmount > 1) {
-			vm.tokenAmount--;
-		}
-	}
 
 	function getCurrentUser() {
 		UsersService
@@ -85,8 +50,7 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 			.then(function(response) {
 				vm.charity = response.data.charity;
 				vm.comments = response.data.comments;
-				vm.image = response.data.image[vm.charity.category];
-				console.log(vm.charity); 
+				vm.image = response.data.image[vm.charity.category]; 
 			});
 	}
 
