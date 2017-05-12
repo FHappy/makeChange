@@ -30,7 +30,7 @@ class Api::CharitiesController < ApplicationController
 		@org_charities.each do |charity|
 			add_lat_long(charity)
 		end
-
+		
 		render json: {
 			suggested: sort_by_goal(@suggested),
 			charities: @org_charities,
