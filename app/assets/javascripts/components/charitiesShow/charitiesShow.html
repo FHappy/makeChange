@@ -9,6 +9,17 @@
 			<p></p>
 			<a ng-href="{{ $ctrl.charity.url }}" target="_blank" class="websiteLink">Website</a>
 		</div>
+
+		<div map-lazy-load="https://maps.google.com/maps/api/js"
+			map-lazy-load-params="{{$ctrl.googleMapsUrl}}" class="map">
+			<ng-map center="41,-87" zoom="3">
+				<div>
+					<marker position="{{ $ctrl.charity.latitude }}, {{ $ctrl.charity.longitude }}">
+					</marker>
+				</div>
+			</ng-map>
+		</div>
+
     <donations charity="$ctrl.charity"></donations>
 	</div>
 </div>
@@ -32,10 +43,20 @@
 <a href="#" class="btn btn-medium" 
 	socialshare 
 	socialshare-provider="facebook"
-	socialshareUrl="http://make-change.herokuapp.com"
+	socialshareUrl="http://make-change.herokuapp.com/charities/{{$ctrl.charity.ein}}"
 	socialshare-title="This app is incredible!"
-	socialshare-caption="Come contribute to {{$ctrl.charity.charityName}}!"
-	>Facebook</a>
+	socialshare-caption="Come contribute to {{$ctrl.charity.charityName}}!">
+	<i class="fa fa-facebook" aria-hidden="true"></i> facebook
+</a>
+
+<a href="#" class="btn btn-medium" 
+	socialshare
+	socialshare-provider="twitter"
+	socialshareUrl="http://make-change.herokuapp.com/charities/{{$ctrl.charity.ein}}"
+	socialshare-title="This app is incredible!"
+	socialshare-caption="Come contribute to {{$ctrl.charity.charityName}}!">
+	<i class="fa fa-twitter" aria-hidden="true"></i> twitter 
+</a>
 
 <div class="row" ng-if="$ctrl.charity.created_at">
 	<h1>COMMENTS</h1>

@@ -38,7 +38,9 @@ charity1 = Charity.create(
 	missionStatement: "",
 	website: "",
 	total_earned: 20,
-	is_active?: false
+	is_active?: false,
+	latitude: 30.378584,
+    longitude: -89.100052
 	)
 charity2 = Charity.create(
 	ein: "010352636",
@@ -51,7 +53,9 @@ charity2 = Charity.create(
 	missionStatement: "Domestic violence resource center offering safe and accessible services to victims 24 hotline, emergency shelter, outreach and court advocacy, school education and prevention.",
 	website: "www.familycrisis.org",
 	total_earned: 25,
-	is_active?: false
+	is_active?: false,
+	latitude: 43.660000,
+    longitude: -70.269997
 	)
 charity3 = Charity.create(
 	ein: "741109881",
@@ -64,7 +68,9 @@ charity3 = Charity.create(
 	missionStatement: "",
 	website: "",
 	total_earned: 10,
-	is_active?: false
+	is_active?: false,
+	latitude: 28.952454,
+    longitude: -97.982849
 	)
 charity4 = Charity.create(
 	ein: "731623980",
@@ -77,7 +83,9 @@ charity4 = Charity.create(
 	missionStatement: "",
 	website: "",
 	total_earned: 30,
-	is_active?: false
+	is_active?: false,
+	latitude: 35.221478,
+    longitude: -97.445885
 	)
 charity5 = Charity.create(
 	ein: "560547476",
@@ -90,7 +98,9 @@ charity5 = Charity.create(
 	missionStatement: "To eliminate racism, empower women and promote peace, justice, freedom and dignity for all through programs that balance disparities in health, childcare, education and employment.",
 	website: "www.ywcaofasheville.org",
 	total_earned: 35,
-	is_active?: false
+	is_active?: false,
+	latitude: 35.587442,
+    longitude: -82.560113
 	)
 charity6 = Charity.create(
 	ein: "351408887",
@@ -103,7 +113,9 @@ charity6 = Charity.create(
 	missionStatement: "",
 	website: "",
 	total_earned: 10,
-	is_active?: false
+	is_active?: false,
+	latitude: 40.192673,
+    longitude: -85.391785
 	)
 Comment.create(
 	user_id: user1.id,

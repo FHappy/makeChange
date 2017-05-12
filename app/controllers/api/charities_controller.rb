@@ -7,9 +7,11 @@ class Api::CharitiesController < ApplicationController
 	def show
 		@charity = Charity.find_by ein: ein
 		if @charity
+			add_lat_long(@charity)
 			render json: { charity: @charity, comments: @charity.comments, image: image }
 		else
 			@charity = HTTParty.get("#{url}&ein=#{ein}").as_json["data"][0]
+			add_lat_long(@charity)
 			render json: { charity: @charity, image: image }
 		end
 	end
@@ -23,11 +25,15 @@ class Api::CharitiesController < ApplicationController
 			end
 		end
 		
-		@org_charities = HTTParty.get("#{url}&searchTerm=#{query}&start=#{page}")
+		@org_charities = HTTParty.get("#{url}&searchTerm=#{query}&start=#{page}")["data"]
+		@org_charities = de_dupe(@org_charities)
+		@org_charities.each do |charity|
+			add_lat_long(charity)
+		end
 		
 		render json: {
 			suggested: sort_by_goal(@suggested),
-			charities: de_dupe(@org_charities["data"]),
+			charities: @org_charities,
 			image: image
 		}
 
@@ -74,8 +80,12 @@ class Api::CharitiesController < ApplicationController
 				@suggested << charity
 			end
 		end
+		@org_charities = de_dupe(@org_charities["data"])
+		@org_charities.each do |charity|
+			add_lat_long(charity)
+		end
 
-		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities["data"]), image: image  }
+		render json: { suggested: sort_by_goal(@suggested), charities: @org_charities, image: image  }
 	end
 
   	def search_location
@@ -104,8 +114,12 @@ class Api::CharitiesController < ApplicationController
 			end
 		end
 		@suggested.uniq!
+		@org_charities = de_dupe(@org_charities)
+		@org_charities.each do |charity|
+			add_lat_long(charity)
+		end
 
-		render json: { suggested: sort_by_goal(@suggested), charities: de_dupe(@org_charities) }
+		render json: { suggested: sort_by_goal(@suggested), charities: @org_charities }
   	end
   
 	def donate
@@ -147,11 +161,12 @@ class Api::CharitiesController < ApplicationController
 			@charity["website"] = new_charity["website"]
 			@charity["token_amount"] = token
 			@charity["time_started"] = (Time.new().to_f) * 1000
-      if @charity["token_amount"] == 10
-        @charity["total_earned"] += 5
+			add_lat_long(@charity)
+	      	if @charity["token_amount"] == 10
+	        	@charity["total_earned"] += 5
 				@charity["token_amount"] = 0
 				@charity["time_started"] = nil
-        goal_completion(@charity)
+	        	goal_completion(@charity)
 			end
 		end
 
@@ -269,5 +284,12 @@ class Api::CharitiesController < ApplicationController
 			}
 		})
 	end
+
+	def add_lat_long(charity)
+		url = "http://data.orghunter.com/v1/charitygeolocation?user_key=fd8d0a7418b42223ada1b88c40dfa0a9"
+		result = HTTParty.post("#{url}&ein=#{charity['ein']}").as_json["data"]
+		charity["latitude"] = result["latitude"]	
+		charity["longitude"] = result["longitude"]	
+	end	
 		
 end

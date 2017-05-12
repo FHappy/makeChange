@@ -2,9 +2,9 @@ angular
 	.module("makeChangeApp")
 	.controller("CharitiesShowController", CharitiesShowController);
 
-CharitiesShowController.$inject = ["$stateParams", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel"];
+CharitiesShowController.$inject = ["$stateParams", "CharitiesService", "UsersService", "CommentsService", "ActionCableChannel", "NgMap"];
 
-function CharitiesShowController($stateParams, CharitiesService, UsersService, CommentsService, ActionCableChannel) {
+function CharitiesShowController($stateParams, CharitiesService, UsersService, CommentsService, ActionCableChannel, NgMap) {
 	var vm = this;
 
 	vm.charity = null;
@@ -21,10 +21,12 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 	vm.editComment = editComment;
 	vm.updateComment = updateComment; 	
 	vm.image = null;
+	vm.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDqvhqBcDAJrmCiaSkp_6SfUET_rvDP2l8"
 
 	function activate() {
 		getCurrentUser();
 		getCharity();
+		console.log(vm.googleMapsUrl);
 	}
 
 	activate();
@@ -33,6 +35,7 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 	var callback = function(response) {
 		vm.comments.push(response.comment);
 	};
+
 	consumer.subscribe(callback)
 		.then(function() {
 			console.log('it worked!');
@@ -82,7 +85,8 @@ function CharitiesShowController($stateParams, CharitiesService, UsersService, C
 			.then(function(response) {
 				vm.charity = response.data.charity;
 				vm.comments = response.data.comments;
-				vm.image = response.data.image[vm.charity.category]; 
+				vm.image = response.data.image[vm.charity.category];
+				console.log(vm.charity); 
 			});
 	}
 

@@ -3,9 +3,9 @@ angular
 	.controller("CharitiesIndexController", CharitiesIndexController);
 
 
-CharitiesIndexController.$inject = ["CharitiesService"];
+CharitiesIndexController.$inject = ["CharitiesService", "NgMap"];
 
-function CharitiesIndexController(CharitiesService) {
+function CharitiesIndexController(CharitiesService, NgMap) {
 	var vm = this;
 
 	vm.charities = [];
@@ -28,6 +28,8 @@ function CharitiesIndexController(CharitiesService) {
 	vm.backgroundImageTwo = null;
 	vm.disabledOrNot = disabledOrNot;
 	vm.loading = false;
+	vm.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDqvhqBcDAJrmCiaSkp_6SfUET_rvDP2l8"
+	vm.mapCenter = [37.09024, -95.712891];
 
 	function activate() {
 		CharitiesService
@@ -37,6 +39,7 @@ function CharitiesIndexController(CharitiesService) {
 				vm.image = response.data.image;
 				vm.backgroundImageOne = response.data.backgroundImageOne;
 				vm.backgroundImageTwo = response.data.backgroundImageTwo;
+				console.log(vm.mapCenter);
 			});
 	}
 
