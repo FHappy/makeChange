@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="progress z-depth-3 grey lighten-2 col l9 m8 s12" style="height: 20px;">
-    <div class="determinate teal {{ $ctrl.progressColor($ctrl.charity.token_amount) }}" ng-style='$ctrl.progressBarWidth($ctrl.charity.token_amount)'></div>
+    <div class="determinate teal {{ $ctrl.progressColor($ctrl.charity.token_amount) }}" ng-style='$ctrl.progressBarWidth($ctrl.charity.token_amount)' class="center-align"><span class="red-text text-lighten-2" ng-if="$ctrl.charity.token_amount > 0">{{ 10 - $ctrl.charity.token_amount}} left!</span></div>
   </div>
   <button class="btn blue col l2 offset-l1 m3 offset-m1 s12" data-target="{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
   <stripe-form ng-if="$ctrl.currentUser.token_amount === 0"></stripe-form>

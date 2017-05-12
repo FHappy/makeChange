@@ -26,7 +26,7 @@
 				<h6 ng-if="$ctrl.charity.category != 'Not Provided'" class="chip grey lighten-1">{{ $ctrl.charity.category }}</h6>
 				<p ng-if="$ctrl.charity.missionStatement">{{ $ctrl.charity.missionStatement }}</p>
 				<p></p>
-				<p><a ng-href="{{ $ctrl.charity.url }}" target="_blank">Direct Donation Site</a><span ng-if="$ctrl.charity.website"> | <a ng-href="{{$ctrl.charity.website}}">Website</a></span></p>
+				<p><a ng-href="{{ $ctrl.charity.url }}" target="_blank">Direct Donation Site</a><span ng-if="$ctrl.charity.website"> | <a ng-href="http://{{$ctrl.charity.website}}">Website</a></span></p>
 			</div>
 			<div class="col l6 s12 m8 offset-m2 charityMap">
 				<div map-lazy-load="https://maps.google.com/maps/api/js" 
