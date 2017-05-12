@@ -178,11 +178,33 @@
 	<div class="col s12" id="map">
 		<div map-lazy-load="https://maps.google.com/maps/api/js"
 			map-lazy-load-params="{{$ctrl.googleMapsUrl}}" class="map">
-			<ng-map center="37.09024, -95.712891" zoom="4">
-				<div ng-repeat="charity in $ctrl.charities">
-					<marker position="{{ charity.latitude }}, {{ charity.longitude }}">
+			<ng-map center="37.09024, -95.712891" zoom="4" default-style="true">
+				<div ng-if="$ctrl.suggested.length > 0" ng-repeat="charity in $ctrl.suggested">
+					<marker position="{{charity.latitude}}, {{charity.longitude}}" 
+									icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+									on-click="$ctrl.showDetail(charity)"
+									id="{{charity.ein}}">
 					</marker>
 				</div>
+				<div ng-repeat="charity in $ctrl.charities">
+					<marker position="{{ charity.latitude }}, {{ charity.longitude }}"
+									on-click="$ctrl.showDetail(charity)"
+									id="{{charity.ein}}">
+					</marker>
+				</div>
+				<info-window id="charity-iw">
+					<div ng-non-bindable="">
+						<div id="siteNotice"></div>
+						<h6 id="firstHeading" class="firstHeading">{{$ctrl.charityInfoWindow.charityName}}</h6>
+						<div id="bodyContent">
+							<p>{{$ctrl.charityInfoWindow.category}}</p>
+							<br>
+							<p>{{$ctrl.charityInfoWindow.missionStatement}}</p>
+							<br>
+							<p>{{$ctrl.charityInfoWindow.city}}, {{$ctrl.charityInfoWindow.state}}</p>
+						</div>
+					</div>
+				</info-window>
 			</ng-map>
 		</div>
 	</div>
