@@ -17,7 +17,6 @@ function HomePageController(UsersService) {
         vm.charities = res.data.charities;
         vm.userHomeBackgroundImage = res.data.userHomeBackgroundImage;
         vm.image = res.data.image;
-        console.log(res.data.image);
   		});
   }
 

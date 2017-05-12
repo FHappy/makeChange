@@ -1,0 +1,32 @@
+<div class="row">
+  <h6 ng-show="$ctrl.charity.time_started"><span id="time-left-{{$ctrl.charity.ein}}" after-render></span></h6>
+</div>
+
+<div class="row">
+  <div class="progress z-depth-3 grey lighten-2 col l9 m8 s12" style="height: 20px;">
+    <div class="determinate teal {{ $ctrl.progressColor($ctrl.charity.token_amount) }}" ng-style='$ctrl.progressBarWidth($ctrl.charity.token_amount)'></div>
+  </div>
+  <button class="btn blue col l2 offset-l1 m3 offset-m1 s12" data-target="{{$ctrl.charity.ein}}" ng-if="$ctrl.currentUser.token_amount > 0">Donate</button>
+  <stripe-form ng-if="$ctrl.currentUser.token_amount === 0"></stripe-form>
+</div>
+
+<div id="{{$ctrl.charity.ein}}" class="modal">
+  <div class="modal-content">
+    <h3 class="center-align">You Have {{ $ctrl.currentUser.token_amount }} Tokens</h3>
+    <h4 class="center-align">Donate How Many?</h4>
+    <h1 class="center-align">{{ $ctrl.tokenAmount }}</h1>
+    <div class="modal-button-container center">
+      <a ng-click="$ctrl.decrementToken()" class="btn red">-</a>
+      <a class="btn blue modal-close" ng-click="$ctrl.donate($ctrl.charity.ein, $ctrl.tokenAmount)">Donate!</a>
+      <a ng-click="$ctrl.incrementToken($ctrl.charity)" class="btn green">+</a>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('.modal').modal();
+    }, 500);
+  });
+</script>

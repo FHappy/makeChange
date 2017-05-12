@@ -8,8 +8,6 @@
 	</div>
 </div>
 
-
-
 <div class="row">
 <!-- Search By Name -->
 	<form ng-submit="$ctrl.resetPage($ctrl.query); $ctrl.searchByName(1)" class="col s6 offset-s3">
@@ -70,10 +68,6 @@
 			<input type="submit" value="Search Locations" class="btn waves-effect waves-light">
 		</div>
 	</form>
-</div>
-
-<div>
-	<a href="#">take me to the map!</a>
 </div>
 
 <!-- suggested -->
@@ -175,19 +169,6 @@
 
 		</div>
 	</div>
-	<div class="col s12" id="map">
-		<div map-lazy-load="https://maps.google.com/maps/api/js"
-			map-lazy-load-params="{{$ctrl.googleMapsUrl}}" class="map">
-			<ng-map center="37.09024, -95.712891" zoom="4">
-				<div ng-repeat="charity in $ctrl.charities">
-					<marker position="{{ charity.latitude }}, {{ charity.longitude }}">
-					</marker>
-				</div>
-			</ng-map>
-		</div>
-	</div>
-
-
 	<!-- Page Buttons -->
 	<div ng-if="$ctrl.currentSearch" class="row">
 		<h5 class="col s12 center">{{ $ctrl.currentSearch }}</h5>
