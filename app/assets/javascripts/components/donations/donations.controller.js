@@ -4,9 +4,9 @@ angular
   .module("makeChangeApp")
   .controller("DonationsController", DonationsController);
 
-DonationsController.$inject = ['CharitiesService', 'UsersService', 'ActionCableChannel', "$timeout", "$scope"];
+DonationsController.$inject = ['CharitiesService', 'UsersService', 'ActionCableChannel', "$timeout", "$scope", "SweetAlert"];
 
-function DonationsController(CharitiesService, UsersService, ActionCableChannel, $timeout, $scope) {
+function DonationsController(CharitiesService, UsersService, ActionCableChannel, $timeout, $scope, SweetAlert) {
   	var vm = this;
   	vm.donate = donate;
   	vm.tokenAmount = 1;
@@ -15,6 +15,9 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel,
   	vm.decrementToken = decrementToken;
   	vm.progressBarWidth = progressBarWidth;
   	vm.progressColor = progressColor;
+		vm.showSwal = showSwal;
+
+
 	vm.$onInit = function() {
 		getCurrentUser();
 		if (vm.charity && vm.charity.time_started) {
@@ -116,6 +119,11 @@ function DonationsController(CharitiesService, UsersService, ActionCableChannel,
 		}
 	}
 	
+	function showSwal() {
+		SweetAlert.swal({
+			
+		})
+	}
 	$scope.$on("$destroy", function() {
 		$(`#time-left-${vm.charity.ein}`).countdown("destroy");
 	});
