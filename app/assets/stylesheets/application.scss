@@ -88,10 +88,6 @@ html {
 	align-items: center;
 }
 
-.charityShowInfo,
-.charityShowDonateBox {
-	text-align: left;
-}
 .parallax-container {
   height: 500px;
 }
@@ -103,6 +99,10 @@ html {
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
+}
+
+.charityInformation {
+  padding-bottom: 5px;
 }
 
 .clientView .infoWrapper {
@@ -124,6 +124,10 @@ html {
   .loading {
     height: 500px;
     width: 600px;
+  }
+
+  .social-media-container {
+    margin-bottom: 10px;
   }
 
 	.stripe-connect {

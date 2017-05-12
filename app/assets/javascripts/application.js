@@ -34,7 +34,7 @@ angular
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('home', {
-        url: '/',
+        url: '/profile',
         component: 'homePage'
       })
       .state("charitiesIndex", {
