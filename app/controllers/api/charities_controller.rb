@@ -262,7 +262,7 @@ class Api::CharitiesController < ApplicationController
 			"Public, Society Benefit - Multipurpose and Other": ActionController::Base.helpers.asset_path("makeChangeIcons/publicBenefit.png"),
 			"Religion-Related, Spiritual Development": ActionController::Base.helpers.asset_path("makeChangeIcons/religion.png"),
 			"Mutual/Membership Benefit Organizations, Other": ActionController::Base.helpers.asset_path("makeChangeIcons/mutualBenefit.png"),
-			"Not Provided": ActionController::Base.helpers.asset_path("makeChangeIcons/question.png")
+			"Not Provided": ActionController::Base.helpers.asset_path("makeChangeIcons/notProvided.png")
 		}.as_json
 	end
 
