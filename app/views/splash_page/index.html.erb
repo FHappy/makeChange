@@ -44,14 +44,13 @@
 	}
 </style>
 
-	<div class="navbar-fixed">
-		<nav class="z-depth-0">
-		  <div class="nav-wrapper">
-
-		 	<a href="/charities" class="brand-logo black-text"><%= image_tag('MAKECHANGE', class: "logo-image") %></a>
-		  </div>
-		</nav>
-	</div>
+<div class="navbar-fixed">
+	<nav class="z-depth-0">
+	  <div class="nav-wrapper">
+	 	<a href="/charities" class="brand-logo black-text"><%= image_tag('MAKECHANGE', class: "logo-image") %></a>
+	  </div>
+	</nav>
+</div>
 
 <div class="row">
 	<div class="col s12 headerContainer">
@@ -85,7 +84,7 @@
 				<div class="container col l5 m12 s12 leftTextMargin">
 					<a class="btn btn-floating pulse left-align"><i class="material-icons">work</i></a>
 					<p class="left-align">
-					First you purchase tokens. Tokens are the way in which we can communicate and transfer your donations to charities all over the nation.
+					First you purchase tokens. Tokens are the way in which we can communicate and transfer your donations to charities all over the nation.  Each token is worth 50 cents. You can click "user menu" in the top-right corner to see the link for adding tokens to your account.  When it comes to giving, every penny counts!
 					</p>
 				</div>
 			</div>
@@ -94,7 +93,7 @@
 				<div class="container col l5 m12 s12 right-align">
 					<a class="btn btn-floating pulse right-align"><i class="material-icons">menu</i></a>
 					<p class="right-align">
-					Next you find the charity you want to donate to. We've taken the time to make searching for your favorite charities as seemless as possible, with the ability to search by name, catagory, and locations!
+					Next you find the charity to which you want to donate. You can search through all charities available by clicking "search charities" at the top of the page. Then you will see a list of some suggested charities based on what other users have donated to. You can then search for your desired charity by either name, category, or location (i.e. city or zipcode)!  You will see a list of suggested results as well as a list of all charities that meet your search criteria.  You can click "See Charities On Map" to see a dynamic map with all the charities on the page.  Click "Next" and "Previous" to navigate through your results. Once you've arrived at your desired charity, assuming you have purchased tokens, you can click "donate" to select how many you would like to contribute. Afterwards, you have the option to seamlessly share via facebook or twitter to your friends and family and ecourage them to contribute as well!
 					</p>
 				</div>
 				<div class="col l6 m12 s12">
@@ -109,8 +108,10 @@
 				<div class="container col l5 m12 s12 leftTextMargin">
 					<a class="btn btn-floating pulse left-align"><i class="material-icons">trending_flat</i></a>
 					<p class="left-align">
-					Finally, once the goal has been met, all the proceeds are accumulated and your charity will recieve the donations!
-					To make sure your charities donations are met, make sure to share the charities donation page via facebook and twitter!
+					If a charity currently has no donations, the first donation starts a 72 hour timer for the 10 token goal to be met. Finally, once the goal has been met, your charity will recieve the $5.00 donation!
+					To make sure the goal is acheived, make sure to share the charity's donation page via facebook and twitter!
+					In the event that a charity cannot raise the ten tokens required within 72 hours, all tokens will be reimbursed to their respective donors.
+					Be sure to check out your donations and favorite charities under your user profile page!
 					</p>
 				</div>
 			</div>
@@ -125,4 +126,12 @@
 		</div>
 	</div>
 </footer>
+
+
+<script>
+	$( document ).ready(function() {
+    	$('select').material_select();
+    	$('.parallax').parallax();
+    });
+</script>
 
