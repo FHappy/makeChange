@@ -24,10 +24,8 @@ function CharitiesIndexController(CharitiesService) {
 	vm.currentSearch = null;
 	vm.resetPage = resetPage;
 	vm.currentQuery = null;
-	vm.progressBarWidth = progressBarWidth;
 	vm.backgroundImageOne = null;
 	vm.backgroundImageTwo = null;
-	vm.progressColor = progressColor;
 	vm.disabledOrNot = disabledOrNot;
 	vm.loading = false;
 
@@ -124,26 +122,6 @@ function CharitiesIndexController(CharitiesService) {
 	function resetPage(query) {
 		vm.currentQuery = query;
 		vm.currentPage = 1;
-	}
-
-	function progressBarWidth(charityTokenAmount) {
-		var width = (charityTokenAmount / 10) * 100;
-		return { "width": `${width}%` }
-	}
-
-	function progressColor(charityTokenAmount) {
-		if (charityTokenAmount < 5) {
-			return `darken-${5 - charityTokenAmount}`;
-		}
-		else if (charityTokenAmount === 5) {
-			return ``;
-		}
-		else if (charityTokenAmount > 5 && charityTokenAmount < 8) {
-			return `lighten-${charityTokenAmount - 5}`;
-		}
-		else {
-			return `accent-${11 - charityTokenAmount}`;
-		}
 	}
 
 	function disabledOrNot(buttonName) {
