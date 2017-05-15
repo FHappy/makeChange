@@ -14,23 +14,23 @@ And finally, in order to guarantee the user had a personal connection to a non-p
 
 # Built With:
 
-	* Ruby-on-Rails
-	* AngularJS
-	* JQuery
-	* JavaScript
-	* OrgHunter API
-	* Stripe API
-	* JQuery Countdown
-	* Materialize CSS
-	* Devise
-	* ngmap
-	* SocialShare
-	* ActionCable
+* Ruby-on-Rails
+* AngularJS
+* JQuery
+* JavaScript
+* OrgHunter API
+* Stripe API
+* JQuery Countdown
+* Materialize CSS
+* Devise
+* ngmap
+* SocialShare
+* ActionCable
 
 # External Links:
 
-	* [Deployed Site](http://make-change.herokuapp.com/)
-	* [Trello Board](https://trello.com/b/Zf14YsNW/changr-working-title)
-	* [Hassan Masroor](https://github.com/fhappy)
-	* [Randy Galeano](https://www.linkedin.com/in/randygaleano/)
-	* [Liam Robinson](https://liamtrobinson.bitballoon.com)
+* [Deployed Site](http://make-change.herokuapp.com/)
+* [Trello Board](https://trello.com/b/Zf14YsNW/changr-working-title)
+* [Hassan Masroor](https://github.com/fhappy)
+* [Randy Galeano](https://www.linkedin.com/in/randygaleano/)
+* [Liam Robinson](https://liamtrobinson.bitballoon.com)
