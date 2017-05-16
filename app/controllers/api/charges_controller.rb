@@ -23,7 +23,7 @@ class Api::ChargesController < ApplicationController
       :currency => 'usd',
       :transfer_group => "{TO_CHARITIES}"
     )
-    @tokens = (@amount / 500) * 5
+    @tokens = (@amount / 500) * 10
     current_user["token_amount"] += @tokens
     current_user.save()
 

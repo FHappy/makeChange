@@ -47,7 +47,7 @@ function StripeFormController(StripeCheckout, $http, SweetAlert, UsersService) {
           $http.post('/api/charges', token)
             .then(function (response) {
               SweetAlert.swal("Success!", response.data.message, "success");
-              vm.user.token_amount += 5;
+              vm.user.token_amount += 10;
             })
             .catch(function(response) {
               SweetAlert.swal("Something went wrong...", response.data.message, "error");
